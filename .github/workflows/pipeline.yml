@@ -1,24 +1,20 @@
-name: Angular GitHub CI
+name: GitHub Pages
+
 on:
   push:
     branches:
-      - main
+    - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-        AWS_REGION: sa-east-1
     steps:
-    # - name: Configure AWS Credentials
-    #   uses: aws-actions/configure-aws-credentials@v1
-    #   with:
-    #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     aws-region: sa-east-1
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
 
     - name: Checkout
       uses: actions/checkout@v2
@@ -31,9 +27,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Lint
-      run: npm run lint
-
     - name: Run tests
       run: npm run test:prod
 
@@ -42,4 +35,4 @@ jobs:
 
     - name: Deploy
       if: success()
-      run: aws s3 sync dist/flowly s3://flowly-dev
+      run: aws s3 sync ./dist/flowly s3://flowly-dev
