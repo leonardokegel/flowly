@@ -45,5 +45,6 @@ jobs:
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
       AWS_EC2_METADATA_DISABLED: true
     steps:
-      - run: aws s3 ./dist/flowly s3://flowly-dev --recursive --aclpublic-read
+      - name: Deploy
+        run: aws s3 ./dist/flowly s3://flowly-dev --recursive --aclpublic-read
 
