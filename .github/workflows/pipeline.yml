@@ -17,7 +17,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: deploy
-          path: ./dist/flowly
+          path: /dist/flowly
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -48,8 +48,9 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
     steps:
-      - uses: actions/download-artifact@v2
+      - name: Download dist
+        uses: actions/download-artifact@v2
         with:
           name: deploy
-          path: ./dist/flowly
-      - run: aws s3 cp sync ./dist/flowly s3://flowly-dev --aclpublic-read
+      - name: Deploy
+        run: aws s3 cp sync ./dist/flowly s3://flowly-dev --aclpublic-read
