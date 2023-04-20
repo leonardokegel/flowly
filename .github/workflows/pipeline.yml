@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: deploy
           path: /dist/flowly
@@ -49,8 +49,8 @@ jobs:
         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
     steps:
       - name: Download dist
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: deploy
       - name: Deploy
-        run: aws s3 cp sync ./dist/flowly s3://flowly-dev --aclpublic-read
+        run: aws s3 cp sync /dist/flowly s3://flowly-dev --aclpublic-read
