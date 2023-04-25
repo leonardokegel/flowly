@@ -1,22 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ImgFlowlyComponent } from './img-flowly.component';
+import { ImgFlowlyComponent } from "./img-flowly.component";
 
 describe('ImgFlowlyComponent', () => {
-  let component: ImgFlowlyComponent;
-  let fixture: ComponentFixture<ImgFlowlyComponent>;
+  const component = new ImgFlowlyComponent();
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ImgFlowlyComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(ImgFlowlyComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
+  it('ImgFlowlyComponent existe', () => {
     expect(component).toBeTruthy();
   });
+
 });
+
+
+

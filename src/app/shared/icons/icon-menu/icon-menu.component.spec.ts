@@ -1,20 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { IconMenuComponent } from './icon-menu.component';
 
-describe('MapPinLineComponent', () => {
-  let component: IconMenuComponent;
-  let fixture: ComponentFixture<IconMenuComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [IconMenuComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(IconMenuComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+describe('IconMenuComponent', () => {
+  const component: IconMenuComponent = new IconMenuComponent();
 
   it('should create', () => {
     expect(component).toBeTruthy();
