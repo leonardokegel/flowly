@@ -48,7 +48,7 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
-    "verbose": true
+    "setupFilesAfterEnv": ["<rootDir>/src/setup-jest.ts"],
+    "globalSetup": "jest-preset-angular/global-setup"
   }
-
 }
