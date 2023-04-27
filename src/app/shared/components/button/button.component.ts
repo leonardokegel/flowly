@@ -21,5 +21,6 @@ export class ButtonComponent {
   disabled = false;
 
   @Output()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   clickButton = new EventEmitter<any>();
 }

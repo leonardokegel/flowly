@@ -13,6 +13,7 @@ export class InputComponent {
 
   //TODO: tipar AbstractControl?
   @Input()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control!: any;
 
   @Input()
