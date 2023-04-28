@@ -1,3 +1,12 @@
+import { ButtonComponent } from './button.component';
+
+describe('ButtonComponent', () => {
+  const component: ButtonComponent = new ButtonComponent();
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 // import { ButtonComponent } from './button.component';
