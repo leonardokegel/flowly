@@ -64,11 +64,13 @@ module.exports = {
         800: '#217716',
         900: '#12620D',
       },
-      'txt-default': '#4C6107',
-      'txt-alternate': '#FFFFFF',
-      'txt-accent': '#94AF1D',
-      'txt-hint': '#C5CD98',
-      'txt-disabled': '#ADB38F',
+      'txt': {
+        'default': '#4C6107',
+        'alternate': '#FFFFFF',
+        'accent': '#94AF1D',
+        'hint': '#C5CD98',
+        'disabled': '#ADB38F',
+      }
     },
     fontFamily: {
       sans: ['Open Sans', ...defaultTheme.fontFamily.sans],
