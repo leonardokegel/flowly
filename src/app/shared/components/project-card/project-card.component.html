@@ -1,9 +1,12 @@
 <div class="border rounded-md  border-basic-300 bg-basic-100">
-  <div>
-    <h3>Card Title</h3>
-    <app-icon-plus></app-icon-plus>
+  <div class="flex gap-2 items-center p-4 border-b border-basic-300">
+    <h3 class="flex-grow font-semibold text-lg">Card Title</h3>
+    <div class="bg-basic-600 opacity-20 self-stretch rounded-full w-0.5"></div>
+    <button class="flex h-full w-10 p-2 rounded-full bg-transparent hover:bg-basic-300">
+      <app-icon-plus class="block w-full h-auto"></app-icon-plus>
+    </button>
   </div>
-  <div>
-    <p>content</p>
+  <div class="p-4">
+    <p>Card Content</p>
   </div>
 </div>
