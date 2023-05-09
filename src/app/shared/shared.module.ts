@@ -11,6 +11,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { IconMenuComponent } from './icons/icon-menu/icon-menu.component';
 import { IconPlusComponent } from './icons/icon-plus/icon-plus.component';
 import { IconWarningCircleComponent } from './icons/icon-warning-circle/icon-warning-circle.component';
+import { CardComponent } from './components/card/card.component';
+import { ProjectStatusComponent } from './components/project-status/project-status.component';
 
 const images = [ImgFlowlyComponent];
 const icons = [
@@ -23,6 +25,8 @@ const components = [
   SidebarComponent,
   ButtonComponent,
   InputComponent,
+  CardComponent,
+  ProjectStatusComponent,
 ];
 
 @NgModule({
