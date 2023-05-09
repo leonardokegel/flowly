@@ -1,40 +1,17 @@
 <aside
   id="logo-sidebar"
-  class="fixed top-0 left-0 z-40 w-56 h-screen pt-16 transition-transform -translate-x-full bg-white border-r border-basic-300 sm:translate-x-0"
+  class="fixed top-0 left-0 z-50 w-56 h-screen transition-transform -translate-x-full bg-white border-r border-basic-300 sm:translate-x-0"
   aria-label="Sidebar"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
 >
   <div class="h-full pb-4 overflow-y-auto bg-white">
+    <div class="flex items-center p-4 h-20 border-b border-basic-300">
+      <app-img-flowly logoType="ICON"></app-img-flowly>
+    </div>
     <ul class="font-medium">
-      <li class="border-b border-basic-300 pl-6 bg-basic-300 text-txt-accent">
-        <div class="fixed left-0 border-l-4 border-l-primary-500 h-16"></div>
-        <a href="#" class="h-16 flex items-center">
-          <app-icon-menu fill="currentColor"></app-icon-menu>
-          <span class="ml-3">Dashboard</span>
-        </a>
-      </li>
-      <li class="border-b border-basic-300 pl-6">
-        <a href="#" class="h-16 flex items-center rounded-lg">
-          <app-icon-menu fill="currentColor"></app-icon-menu>
-          <span class="flex-1 ml-3 whitespace-nowrap">Clientes</span>
-        </a>
-      </li>
-      <li class="border-b border-basic-300 pl-6">
-        <a href="#" class="h-16 flex items-center rounded-lg">
-          <app-icon-menu fill="currentColor"></app-icon-menu>
-          <span class="flex-1 ml-3 whitespace-nowrap">Projetos</span>
-        </a>
-      </li>
-      <li class="border-b border-basic-300 pl-6">
-        <a href="#" class="h-16 flex items-center rounded-lg">
-          <app-icon-menu fill="currentColor"></app-icon-menu>
-          <span class="flex-1 ml-3 whitespace-nowrap">Propostas</span>
-        </a>
-      </li>
-      <li class="border-b border-basic-300 pl-6">
-        <a href="#" class="h-16 flex items-center rounded-lg">
-          <app-icon-menu fill="currentColor"></app-icon-menu>
-          <span class="flex-1 ml-3 whitespace-nowrap">Contratos</span>
-        </a>
+      <li *ngFor="let sidebarLink of sidebarLinks">
+        <app-sidebar-link [sidebarLink]="sidebarLink"></app-sidebar-link>
       </li>
     </ul>
   </div>

@@ -1,0 +1,15 @@
+<ng-container [ngSwitch]="currentLink">
+  <div *ngSwitchCase="'DEFAULT'" class="border-b border-basic-300 pl-6">
+    <a [href]="sidebarLink.url" class="h-16 flex items-center rounded-lg">
+      <app-icon-sidebar [iconType]="sidebarLink.icon"></app-icon-sidebar>
+      <span class="flex-1 ml-3 whitespace-nowrap">{{ sidebarLink.label }}</span>
+    </a>
+  </div>
+  <div *ngSwitchCase="'CURRENT'" class="border-b border-basic-300 pl-6 bg-basic-300 text-txt-accent">
+    <div class="fixed left-0 border-l-4 border-l-primary-500 h-16"></div>
+    <a [href]="sidebarLink.url" class="h-16 flex items-center">
+      <app-icon-sidebar [iconType]="sidebarLink.icon"></app-icon-sidebar>
+      <span class="ml-3">{{ sidebarLink.label }}</span>
+    </a>
+  </div>
+</ng-container>
