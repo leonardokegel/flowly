@@ -19,7 +19,7 @@ import { Component, Input } from '@angular/core';
 })
 export class IconMenuComponent {
   @Input()
-  fill = '#3C4522';
+  fill = 'currentColor';
 
   @Input()
   width = '18';

@@ -1,22 +1,24 @@
 <nav
-  class="fixed z-50 flex w-full flex-wrap items-center justify-between bg-white py-3 text-neutral-500 shadow-lg"
+  class="z-50 flex w-full flex-wrap items-center justify-between bg-white py-4 border-b border-basic-300"
 >
   <div class="flex w-full flex-wrap items-center justify-between px-3">
-    <div class="flex items-center">
-      <app-icon-menu class="px-2"> </app-icon-menu>
-      <app-img-flowly class="px-6"> </app-img-flowly>
-    </div>
+    <button class="flex h-full p-2 rounded-md bg-transparent hover:text-primary-500 text-txt-default">
+      <app-icon-menu class="block w-full h-auto"></app-icon-menu>
+    </button>
 
-    <div class="flex items-center">
-      <app-icon-plus class="px-3"> </app-icon-plus>
-      <div class="h-7 border-l-2 border-basic-300"></div>
+
+    <div class="flex items-center gap-2">
+      <button class="flex h-full w-10 p-2 rounded-full bg-transparent hover:bg-basic-300">
+        <app-icon-plus class="block w-full h-auto"></app-icon-plus>
+      </button>
+      <div class="bg-basic-600 opacity-20 self-stretch rounded-full w-0.5"></div>
       <div class="flex px-3">
         <img
           src="assets/images/Avatar.jpg"
           class="h-10 mr-3 rounded-full"
           alt="Flowly Logo"
         />
-        <span class="self-center whitespace-nowrap text-xs font-semibold"
+        <span class="self-center whitespace-nowrap text-sm font-semibold"
           >Freela Name</span
         >
       </div>
