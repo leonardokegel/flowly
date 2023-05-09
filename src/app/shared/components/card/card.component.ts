@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CardComponent {
   @Input()
-  title: String = '';
+  title = '';
 
   @Output()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
