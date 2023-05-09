@@ -6,7 +6,7 @@
 
     <app-input
       label="nome"
-      [control]="signUpForm.get('displayName')"
+      [control]="signUpForm.get('nome')"
     ></app-input>
 
     <app-input
@@ -18,7 +18,7 @@
     <app-input
       label="senha"
       [type]="'password'"
-      [control]="signUpForm.get('password')"
+      [control]="signUpForm.get('senha')"
     ></app-input>
 
     <app-button
@@ -28,7 +28,7 @@
       [disabled]="signUpForm.invalid"
       [classUp]="['w-full', 'mt-4']"
     >
-      Entrar
+      Cadastrar
     </app-button>
 
     <div *ngIf="errorMessage !== ''" class="error-style">

@@ -21,7 +21,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule,
+    SharedModule
   ],
 })
 export class LoginModule {}
