@@ -1,0 +1,28 @@
+<app-sidebar> </app-sidebar>
+
+<div class="sm:ml-56 h-full">
+  <app-navbar> </app-navbar>
+  <div class="bg-basic-200 min-h-full flex flex-wrap gap-4 content-start pt-20 p-4">
+
+    <div class="flex-grow w-full">
+      <app-card title="Projetos Ativos">
+        <app-project-status></app-project-status>
+      </app-card>
+    </div>
+
+    <div class="flex-grow w-3/5">
+      <app-card title="Mensagens Recentes" >
+        <p>Hello Content</p>
+      </app-card>
+    </div>
+
+    <div class="flex-grow min-w-max flex gap-4 flex-col">
+      <app-card title="Propostas enviadas">
+        <app-document-status></app-document-status>
+      </app-card>
+      <app-card title="Contratos enviadas">
+        <app-document-status></app-document-status>
+      </app-card>
+    </div>
+  </div>
+</div>

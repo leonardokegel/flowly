@@ -1,0 +1,46 @@
+<div class="w-screen max-w-md px-12 py-4">
+  <form [formGroup]="loginForm">
+    <h1 class="font-barlow mb-8 self-start text-3xl text-gray-600">
+      Fazer Login
+    </h1>
+
+    <app-input label="e-mail" [control]="loginForm.get('email')"></app-input>
+
+    <app-input
+      label="senha"
+      [type]="'password'"
+      [control]="loginForm.get('senha')"
+    ></app-input>
+
+    <app-button
+      (clickButton)="loginUser()"
+      colorBg="blue"
+      colorTxt="white"
+      [disabled]="loginForm.invalid"
+      [classUp]="['w-full', 'mt-4']"
+    >
+      Entrar
+    </app-button>
+
+    <div *ngIf="errorMessage !== ''" class="error-style">
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <div class="mt-8 flex items-center">
+      <app-icon-warning-circle stroke="#eab308"></app-icon-warning-circle>
+      <a
+        class="font-heebo ml-2 text-gray-400"
+        routerLink="/login/reset-password"
+      >
+        Esqueci a senha!
+      </a>
+    </div>
+
+    <div class="mt-8 flex items-center">
+      <app-icon-warning-circle stroke="#ef4444"></app-icon-warning-circle>
+      <a class="font-heebo ml-2 text-gray-400" routerLink="/login/sign-up">
+        Criar conta.
+      </a>
+    </div>
+  </form>
+</div>

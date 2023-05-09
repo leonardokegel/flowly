@@ -1,0 +1,45 @@
+<div class="w-screen max-w-md px-12 py-4">
+  <form [formGroup]="signUpForm">
+    <h1 class="font-barlow mb-8 self-start text-3xl text-gray-600">
+      Criar Conta
+    </h1>
+
+    <app-input
+      label="nome"
+      [control]="signUpForm.get('nome')"
+    ></app-input>
+
+    <app-input
+      label="e-mail"
+      [type]="'email'"
+      [control]="signUpForm.get('email')"
+    ></app-input>
+
+    <app-input
+      label="senha"
+      [type]="'password'"
+      [control]="signUpForm.get('senha')"
+    ></app-input>
+
+    <app-button
+      (clickButton)="signUp()"
+      colorBg="blue"
+      colorTxt="white"
+      [disabled]="signUpForm.invalid"
+      [classUp]="['w-full', 'mt-4']"
+    >
+      Cadastrar
+    </app-button>
+
+    <div *ngIf="errorMessage !== ''" class="error-style">
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <div class="mt-8 flex items-center">
+      <app-icon-warning-circle stroke="#22c55e"></app-icon-warning-circle>
+      <a class="font-heebo ml-2 text-gray-400" routerLink="/login">
+        Ops, lembrei que tenho conta!
+      </a>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,33 @@
+<button
+  type="button"
+  class="
+    font-heebo
+    text-base
+    inline-block
+    py-4
+    px-6
+    bg-primary-600
+    text-{{ colorTxt }}
+    font-medium
+    leading-tight
+    rounded
+    shadow-md
+    hover:bg-primary-700
+    hover:shadow-lg
+    focus:bg-primary-700
+    focus:shadow-lg
+    focus:outline-none
+    focus:ring-0
+    active:bg-primary-800
+    active:shadow-lg
+    transition
+    duration-150
+    ease-in-out
+    disabled:opacity-50
+    {{ classUp.join(' ') }}
+  "
+  [disabled]="disabled"
+  (click)="clickButton.emit()"
+>
+  <ng-content></ng-content>
+</button>
