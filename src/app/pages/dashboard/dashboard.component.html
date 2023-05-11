@@ -1,5 +1,5 @@
 <app-sidebar (hovered)="onHovered($event)" [isOpen]="menuOpen"> </app-sidebar>
-<app-navbar (open)="onClick($event)" [sidebarHovered]="sidebarHovered"> </app-navbar>
+<app-navbar (openMenu)="onClick($event)" [sidebarHovered]="sidebarHovered"> </app-navbar>
 <div class="ml-16 bg-basic-200 min-h-full flex flex-wrap gap-4 content-start p-4">
   <div class="flex-grow w-full">
     <app-card title="Projetos Ativos">

@@ -13,7 +13,7 @@ export class DashboardComponent {
     this.sidebarHovered = hovered;
   }
 
-  onClick(open: boolean) {
-    this.menuOpen = open;
+  onClick(openMenu: boolean) {
+    this.menuOpen = openMenu;
   }
 }
