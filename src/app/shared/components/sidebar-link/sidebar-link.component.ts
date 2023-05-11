@@ -14,5 +14,5 @@ export class SidebarLinkComponent {
   currentLink: CurrentLink = 'DEFAULT';
 
   @Input()
-  sidebarHovered: Boolean = false;
+  sidebarHovered: boolean = false;
 }
