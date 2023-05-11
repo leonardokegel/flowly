@@ -25,15 +25,12 @@ export class SidebarComponent {
       this.isHovered = hovered;
     });
   }
-
+  
   onHover() {
     this.hovered.emit(true);
   }
 
   onLeave() {
     this.hovered.emit(false);
-    if (this.isOpen) {
-      this.hovered.emit(true);
-    }
   }
 }
