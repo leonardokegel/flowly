@@ -4,8 +4,8 @@ import { IconSidebarType } from './icon-sidebar.model';
 @Component({
   selector: 'app-icon-sidebar',
   template: `<svg 
-    width="20" 
-    height="20" 
+    [attr.width]="width" 
+    [attr.height]="width" 
     viewBox="0 0 20 20" 
     fill="none" 
     xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +61,4 @@ export class IconSidebarComponent {
 
   @Input()
   width = '20';
-
-  @Input()
-  height = '20';
 }
