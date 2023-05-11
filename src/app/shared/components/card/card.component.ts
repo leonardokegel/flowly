@@ -1,4 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IconCardType } from '@shared/icons/icon-card/icon-card.model';
+import { PopupType } from './card.model';
+
+interface Card {
+  title: string,
+  icon: IconCardType,
+  openPopup?: PopupType;
+}
 
 @Component({
   selector: 'app-card',
@@ -7,9 +15,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CardComponent {
   @Input()
-  title = '';
+  card: Card = {
+    title: 'Card Title',
+    icon: 'plus'
+  };
 
   @Output()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  clickIcon = new EventEmitter<any>();
+  openPopup = new EventEmitter<PopupType>();
 }

@@ -1,11 +1,14 @@
 <div class="border rounded-md  border-basic-300 bg-basic-100">
   <div class="flex gap-2 items-center p-4 border-b border-basic-300">
     <h3 class="flex-grow font-semibold text-lg">
-      {{ title }}
+      {{ card.title }}
     </h3>
     <div class="bg-basic-600 opacity-20 self-stretch rounded-full w-0.5"></div>
-    <button class="flex h-full w-10 p-2 rounded-full bg-transparent hover:bg-basic-300" (click)="clickIcon.emit()">
-      <app-icon-plus class="block w-full h-auto"></app-icon-plus>
+    <button 
+      class="flex h-full w-10 p-2 rounded-full bg-transparent hover:bg-basic-300 text-txt-hint hover:text-txt-accent" 
+      (click)="openPopup.emit(card.openPopup)"
+    >
+      <app-icon-card class="block w-full h-auto" [iconType]="card.icon"></app-icon-card>
     </button>
   </div>
   <ng-content></ng-content>
