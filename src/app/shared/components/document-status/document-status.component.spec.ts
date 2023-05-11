@@ -4,17 +4,9 @@ import { DocumentStatusComponent } from './document-status.component';
 
 describe('DocumentStatusComponent', () => {
   let component: DocumentStatusComponent;
-  let fixture: ComponentFixture<DocumentStatusComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ DocumentStatusComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(DocumentStatusComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new DocumentStatusComponent();
   });
 
   it('should create', () => {
