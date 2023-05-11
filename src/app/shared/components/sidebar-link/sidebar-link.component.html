@@ -1,0 +1,27 @@
+<ng-container [ngSwitch]="currentLink">
+  <div 
+    *ngSwitchCase="'DEFAULT'" 
+    class="group border-b border-b-basic-300 border-l-4 border-l-transparent hover:border-l-primary-500 bg-basic-100 hover:bg-basic-300 text-txt-default hover:text-txt-accent transition-all"
+  >
+    <a [href]="sidebarLink.url" class="h-16 flex items-center pl-4">
+      <app-icon-sidebar [iconType]="sidebarLink.icon" class="text-basic-600 group-hover:text-txt-accent"></app-icon-sidebar>
+      <span 
+        class="flex-1 ml-3 whitespace-nowrap"
+        [ngClass]="sidebarHovered? 'block': 'hidden'"
+      >{{ sidebarLink.label }}</span>
+    </a>
+  </div>
+
+  <div 
+    *ngSwitchCase="'CURRENT'" 
+    class="border-b border-b-basic-300 border-l-4 border-l-primary-500 bg-basic-300 text-txt-accent"
+  >
+    <a [href]="sidebarLink.url" class="h-16 flex items-center pl-4">
+      <app-icon-sidebar [iconType]="sidebarLink.icon" class="text-txt-accent"></app-icon-sidebar>
+      <span 
+        class="flex-1 ml-3 whitespace-nowrap"
+        [ngClass]="sidebarHovered? 'block': 'hidden'"
+      >{{ sidebarLink.label }}</span>
+    </a>
+  </div>
+</ng-container>
