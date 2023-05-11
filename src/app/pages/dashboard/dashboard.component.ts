@@ -7,8 +7,13 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   sidebarHovered = false;
+  menuOpen = false;
 
   onHovered(hovered: boolean) {
     this.sidebarHovered = hovered;
+  }
+
+  onClick(open: boolean) {
+    this.menuOpen = open;
   }
 }
