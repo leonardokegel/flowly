@@ -10,17 +10,17 @@ export class NavbarComponent {
   sidebarHovered = false;
   
   @Output() 
-  open = new EventEmitter<boolean>();
+  openSidebar = new EventEmitter<boolean>();
 
   isOpen = false;
 
   constructor() {
-    this.open.subscribe((open: boolean) => {
+    this.openSidebar.subscribe((open: boolean) => {
       this.isOpen = open;
     });
   }
 
   onClick() {
-    this.isOpen ? this.open.emit(false): this.open.emit(true);
+    this.isOpen ? this.openSidebar.emit(false): this.openSidebar.emit(true);
   }
 }
