@@ -1,11 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DocumentStatusComponent } from './document-status.component';
 
 describe('DocumentStatusComponent', () => {
   let component: DocumentStatusComponent;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     component = new DocumentStatusComponent();
   });
 
