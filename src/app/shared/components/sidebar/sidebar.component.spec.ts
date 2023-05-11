@@ -1,9 +1,13 @@
 import { SidebarComponent } from './sidebar.component';
 
 describe('SidebarComponent', () => {
-  const component = new SidebarComponent();
+  let component: SidebarComponent;
 
-  it('SidebarComponent', () => {
+  beforeEach(() => {
+    component = new SidebarComponent();
+  });
+
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
