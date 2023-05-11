@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SidebarLink } from '../sidebar-link/sidebar-link';
 
 @Component({
@@ -13,13 +13,27 @@ export class SidebarComponent {
     { label: 'Clientes', url: '/clientes', icon: 'clientes' }
   ];
 
-  mouseOver: Boolean = false;
+  @Input()
+  isOpen = false;
 
-  onMouseEnter() {
-    this.mouseOver = true
+  @Output() hovered = new EventEmitter<boolean>();
+
+  isHovered = false;
+
+  constructor() {
+    this.hovered.subscribe((hovered: boolean) => {
+      this.isHovered = hovered;
+    });
   }
 
-  onMouseLeave() {
-    this.mouseOver = false
+  onHover() {
+    this.hovered.emit(true);
+  }
+
+  onLeave() {
+    this.hovered.emit(false);
+    if (this.isOpen) {
+      this.hovered.emit(true);
+    }
   }
 }
