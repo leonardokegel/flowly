@@ -18,7 +18,7 @@ export class DashboardComponent {
     this.menuOpen = open;
   }
 
-  onCardIconClick(open: string) {
-    this.popupOpen = open;
+  onCardIconClick(openPopup: string) {
+    this.popupOpen = openPopup;
   }
 }
