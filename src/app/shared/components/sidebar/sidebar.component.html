@@ -1,17 +1,18 @@
 <aside
   id="logo-sidebar"
-  class="fixed top-0 left-0 z-50 w-16 hover:w-60 h-screen bg-basic-100 border-r border-basic-300 transition-all overflow-hidden"
+  class="fixed top-0 left-0 z-50 h-screen bg-basic-100 border-r border-basic-300 transition-all overflow-hidden"
+  [ngClass]="isHovered || isOpen? 'w-60': 'w-16'"
   aria-label="Sidebar"
   (mouseenter)="onHover()"
   (mouseleave)="onLeave()"
 >
   <div class="h-full pb-4">
     <div class="flex flex-grow items-center p-4 h-20 border-b border-basic-300">
-      <app-img-flowly [logoType]="isHovered? 'DEFAULT': 'ICON'"></app-img-flowly>
+      <app-img-flowly [logoType]="isHovered || isOpen? 'DEFAULT': 'ICON'"></app-img-flowly>
     </div>
     <ul>
       <li *ngFor="let sidebarLink of sidebarLinks">
-        <app-sidebar-link [sidebarLink]="sidebarLink" [sidebarHovered]="isHovered"></app-sidebar-link>
+        <app-sidebar-link [sidebarLink]="sidebarLink" [sidebarHovered]="isHovered || isOpen"></app-sidebar-link>
       </li>
     </ul>
   </div>
