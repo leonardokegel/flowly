@@ -9,7 +9,7 @@
 
   <div class="flex-grow w-3/5">
     <app-card [card]="{ title: 'Mensagens Recentes', icon: 'email', openPopup: 'CREATE_EMAIL' }" (openPopup)="onCardIconClick($event)">
-      <p>Hello Content</p>
+      <app-messages></app-messages>
     </app-card>
   </div>
 
