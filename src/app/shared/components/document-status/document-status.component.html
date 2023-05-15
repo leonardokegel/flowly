@@ -1,7 +1,7 @@
 <div *ngFor="let item of documentStatus" class="flex items-center justify-between border-b last:border-b-0  border-basic-300 p-4">
   <div>
-    <p class="text-base font-semibold">{{ item.title }}</p>
-    <p class="text-sm text-txt-disabled">enviado para: <span>{{ item.client }}</span></p>
+    <a href="{{ '/'+ documentType +'/' + item.id }}" class="text-base font-semibold hover:underline hover:text-txt-accent transition-all">{{ item.title }}</a>
+    <p class="text-sm text-txt-disabled">enviado para: <span class="hover:underline hover:text-txt-accent transition-all"><a href="{{ '/client/' + item.client.id }}">{{ item.client.name }}</a></span></p>
   </div>
   <app-badge-status [status]="item.status"></app-badge-status>
 </div>

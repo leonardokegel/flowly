@@ -2,8 +2,12 @@ import { Component, Input } from '@angular/core';
 import { Status } from '../badge-status/badge-status';
 
 interface DocumentStatus {
+  id: string
   title: string
-  client: string
+  client: {
+    id: string
+    name: string
+  }
   status: Status
 }
 
@@ -14,9 +18,12 @@ interface DocumentStatus {
 })
 export class DocumentStatusComponent {
   @Input()
+  documentType!: 'proposta' | 'contrato';
+
+  @Input()
   documentStatus: DocumentStatus[] = [
-    { title: 'Ciação de site', client: 'Fulano de tal', status: 1 },
-    { title: 'Desenvolvimento de Aplicação', client: 'Cicrano', status: 2 },
-    { title: 'Design de Logo', client: 'Fulaninho', status: 4 }
+    { id: '1', title: 'Ciação de site', client: {id: '1', name: 'Fulano de tal' }, status: 1 },
+    { id: '2', title: 'Desenvolvimento de Aplicação', client: {id: '2', name: 'Cicrano' }, status: 2 },
+    { id: '3', title: 'Design de Logo', client: {id: '3', name: 'Fulaninho' }, status: 4 }
   ];
 }
