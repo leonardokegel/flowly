@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalComponent } from '@shared/modal/modal.component';
+import { ModalType } from '@shared/modal/modal.model';
+import { ModalService } from '@shared/modal/modal.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +11,8 @@ import { Component } from '@angular/core';
 export class DashboardComponent {
   sidebarHovered = false;
   menuOpen = false;
-  popupOpen?: string;
+
+  constructor(private modalService: ModalService) { }
 
   onSidebarHovered(hovered: boolean) {
     this.sidebarHovered = hovered;
@@ -18,7 +22,20 @@ export class DashboardComponent {
     this.menuOpen = open;
   }
 
-  onCardIconClick(openPopup: string) {
-    this.popupOpen = openPopup;
+  openModal(modal: string, hasBackdropClick: boolean) {
+    this.modalService.open(
+      ModalComponent,
+      {
+        data:
+        {
+          title: 'Modal',
+          subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          modalType: modal
+        },
+        hasBackdropClick: hasBackdropClick
+      }
+    );
+
+    console.log('Open', modal);
   }
 }
