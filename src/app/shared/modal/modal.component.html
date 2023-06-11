@@ -1,0 +1,13 @@
+<div class="min-w-[50] bg-basic-100 border border-basic-300 rounded-lg shadow">
+  <div class="border-b border-basic-300 p-4">
+    <h2 class="text-lg font-bold">{{ data.title }}<span> - </span><span>{{ data.modalType }}</span></h2>
+    <p class="text-base font-semibold">{{ data.subtitle }}</p>
+  </div>
+  <div class="p-4">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <div class="flex gap-3 justify-end border-t border-basic-300 p-4">
+    <button (click)="close()" class="px-5 py-3 rounded-md font-semibold text-txt-default bg-transparent hover:bg-basic-300 transition-colors">Cancelar</button>
+    <button (click)="close()" class="px-5 py-3 rounded-md font-semibold text-txt-alternate bg-primary-500 hover:bg-primary-600 transition-colors">Salvar</button>
+  </div>
+</div>

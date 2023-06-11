@@ -21,6 +21,7 @@ import { DocumentStatusComponent } from './components/document-status/document-s
 import { BadgeStatusComponent } from './components/badge-status/badge-status.component';
 import { SidebarLinkComponent } from './components/sidebar-link/sidebar-link.component';
 import { MessagesComponent } from './components/messages/messages.component';
+import { ModalModule } from './modal/modal.module';
 
 
 const images = [ImgFlowlyComponent];
@@ -46,7 +47,7 @@ const components = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, ModalModule],
   declarations: [...images, ...icons, ...components],
   exports: [...images, ...icons, ...components],
 })
