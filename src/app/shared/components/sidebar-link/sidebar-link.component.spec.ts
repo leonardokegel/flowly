@@ -1,5 +1,3 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SidebarLinkComponent } from './sidebar-link.component';
 
 describe('SidebarLinkComponent', () => {

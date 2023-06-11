@@ -1,6 +1,6 @@
 <div *ngFor="let message of messages" class="flex items-start p-4 border-b border-basic-300 last:border-b-0">
-  <span *ngIf="message.status == 'READ'" class="m-3 ml-1 w-2 h-2 rounded-full bg-txt-accent"></span>
-  <span *ngIf="message.status == 'RECEIVED'" class="m-3 ml-1 w-2 h-2 rounded-full bg-txt-disabled opacity-60"></span>
+  <span *ngIf="message.status === 'READ'" class="m-3 ml-1 w-2 h-2 rounded-full bg-txt-accent"></span>
+  <span *ngIf="message.status === 'RECEIVED'" class="m-3 ml-1 w-2 h-2 rounded-full bg-txt-disabled opacity-60"></span>
   <div class="flex-grow">
     <a href="#" class="text-base font-semibold hover:underline hover:text-txt-accent transition-all">
       <span>"</span>

@@ -5,6 +5,7 @@ import { ModalRef } from './modal.ref';
 import { MODAL_DATA } from './modal-tokens';
 
 export interface ModalConfig {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   data?: any
   hasBackdropClick?: boolean
 }
@@ -40,7 +41,7 @@ export class ModalService {
       ]
     });
 
-    overlayRef.backdropClick().subscribe((_) => {
+    overlayRef.backdropClick().subscribe(() => {
       if (config?.hasBackdropClick) {
         modalRef.close();
       }

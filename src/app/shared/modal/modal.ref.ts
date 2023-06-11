@@ -1,6 +1,7 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Observable, Subject } from 'rxjs';
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export class ModalRef {
   private afterClosedSubject = new Subject<any>();
 
