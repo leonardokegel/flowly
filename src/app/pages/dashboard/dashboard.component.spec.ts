@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
+import { RouterOutlet } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -7,7 +9,9 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [ DashboardComponent ],
+      imports: [RouterOutlet],
     })
     .compileComponents();
 
