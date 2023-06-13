@@ -11,6 +11,7 @@ export class ModalComponent {
 
   constructor(
     private modalRef: ModalRef, 
+    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     @Inject(MODAL_DATA) public data: any
   ){}
 
