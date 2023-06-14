@@ -10,7 +10,7 @@ export class SidebarComponent {
   @Input()
   sidebarLinks: SidebarLink[] = [
     { label: 'Dashboard', url: '/dashboard', icon: 'dashboard' },
-    { label: 'Clientes', url: '/clientes', icon: 'clientes' }
+    { label: 'Clientes', url: '/dashboard/clientes', icon: 'clientes' }
   ];
 
   @Input()
