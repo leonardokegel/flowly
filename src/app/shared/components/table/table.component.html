@@ -1,0 +1,22 @@
+<table class="table-fixed w-full border-collapse border rounded-md  border-basic-300 bg-basic-100">
+    <thead>
+        <tr>
+            <th class="hidden">id</th>
+            <th *ngFor="let column of columns" class="text-ellipsis overflow-hidden">{{ column }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of rowsArray">
+            <ng-container *ngFor="let item of row">
+                <ng-container [ngSwitch]="item[0]">
+                    <td *ngSwitchCase="'id'" class="hidden">
+                        {{ item[1] }}
+                    </td>
+                    <td *ngSwitchDefault [ngClass]="columnMaxWidth">
+                        <app-table-cel [item]="item" />
+                    </td>
+                </ng-container>
+            </ng-container>
+        </tr>
+    </tbody>
+</table>
