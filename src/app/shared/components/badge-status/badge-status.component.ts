@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Status } from './badge-status';
 
 @Component({
   selector: 'app-badge-status',
@@ -8,5 +7,5 @@ import { Status } from './badge-status';
 })
 export class BadgeStatusComponent {
   @Input()
-  status: Status = 0;
+  status = 0;
 }

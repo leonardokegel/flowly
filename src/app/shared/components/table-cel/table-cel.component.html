@@ -1,0 +1,44 @@
+<ng-container [ngSwitch]="item[0]">
+    <ng-container *ngSwitchCase="'status'">
+        <app-badge-status [status]="item[1]" />
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'propostas'">
+        <ng-container *ngIf="item[1].length === 0; else documento">
+            Nenhuma proposta criada
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'contratos'">
+        <ng-container *ngIf="item[1].length === 0; else documento">
+            <span class="font-semibold text-txt-disabled text-sm">Nenhum contrato criado</span>
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>{{ item[1] }}</ng-container>
+</ng-container>
+
+<ng-template #documento>
+    <div *ngIf="item[1].length === 1; else documentos" class="flex gap-2 justify-between">
+        <p class="text-ellipsis overflow-hidden whitespace-nowrap">{{ item[1][0].titulo }}</p>
+        <app-badge-status [status]="item[1][0].status" />
+    </div>
+</ng-template>
+
+<ng-template #documentos>
+    <div class="flex gap-2 items-center justify-between cursor-pointer" (click)="openDropdown()">
+        <div class="text-txt-disabled" [ngClass]="isDropdownClosed? 'rotate-0': 'rotate-90'"><app-icon-chevron />
+        </div>
+        <span class="flex-grow text-ellipsis overflow-hidden transition-opacity" [ngClass]="isDropdownClosed? 'opacity-100': 'opacity-0'">{{ item[0] | lowercase }}</span>
+        <app-badge-status [status]="highestStatus" *ngIf="isDropdownClosed" />
+    </div>
+
+    <div class="overflow-hidden" [ngClass]="isDropdownClosed? 'max-h-[0rem]': 'max-h-[100rem]'">
+        <ul>
+            <li *ngFor="let documento of item[1]" class="flex gap-2 justify-between p-2 text-sm">
+                <p class="text-ellipsis overflow-hidden">{{ documento.titulo }}</p>
+                <app-badge-status [status]="documento.status" />
+            </li>
+        </ul>
+    </div>
+</ng-template>

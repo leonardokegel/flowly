@@ -22,7 +22,9 @@ import { BadgeStatusComponent } from './components/badge-status/badge-status.com
 import { SidebarLinkComponent } from './components/sidebar-link/sidebar-link.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { ModalModule } from './modal/modal.module';
-
+import { TableCelComponent } from './components/table-cel/table-cel.component';
+import { IconChevronComponent } from './icons/icon-chevron/icon-chevron.component';
+import { TableListComponent } from './components/table-list/table-list.component';
 
 const images = [ImgFlowlyComponent];
 const icons = [
@@ -32,6 +34,7 @@ const icons = [
   IconSidebarComponent,
   IconCardComponent,
   IconAttachComponent,
+  IconChevronComponent
 ];
 const components = [
   NavbarComponent,
@@ -44,6 +47,8 @@ const components = [
   BadgeStatusComponent,
   SidebarLinkComponent,
   MessagesComponent,
+  TableCelComponent,
+  TableListComponent
 ];
 
 @NgModule({

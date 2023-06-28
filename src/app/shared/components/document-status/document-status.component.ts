@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Status } from '../badge-status/badge-status';
 
 interface DocumentStatus {
   id: string
@@ -8,7 +7,7 @@ interface DocumentStatus {
     id: string
     name: string
   }
-  status: Status
+  status: number
 }
 
 @Component({
