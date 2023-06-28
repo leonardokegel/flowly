@@ -1,0 +1,33 @@
+<div class="overflow-x-auto border rounded-md  border-basic-300 bg-basic-100">
+    <div class="max-md:hidden grid w-full border-b text-left border-basic-300"
+        [ngStyle]="{'grid-template-columns': gridColumns}">
+        <div *ngFor="let column of columnsArray | slice:1"
+            class="p-4 font-semibold text-basic-600 overflow-hidden">
+            {{ column | titlecase }}
+        </div>
+    </div>
+    <div *ngFor="let row of rowsArray" class="max-md:block max-md:p-4 grid w-full border-b text-left border-basic-300 "
+        [ngStyle]="{'grid-template-columns': gridColumns}">
+        <ng-container *ngFor="let item of row | slice:1">
+            <div 
+                class="
+                    max-md:first:p-0 
+                    max-md:first:mb-4 
+                    max-md:first:font-bold
+                    max-md:first:bg-transparent
+                    max-md:py-2
+                    max-md:bg-basic-200
+                    max-md:first:text-txt-accent
+                    max-md:rounded-md
+                    font-medium 
+                    whitespace-nowrap 
+                    text-ellipsis 
+                    overflow-hidden 
+                    p-4
+                "
+            >
+                <app-table-cel [item]="item" />
+            </div>
+        </ng-container>
+    </div>
+</div>
