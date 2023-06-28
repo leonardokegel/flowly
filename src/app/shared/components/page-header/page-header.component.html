@@ -1,0 +1,23 @@
+<div class="flex flex-wrap gap-4 justify-between items-center w-full">
+    <div class="flex-grow">
+        <h1 class="text-3xl font-semibold">{{ page | titlecase }}</h1>
+    </div>
+
+    <div class="max-sm:hidden">
+        <label for="search" class="mb-2 text-sm font-medium text-txt-disabled sr-only">Search</label>
+        <div class="relative">
+            <input type="search" id="search"
+                class="block w-full p-3 pr-10 border border-basic-500 rounded-xl bg-basic-300 focus:ring-primary-500 focus:border-primary-500 placeholder:text-txt-disabled"
+                [placeholder]="'buscar ' + page" required>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 text-txt-disabled pointer-events-none">
+                <app-icon-search width="28" />
+            </div>
+        </div>
+    </div>
+
+    <div class="max-sm:hidden bg-basic-600 opacity-20 self-stretch rounded-full w-0.5"></div>
+
+    <button class="transition-all hover:text-txt-accent hover:scale-105">
+        <app-icon-plus width="35" [round]="true"></app-icon-plus>
+    </button>
+</div>
