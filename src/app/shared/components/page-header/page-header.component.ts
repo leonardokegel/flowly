@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ModalType } from '@shared/modal/modal.model';
 
 @Component({
   selector: 'app-page-header',
@@ -13,8 +14,7 @@ export class PageHeaderComponent {
   haveSettings = false;
 
   @Output()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  clickAdd = new EventEmitter<any>();
+  openPopup = new EventEmitter<ModalType>();
 
   @Output()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
