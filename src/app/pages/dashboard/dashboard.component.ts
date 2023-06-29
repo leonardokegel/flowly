@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SidebarLink } from '@shared/components/sidebar-link/sidebar-link';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +9,11 @@ import { Component } from '@angular/core';
 export class DashboardComponent {
   sidebarHovered = false;
   menuOpen = false;
+  sidebarLinks: SidebarLink[] = [
+    { label: 'Dashboard', url: '/dashboard', icon: 'dashboard' },
+    { label: 'Clientes', url: '/dashboard/clientes', icon: 'clientes' },
+    { label: 'Projetos', url: '/dashboard/projetos', icon: 'projetos' }
+  ];
 
   onSidebarHovered(hovered: boolean) {
     this.sidebarHovered = hovered;
