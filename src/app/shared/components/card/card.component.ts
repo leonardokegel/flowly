@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IconCardType } from '@shared/icons/icon-card/icon-card.model';
-import { PopupType } from './card.model';
+import { ModalType } from '@shared/modal/modal.model';
 
 interface Card {
   title: string,
   icon: IconCardType,
-  openPopup?: PopupType;
+  openPopup?: ModalType;
 }
 
 @Component({
@@ -21,5 +21,5 @@ export class CardComponent {
   };
 
   @Output()
-  openPopup = new EventEmitter<PopupType>();
+  openPopup = new EventEmitter<ModalType>();
 }
