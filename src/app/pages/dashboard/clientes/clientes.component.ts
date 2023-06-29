@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientRow } from '@shared/components/table-list/table-list.model';
+import { ModalComponent } from '@shared/modal/modal.component';
+import { ModalService } from '@shared/modal/modal.service';
 
 @Component({
   selector: 'app-clientes',
@@ -8,6 +10,25 @@ import { ClientRow } from '@shared/components/table-list/table-list.model';
 })
 export class ClientesComponent implements OnInit {
   clients!: ClientRow[];
+
+  constructor(private modalService: ModalService) { }
+
+  openModal(modal: string, hasBackdropClick: boolean) {
+    this.modalService.open(
+      ModalComponent,
+      {
+        data:
+        {
+          title: 'Modal',
+          subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          modalType: modal
+        },
+        hasBackdropClick: hasBackdropClick
+      }
+    );
+
+    console.log('Open', modal);
+  }
 
   ngOnInit(): void {
     this.clients = [
