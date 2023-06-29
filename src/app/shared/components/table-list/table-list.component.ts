@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Row } from './table-list.model';
 
 @Component({
   selector: 'app-table-list',
@@ -7,32 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TableListComponent implements OnInit {
   @Input()
-  rows = [
-    {
-      id: '1',
-      cliente: 'Fulano Inc.',
-      contato: 'Fulano de Tal Algumacoisa',
-      email: 'fulano@email.com',
-      propostas: [
-        {
-          id: '1',
-          titulo: 'Proposta de Desenvolvimento',
-          status: 1,
-        },
-        {
-          id: '2',
-          titulo: 'Proposta Inicial',
-          status: 5,
-        }
-      ],
-      contratos: [
-        {
-          id: '1',
-          titulo: 'Contrato de Desenvolvimento',
-          status: 0,
-        }
-      ]
-    },
+  rows: Row[] = [
     {
       id: '1',
       cliente: 'Fulano Inc.',
