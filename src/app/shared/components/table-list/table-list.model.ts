@@ -13,4 +13,17 @@ export type ClientRow = {
     contratos: document[]
 }
 
-export type Row = ClientRow
+export type ProjectsRow = {
+    id: string
+    titulo: string
+    status: number
+    cliente: {
+        id: string
+        cliente: string
+        contato: string
+    }
+    data_inicio: string
+    valor: string
+}
+
+export type Row = ClientRow | ProjectsRow
