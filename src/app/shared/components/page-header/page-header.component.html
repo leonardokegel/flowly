@@ -17,7 +17,11 @@
 
     <div class="max-sm:hidden bg-basic-600 opacity-20 self-stretch rounded-full w-0.5"></div>
 
-    <button class="transition-all hover:text-txt-accent hover:scale-105">
-        <app-icon-plus width="35" [round]="true"></app-icon-plus>
+    <button *ngIf="haveSettings" class="text-txt-disabled transition-all hover:text-txt-accent hover:scale-105" (click)="clickSettings">
+        <app-icon-settings width="30"/>
+    </button>
+
+    <button class="transition-all hover:text-txt-accent hover:scale-105" (click)="clickAdd">
+        <app-icon-plus width="35" [round]="true"/>
     </button>
 </div>
