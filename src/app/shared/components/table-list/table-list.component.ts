@@ -11,8 +11,8 @@ export class TableListComponent implements OnInit {
   rows: Row[] = [
     {
       id: '1',
-      cliente: 'Fulano Inc.',
-      contato: 'Fulano de Tal Algumacoisa',
+      empresa: 'Fulano Inc.',
+      nome: 'Fulano de Tal Algumacoisa',
       email: 'fulano@email.com',
       propostas: [
         {
