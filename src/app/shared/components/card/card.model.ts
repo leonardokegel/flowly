@@ -1,5 +1,0 @@
-export type PopupType = 
-| 'CREATE_PROJETO' 
-| 'CREATE_PROPOSTA' 
-| 'CREATE_CONTRATO' 
-| 'CREATE_EMAIL';
