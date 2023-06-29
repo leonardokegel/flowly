@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Row } from './table-list.model';
 
 @Component({
   selector: 'app-table-list',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TableListComponent implements OnInit {
   @Input()
-  rows = [
+  rows: Row[] = [
     {
       id: '1',
       cliente: 'Fulano Inc.',
