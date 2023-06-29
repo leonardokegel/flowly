@@ -2,4 +2,5 @@ export type ModalType =
 | 'CREATE_PROJETO' 
 | 'CREATE_PROPOSTA' 
 | 'CREATE_CONTRATO' 
+| 'CREATE_CLIENTE' 
 | 'CREATE_EMAIL';
