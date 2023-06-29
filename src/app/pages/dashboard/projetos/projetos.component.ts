@@ -17,8 +17,8 @@ export class ProjetosComponent implements OnInit {
         status: 0,
         cliente: {
             id: '1',
-            cliente: 'Cricrano Inc.',
-            contato: 'Cicrano Cicranildo',
+            empresa: 'Cricrano Inc.',
+            nome: 'Cicrano Cicranildo',
         },
         data_inicio: '11/08/2023',
         valor: 'R$ 25000.00',
