@@ -4,7 +4,7 @@ type document = {
     status: number
 }
 
-type ClientRow = {
+export type ClientRow = {
     id: string
     cliente: string
     contato: string

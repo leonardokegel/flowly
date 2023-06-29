@@ -26,31 +26,6 @@ export class TableListComponent implements OnInit {
           status: 5,
         }
       ],
-      contratos: [
-        {
-          id: '1',
-          titulo: 'Contrato de Desenvolvimento',
-          status: 0,
-        }
-      ]
-    },
-    {
-      id: '1',
-      cliente: 'Fulano Inc.',
-      contato: 'Fulano de Tal Algumacoisa',
-      email: 'fulano@email.com',
-      propostas: [
-        {
-          id: '1',
-          titulo: 'Proposta de Desenvolvimento',
-          status: 1,
-        },
-        {
-          id: '2',
-          titulo: 'Proposta Inicial',
-          status: 5,
-        }
-      ],
       contratos: []
     }
   ]
