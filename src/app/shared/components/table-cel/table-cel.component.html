@@ -15,6 +15,10 @@
         </ng-container>
     </ng-container>
 
+    <ng-container *ngSwitchCase="'cliente'">
+        {{ item[1].empresa }}, {{ item[1].nome }}
+    </ng-container>
+
     <ng-container *ngSwitchDefault>{{ item[1] }}</ng-container>
 </ng-container>
 

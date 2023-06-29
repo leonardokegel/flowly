@@ -13,8 +13,8 @@ export class ClientesComponent implements OnInit {
     this.clients = [
       {
         id: '1',
-        cliente: 'Fulano Inc.',
-        contato: 'Fulano de Tal Algumacoisa',
+        empresa: 'Fulano Inc.',
+        nome: 'Fulano de Tal Algumacoisa',
         email: 'fulano@email.com',
         propostas: [
           {
@@ -38,8 +38,8 @@ export class ClientesComponent implements OnInit {
       },
       {
         id: '1',
-        cliente: 'Cicrano Inc.',
-        contato: 'Cicrano Cicranildo',
+        empresa: 'Cicrano Inc.',
+        nome: 'Cicrano Cicranildo',
         email: 'fulano@email.com',
         propostas: [
           {

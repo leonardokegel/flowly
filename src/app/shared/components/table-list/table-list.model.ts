@@ -6,8 +6,8 @@ type document = {
 
 export type ClientRow = {
     id: string
-    cliente: string
-    contato: string
+    empresa: string
+    nome: string
     email: string
     propostas: document[]
     contratos: document[]
@@ -19,8 +19,8 @@ export type ProjectsRow = {
     status: number
     cliente: {
         id: string
-        cliente: string
-        contato: string
+        empresa: string
+        nome: string
     }
     data_inicio: string
     valor: string
