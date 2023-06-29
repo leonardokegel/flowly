@@ -29,13 +29,13 @@
     <div class="flex gap-2 items-center justify-between cursor-pointer" (click)="openDropdown()">
         <div class="text-txt-disabled" [ngClass]="isDropdownClosed? 'rotate-0': 'rotate-90'"><app-icon-chevron />
         </div>
-        <span class="flex-grow text-ellipsis overflow-hidden transition-opacity" [ngClass]="isDropdownClosed? 'opacity-100': 'opacity-0'">{{ item[0] | lowercase }}</span>
+        <span class="flex-grow text-ellipsis overflow-hidden transition-colors" [ngClass]="isDropdownClosed? '': 'text-txt-disabled'">{{ item[0] | lowercase }}</span>
         <app-badge-status [status]="highestStatus" *ngIf="isDropdownClosed" />
     </div>
-
-    <div class="overflow-hidden" [ngClass]="isDropdownClosed? 'max-h-[0rem]': 'max-h-[100rem]'">
-        <ul>
-            <li *ngFor="let documento of item[1]" class="flex gap-2 justify-between p-2 text-sm">
+    <!-- [ngClass]="isDropdownClosed? 'max-h-[0rem]': 'max-h-[100rem]'" -->
+    <div class="overflow-hidden" [ngClass]="isDropdownClosed? 'closed': 'open'">
+        <ul class="bg-basic-200 rounded-lg border border-basic-300 mt-2">
+            <li *ngFor="let documento of item[1]" class="flex gap-2 justify-between p-2 text-sm border-b last:border-b-0 border-basic-300">
                 <p class="text-ellipsis overflow-hidden">{{ documento.titulo }}</p>
                 <app-badge-status [status]="documento.status" />
             </li>
