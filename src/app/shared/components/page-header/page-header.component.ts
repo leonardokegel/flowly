@@ -8,7 +8,7 @@ import { ModalType } from '@shared/modal/modal.model';
 })
 export class PageHeaderComponent {
   @Input()
-  page = 'clientes';
+  page = 'Clientes';
 
   @Input()
   haveSettings = false;
