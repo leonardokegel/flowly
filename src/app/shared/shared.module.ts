@@ -10,6 +10,7 @@ import { IconSidebarComponent } from './icons/icon-sidebar/icon-sidebar.componen
 import { IconCardComponent } from './icons/icon-card/icon-card.component';
 import { IconAttachComponent } from './icons/icon-attach/icon-attach.component';
 import { IconSearchComponent } from './icons/icon-search/icon-search.component';
+import { IconSettingsComponent } from './icons/icon-settings/icon-settings.component';
 
 import { ImgFlowlyComponent } from './brand/img-flowly/img-flowly.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -37,7 +38,8 @@ const icons = [
   IconCardComponent,
   IconAttachComponent,
   IconChevronComponent,
-  IconSearchComponent
+  IconSearchComponent,
+  IconSettingsComponent
 ];
 const components = [
   NavbarComponent,
