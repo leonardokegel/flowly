@@ -9,6 +9,7 @@ import { IconWarningCircleComponent } from './icons/icon-warning-circle/icon-war
 import { IconSidebarComponent } from './icons/icon-sidebar/icon-sidebar.component';
 import { IconCardComponent } from './icons/icon-card/icon-card.component';
 import { IconAttachComponent } from './icons/icon-attach/icon-attach.component';
+import { IconSearchComponent } from './icons/icon-search/icon-search.component';
 
 import { ImgFlowlyComponent } from './brand/img-flowly/img-flowly.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -25,6 +26,7 @@ import { ModalModule } from './modal/modal.module';
 import { TableCelComponent } from './components/table-cel/table-cel.component';
 import { IconChevronComponent } from './icons/icon-chevron/icon-chevron.component';
 import { TableListComponent } from './components/table-list/table-list.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
 
 const images = [ImgFlowlyComponent];
 const icons = [
@@ -34,7 +36,8 @@ const icons = [
   IconSidebarComponent,
   IconCardComponent,
   IconAttachComponent,
-  IconChevronComponent
+  IconChevronComponent,
+  IconSearchComponent
 ];
 const components = [
   NavbarComponent,
@@ -48,7 +51,8 @@ const components = [
   SidebarLinkComponent,
   MessagesComponent,
   TableCelComponent,
-  TableListComponent
+  TableListComponent,
+  PageHeaderComponent
 ];
 
 @NgModule({
