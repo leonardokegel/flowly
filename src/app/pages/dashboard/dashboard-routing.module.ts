@@ -8,6 +8,13 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
+        path: 'propostas',
+        loadChildren: () =>
+        import('./propostas/propostas.module').then(
+          (m) => m.PropostasModule
+        ),
+      },
+      {
         path: 'projetos',
         loadChildren: () =>
         import('./projetos/projetos.module').then(

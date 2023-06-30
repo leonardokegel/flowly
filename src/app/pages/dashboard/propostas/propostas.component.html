@@ -1,0 +1,8 @@
+<div class="ml-16 bg-basic-200 min-h-full flex flex-wrap gap-4 content-start p-4">
+    <div class="pt-4 pb-2 w-full">
+        <app-page-header page="Propostas" (openPopup)="openModal($event, true)" [haveSettings]="true"></app-page-header>
+    </div>
+    <div class="flex-grow w-full">
+        <app-table-list [rows]="proposals"></app-table-list>
+    </div>
+</div>
