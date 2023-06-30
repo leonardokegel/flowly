@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ClientRow } from '@shared/components/table-list/table-list.model';
-import { ModalComponent } from '@shared/modal/modal.component';
 import { ModalService } from '@shared/modal/modal.service';
 
 @Component({

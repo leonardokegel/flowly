@@ -1,0 +1,21 @@
+<form [formGroup]="createForm" class="w-full bg-basic-100 border border-basic-300 rounded-md">
+    <div class="border-b border-basic-300 p-4 font-semibold text-lg">
+        <h1>
+            Criar Cliente
+        </h1>
+    </div>
+
+    <div class="p-4">
+        <app-input 
+        label="Nome da Empresa" 
+        [control]="createForm.get('nome')"
+        ></app-input>
+
+        <app-input label="e-mail" [type]="'email'" [control]="createForm.get('email')"></app-input>
+
+        <div *ngIf="errorMessage !== ''" class="error-style">
+            <p>{{ errorMessage }}</p>
+        </div>
+    </div>
+
+</form>

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { ModalRef } from './modal.ref';
-import { MODAL_DATA } from './modal-tokens';
+import { MODAL_DATA } from '@shared/modal/modal-tokens';
+import { ModalRef } from '@shared/modal/modal.ref';
 
 @Component({
   selector: 'app-modal',
@@ -8,7 +8,6 @@ import { MODAL_DATA } from './modal-tokens';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
-
   constructor(
     private modalRef: ModalRef, 
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any

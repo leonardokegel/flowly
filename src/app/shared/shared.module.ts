@@ -29,6 +29,8 @@ import { IconChevronComponent } from './icons/icon-chevron/icon-chevron.componen
 import { TableListComponent } from './components/table-list/table-list.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { CreateClienteComponent } from './components/create-cliente/create-cliente.component';
 
 const images = [ImgFlowlyComponent];
 const icons = [
@@ -56,7 +58,9 @@ const components = [
   TableCelComponent,
   TableListComponent,
   PageHeaderComponent,
-  PageLayoutComponent
+  PageLayoutComponent,
+  ModalComponent,
+  CreateClienteComponent
 ];
 
 @NgModule({

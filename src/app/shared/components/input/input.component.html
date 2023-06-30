@@ -1,29 +1,18 @@
-<div class="relative my-4">
-  <label
-    for="txt-{{ label }}"
-    class="uppercase"
-    [ngClass]="
-      control?.errors && control?.touched ? 'text-red-400' : 'text-gray-400'
-    "
-  >
+<div class="mb-4">
+  <label for="txt-{{ label }}" [class]="labelClass" [ngClass]="
+      control?.errors && control?.touched ? 'text-danger-500' : ''
+    ">
     {{ label }}
     {{
-      control?.errors && control?.touched && control.hasError("required")
-        ? " - obrigatório"
-        : control?.errors && control?.touched && control.hasError("email")
-        ? " - invalido"
-        : ""
+    control?.errors && control?.touched && control.hasError("required")
+    ? " - obrigatório"
+    : control?.errors && control?.touched && control.hasError("email")
+    ? " - invalido"
+    : ""
     }}
   </label>
-  <input
-    autocomplete="off"
-    [type]="type"
-    [formControl]="control"
-    id="input-{{ label }}"
-    class="font-heebo mt-2 w-full rounded-xl border-solid border-gray-200 p-6 pb-3 text-base"
-    [ngClass]="
-      control?.errors && control?.touched ? 'border-red-500' : 'border-gray-200'
-    "
-    placeholder=" "
-  />
+  <input autocomplete="off" [type]="type" [formControl]="control" id="input-{{ label }}" [class]="inputClass" [ngClass]="
+      control?.errors && control?.touched ? 'border-danger-500 bg-danger-100' : ''
+    " placeholder=" "
+    />
 </div>

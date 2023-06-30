@@ -21,7 +21,7 @@
         <app-icon-settings width="30"/>
     </button>
 
-    <button class="transition-all hover:text-txt-accent hover:scale-105" [routerLink]="['create']">
+    <button class="transition-all hover:text-txt-accent hover:scale-105" (click)="openPopup.emit(createModal)">
         <app-icon-plus width="35" [round]="true"/>
     </button>
 </div>
