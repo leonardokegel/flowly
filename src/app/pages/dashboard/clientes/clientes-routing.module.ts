@@ -8,6 +8,13 @@ const routes: Routes = [
     path: '',
     component: ClientesComponent,
   },
+  {
+    path: 'create',
+    loadChildren: () =>
+    import('../criar-cliente/criar-cliente.module').then(
+      (m) => m.CriarClienteModule
+    ),
+  },
 ];
 
 @NgModule({
