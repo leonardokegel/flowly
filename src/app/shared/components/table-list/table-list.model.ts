@@ -37,4 +37,15 @@ export type ProposalsRow = {
     }
 }
 
-export type Row = ClientRow | ProjectsRow | ProposalsRow
+export type ContractsRow = {
+    id: string
+    titulo: string
+    status: number
+    cliente: {
+        id: string
+        empresa: string
+        nome: string
+    }
+}
+
+export type Row = ClientRow | ProjectsRow | ProposalsRow | ContractsRow

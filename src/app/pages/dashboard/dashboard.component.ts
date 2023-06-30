@@ -13,7 +13,8 @@ export class DashboardComponent {
     { label: 'Dashboard', url: '/dashboard', icon: 'dashboard' },
     { label: 'Clientes', url: '/dashboard/clientes', icon: 'clientes' },
     { label: 'Projetos', url: '/dashboard/projetos', icon: 'projetos' },
-    { label: 'Propostas', url: '/dashboard/propostas', icon: 'propostas' }
+    { label: 'Propostas', url: '/dashboard/propostas', icon: 'propostas' },
+    { label: 'Contratos', url: '/dashboard/contratos', icon: 'contratos' }
   ];
 
   onSidebarHovered(hovered: boolean) {
