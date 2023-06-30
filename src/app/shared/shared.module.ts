@@ -28,6 +28,7 @@ import { TableCelComponent } from './components/table-cel/table-cel.component';
 import { IconChevronComponent } from './icons/icon-chevron/icon-chevron.component';
 import { TableListComponent } from './components/table-list/table-list.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 
 const images = [ImgFlowlyComponent];
 const icons = [
@@ -54,7 +55,8 @@ const components = [
   MessagesComponent,
   TableCelComponent,
   TableListComponent,
-  PageHeaderComponent
+  PageHeaderComponent,
+  PageLayoutComponent
 ];
 
 @NgModule({

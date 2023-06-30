@@ -1,4 +1,4 @@
-<div class="ml-16 bg-basic-200 min-h-full flex flex-wrap gap-4 content-start p-4">
+<app-page-layout>
   <div class="flex-grow w-full">
     <app-card [card]="{ title: 'Projetos Ativos', icon: 'plus', openPopup: 'CREATE_PROJETO' }"
       (openPopup)="openModal($event, true)">
@@ -24,4 +24,4 @@
       <app-document-status documentType="contrato"></app-document-status>
     </app-card>
   </div>
-</div>
+</app-page-layout>
