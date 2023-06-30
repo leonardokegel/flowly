@@ -12,7 +12,8 @@ export class DashboardComponent {
   sidebarLinks: SidebarLink[] = [
     { label: 'Dashboard', url: '/dashboard', icon: 'dashboard' },
     { label: 'Clientes', url: '/dashboard/clientes', icon: 'clientes' },
-    { label: 'Projetos', url: '/dashboard/projetos', icon: 'projetos' }
+    { label: 'Projetos', url: '/dashboard/projetos', icon: 'projetos' },
+    { label: 'Propostas', url: '/dashboard/propostas', icon: 'propostas' }
   ];
 
   onSidebarHovered(hovered: boolean) {
