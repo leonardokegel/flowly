@@ -1,5 +1,5 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,18 +8,22 @@ import { RouterOutlet } from '@angular/router';
   styleUrls: ['./login.component.scss'],
   animations: [
     trigger('routeAnimations', [
-      transition('* => *', [
+      transition('* <=> *', [
         query(':enter, :leave', style({ position: 'fixed' }), {
           optional: true,
         }),
         group([
-          query(':leave', [
-            style({ transform: 'translateX(0%)' }),
-            animate(
-              '0.2s ease-in-out',
-              style({ transform: 'translateX(-220%)' })
-            ),
-          ]),
+          query(
+            ':leave',
+            [
+              style({ transform: 'translateX(0%)' }),
+              animate(
+                '0.2s ease-in-out',
+                style({ transform: 'translateX(-220%)' })
+              ),
+            ],
+            { optional: true }
+          ),
           query(
             ':enter',
             [
@@ -29,16 +33,20 @@ import { RouterOutlet } from '@angular/router';
                 style({ transform: 'translateX(0%)' })
               ),
             ],
-            {
-              optional: true,
-            }
+            { optional: true }
           ),
         ]),
       ]),
     ]),
   ],
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
+  constructor(private changeRef: ChangeDetectorRef) {}
+
+  ngAfterViewInit(): void {
+    this.changeRef.detectChanges();
+  }
+
   prepareRoute(outlet: RouterOutlet) {
     return (
       outlet &&
