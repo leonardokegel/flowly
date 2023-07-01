@@ -1,29 +1,37 @@
 <nav
-  class="sticky top-0 z-50 flex flex-wrap items-center justify-between bg-basic-100 py-4 border-b border-basic-300 h-20"
-  [ngClass]="sidebarHovered || isOpen ? 'ml-60': 'ml-16'"
+  class="sticky top-0 z-50 flex h-20 flex-wrap items-center justify-between border-b border-basic-300 bg-basic-100 py-4"
+  [ngClass]="sidebarHovered || isOpen ? 'ml-60' : 'ml-16'"
 >
   <div class="flex w-full flex-wrap items-center justify-between px-3">
-    <button 
-    class="flex h-full p-2 rounded-md bg-transparent hover:text-primary-500 text-basic-600"
-    (click)="onClick()"
+    <button
+      class="flex h-full rounded-md bg-transparent p-2 text-basic-600 hover:text-primary-500"
+      (click)="onClick()"
     >
-      <app-icon-menu [iconType]="sidebarHovered || isOpen ? 'open': 'close'" width="30" class="block w-full h-auto"></app-icon-menu>
+      <app-icon-menu
+        [iconType]="sidebarHovered || isOpen ? 'open' : 'close'"
+        width="30"
+        class="block h-auto w-full"
+      ></app-icon-menu>
     </button>
 
     <div class="flex items-center gap-2">
-      <button class="flex h-full w-10 p-2 rounded-full bg-transparent hover:bg-basic-300">
-        <app-icon-plus class="block w-full h-auto"></app-icon-plus>
+      <button
+        class="flex h-full w-10 rounded-full bg-transparent p-2 hover:bg-basic-300"
+      >
+        <app-icon-plus class="block h-auto w-full"></app-icon-plus>
       </button>
-      <div class="bg-basic-600 opacity-20 self-stretch rounded-full w-0.5"></div>
+      <div
+        class="w-0.5 self-stretch rounded-full bg-basic-600 opacity-20"
+      ></div>
       <div class="flex px-3">
         <img
           src="assets/images/Avatar.jpg"
-          class="h-10 mr-3 rounded-full"
+          class="mr-3 h-10 rounded-full"
           alt="Flowly Logo"
         />
-        <span class="self-center whitespace-nowrap text-sm font-semibold"
-          >Freela Name</span
-        >
+        <span class="self-center whitespace-nowrap text-sm font-semibold">{{
+          (userName$ | async)?.nome | titlecase
+        }}</span>
       </div>
     </div>
   </div>
