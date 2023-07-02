@@ -8,27 +8,7 @@ import { Row } from './table-list.model';
 })
 export class TableListComponent implements OnInit {
   @Input()
-  rows: Row[] = [
-    {
-      id: '1',
-      empresa: 'Fulano Inc.',
-      nome: 'Fulano de Tal Algumacoisa',
-      email: 'fulano@email.com',
-      propostas: [
-        {
-          id: '1',
-          titulo: 'Proposta de Desenvolvimento',
-          status: 1,
-        },
-        {
-          id: '2',
-          titulo: 'Proposta Inicial',
-          status: 5,
-        }
-      ],
-      contratos: []
-    }
-  ]
+  rows: Row[] = []
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rowsArray: any[] = [];

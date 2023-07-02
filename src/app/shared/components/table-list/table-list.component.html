@@ -11,18 +11,18 @@
         [ngStyle]="{'grid-template-columns': gridColumns}">
         <ng-container *ngFor="let item of row | slice:1">
             <div class="
-                    max-md:first:p-0 
-                    max-md:first:mb-4 
+                    max-md:first:p-0
+                    max-md:first:mb-4
                     max-md:first:font-bold
                     max-md:first:bg-transparent
                     max-md:py-2
                     max-md:bg-basic-200
                     max-md:first:text-txt-accent
                     max-md:rounded-md
-                    font-medium 
-                    whitespace-nowrap 
-                    text-ellipsis 
-                    overflow-hidden 
+                    font-medium
+                    whitespace-nowrap
+                    text-ellipsis
+                    overflow-hidden
                     p-4
                 ">
                 <app-table-cel [item]="item" />
