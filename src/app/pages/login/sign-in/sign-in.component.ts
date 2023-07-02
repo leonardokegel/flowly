@@ -20,6 +20,8 @@ export class SignInComponent {
     private store: Store
   ) {}
 
+  isLoading = false;
+
   loginForm: FormGroup = this.formBuilder.group({
     email: ['', Validators.compose([Validators.required, Validators.email])],
     senha: ['', [Validators.required]],
@@ -32,6 +34,7 @@ export class SignInComponent {
       return;
     }
 
+    this.isLoading = true;
     this.service
       .signIn(this.loginForm.value)
       .pipe(take(1))

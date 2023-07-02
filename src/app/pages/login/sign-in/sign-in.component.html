@@ -1,6 +1,6 @@
 <div class="w-screen max-w-md px-12 py-4">
   <form [formGroup]="loginForm">
-    <h1 class="font-barlow mb-8 self-start text-3xl text-gray-600">
+    <h1 class="font-barlow text-gray-600 mb-8 self-start text-3xl">
       Fazer Login
     </h1>
 
@@ -16,10 +16,11 @@
       (clickButton)="loginUser()"
       colorBg="blue"
       colorTxt="white"
-      [disabled]="loginForm.invalid"
+      [disabled]="loginForm.invalid || isLoading"
       [classUp]="['w-full', 'mt-4']"
     >
-      Entrar
+      {{ isLoading ? "" : "Entrar" }}
+      <app-loading *ngIf="isLoading"></app-loading>
     </app-button>
 
     <div *ngIf="errorMessage !== ''" class="error-style">
@@ -29,7 +30,7 @@
     <div class="mt-8 flex items-center">
       <app-icon-warning-circle stroke="#eab308"></app-icon-warning-circle>
       <a
-        class="font-heebo ml-2 text-gray-400"
+        class="font-heebo text-gray-400 ml-2"
         routerLink="/login/reset-password"
       >
         Esqueci a senha!
@@ -38,7 +39,7 @@
 
     <div class="mt-8 flex items-center">
       <app-icon-warning-circle stroke="#ef4444"></app-icon-warning-circle>
-      <a class="font-heebo ml-2 text-gray-400" routerLink="/login/sign-up">
+      <a class="font-heebo text-gray-400 ml-2" routerLink="/login/sign-up">
         Criar conta.
       </a>
     </div>
