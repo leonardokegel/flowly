@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 import { ProjectStatusComponent } from './components/project-status/project-status.component';
+import { SelectComponent } from './components/select/select.component';
 import { SidebarLinkComponent } from './components/sidebar-link/sidebar-link.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TableCelComponent } from './components/table-cel/table-cel.component';
@@ -23,24 +24,28 @@ import { IconAttachComponent } from './icons/icon-attach/icon-attach.component';
 import { IconCardComponent } from './icons/icon-card/icon-card.component';
 import { IconChevronComponent } from './icons/icon-chevron/icon-chevron.component';
 import { IconMenuComponent } from './icons/icon-menu/icon-menu.component';
+import { IconPencilLineComponent } from './icons/icon-pencil-line/icon-pencil-line.component';
 import { IconPlusComponent } from './icons/icon-plus/icon-plus.component';
 import { IconSearchComponent } from './icons/icon-search/icon-search.component';
 import { IconSettingsComponent } from './icons/icon-settings/icon-settings.component';
 import { IconSidebarComponent } from './icons/icon-sidebar/icon-sidebar.component';
+import { IconTrashComponent } from './icons/icon-trash/icon-trash.component';
 import { IconWarningCircleComponent } from './icons/icon-warning-circle/icon-warning-circle.component';
 import { ModalModule } from './modal/modal.module';
 
 const images = [ImgFlowlyComponent];
 const icons = [
-  IconMenuComponent,
-  IconPlusComponent,
-  IconWarningCircleComponent,
-  IconSidebarComponent,
-  IconCardComponent,
   IconAttachComponent,
+  IconCardComponent,
   IconChevronComponent,
+  IconMenuComponent,
+  IconPencilLineComponent,
+  IconPlusComponent,
   IconSearchComponent,
   IconSettingsComponent,
+  IconSidebarComponent,
+  IconTrashComponent,
+  IconWarningCircleComponent,
 ];
 const components = [
   BadgeStatusComponent,
@@ -54,6 +59,7 @@ const components = [
   PageHeaderComponent,
   PageLayoutComponent,
   ProjectStatusComponent,
+  SelectComponent,
   SidebarComponent,
   SidebarLinkComponent,
   TableCelComponent,

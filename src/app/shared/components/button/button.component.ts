@@ -9,7 +9,7 @@ import { ColorButton } from './button.model';
 })
 export class ButtonComponent {
   @Input()
-  colorBg: ColorButton = 'green';
+  colorBg: ColorButton = 'primary';
 
   @Input()
   classUp: string[] = [];

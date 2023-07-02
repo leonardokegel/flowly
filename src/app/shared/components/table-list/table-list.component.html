@@ -1,32 +1,46 @@
-<div class="overflow-x-auto border rounded-md  border-basic-300 bg-basic-100">
-    <div class="max-md:hidden grid border-b text-left border-basic-300 min-w-fit"
-        [ngStyle]="{'grid-template-columns': gridColumns}">
-        <div *ngFor="let column of columnsArray | slice:2"
-            class="p-4 font-semibold text-basic-600 overflow-hidden min-w-[200px] w-[16%]">
-            {{ column | titlecase }}
-        </div>
+<div class="overflow-x-auto rounded-md border border-basic-300 bg-basic-100">
+  <div
+    class="grid min-w-fit border-b border-basic-300 text-left max-md:hidden"
+    [ngStyle]="{ 'grid-template-columns': gridColumns }"
+  >
+    <div
+      *ngFor="let column of columnsArray | slice : 1"
+      class="w-[16%] min-w-[200px] overflow-hidden p-4 font-semibold text-basic-600"
+    >
+      {{ column | titlecase }}
     </div>
-    <div *ngFor="let row of rowsArray"
-        class="max-md:block max-md:p-4 grid border-b last:border-b-0 text-left border-basic-300 min-w-fit"
-        [ngStyle]="{'grid-template-columns': gridColumns}">
-        <ng-container *ngFor="let item of row | slice:2">
-            <div class="
-                    max-md:first:p-0
-                    max-md:first:mb-4
-                    max-md:first:font-bold
-                    max-md:first:bg-transparent
-                    max-md:py-2
-                    max-md:bg-basic-200
-                    max-md:first:text-txt-accent
-                    max-md:rounded-md
-                    font-medium
-                    whitespace-nowrap
-                    text-ellipsis
-                    overflow-hidden
-                    p-4
-                ">
-                <app-table-cel [item]="item" />
-            </div>
-        </ng-container>
+    <div
+      class="w-[16%] min-w-[200px] overflow-hidden p-4 font-semibold text-basic-600"
+    >
+      Açoes
     </div>
+  </div>
+  <div
+    *ngFor="let row of rowsArray"
+    class="grid min-w-fit border-b border-basic-300 text-left last:border-b-0 max-md:block max-md:p-4"
+    [ngStyle]="{ 'grid-template-columns': gridColumns }"
+  >
+    <ng-container *ngFor="let item of row | slice : 1">
+      <div
+        class="overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:rounded-md max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
+      >
+        <app-table-cel [item]="item" />
+      </div>
+    </ng-container>
+    <ng-container>
+      <div
+        class="flex gap-2 overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:rounded-md max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
+      >
+        <button>
+          <app-icon-pencil-line
+            stroke="#4c6107"
+            width="24"
+          ></app-icon-pencil-line>
+        </button>
+        <button>
+          <app-icon-trash stroke="#4c6107" width="24"></app-icon-trash>
+        </button>
+      </div>
+    </ng-container>
+  </div>
 </div>
