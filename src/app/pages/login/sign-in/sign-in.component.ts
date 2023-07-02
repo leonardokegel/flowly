@@ -43,7 +43,6 @@ export class SignInComponent {
       .pipe(take(1))
       .subscribe({
         next: (responseApi) => {
-          console.log(responseApi);
           this.store.dispatch(new ObterDadosSessaoAction(responseApi));
 
           this.router.navigate(['/dashboard']);

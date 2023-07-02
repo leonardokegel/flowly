@@ -36,7 +36,6 @@ export class DashboardComponent implements OnInit {
     )
     .subscribe({
       next: (e) => {
-        console.log(e)
         this.store.dispatch(new ObterDadosClientesAction(e as IDadosClientesState[]));
       },
       error: (err) => console.log(err),

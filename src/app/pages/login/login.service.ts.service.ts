@@ -24,7 +24,6 @@ export class LoginService {
   }
 
   signIn(form: ISignIn): Observable<ISignInResponse> {
-    console.log(form);
     return this.http
       .post<ISignInResponse>(`${this.baseUrl}users/login`, form)
       .pipe(catchError((err) => throwError(() => err.error)));

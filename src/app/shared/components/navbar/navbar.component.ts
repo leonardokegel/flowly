@@ -23,10 +23,6 @@ export class NavbarComponent {
   userName$: Observable<IDadosSessaoState> | undefined;
 
   constructor() {
-    this.userName$?.subscribe((e) => {
-      console.log(e);
-    });
-
     this.openSidebar.subscribe((open: boolean) => {
       this.isOpen = open;
     });

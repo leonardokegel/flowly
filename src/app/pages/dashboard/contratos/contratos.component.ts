@@ -47,9 +47,7 @@ export class ContratosComponent implements OnInit {
       .select(DadosClienteState)
       .pipe(
         switchMap((clientes: IDadosClientesState[]) => {
-          console.log(clientes);
           clientes.map((e: IDadosClientesState) => ids.push(e.id));
-          console.log(ids);
           return this.service.getContratos(ids).pipe(take(1));
         })
       )

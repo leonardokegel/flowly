@@ -1,4 +1,4 @@
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ContractsRow } from '@shared/components/table-list/table-list.model';
@@ -12,6 +12,9 @@ export class ContratosService {
   constructor(private http: HttpClient) {}
 
   getContratos(idsCliente: string[]): Observable<ContractsRow[]> {
+    if (!idsCliente) {
+      return of([]);
+    }
     return this.http.get<ContractsRow[]>(`${this.baseUrl}`, {
       params: new HttpParams().set('id', idsCliente.toString())
     }).pipe(
