@@ -21,4 +21,7 @@ export type ColorButton =
   | 'fuchsia'
   | 'pink'
   | 'rose'
-  | 'white';
+  | 'white'
+  | 'primary'
+  | 'basic'
+  | 'warning';

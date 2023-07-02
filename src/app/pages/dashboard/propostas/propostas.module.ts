@@ -1,16 +1,20 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { PropostasComponent } from './propostas.component';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
+
+import { CriarPropostaComponent } from './criar-proposta/criar-proposta.component';
 import { PropostasRoutingModule } from './propostas-routing.module';
+import { PropostasComponent } from './propostas.component';
 
 @NgModule({
-  declarations: [
-    PropostasComponent
-  ],
+  declarations: [PropostasComponent, CriarPropostaComponent],
   imports: [
-    CommonModule, PropostasRoutingModule, SharedModule
-  ]
+    CommonModule,
+    FormsModule,
+    PropostasRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+  ],
 })
-export class PropostasModule { }
+export class PropostasModule {}
