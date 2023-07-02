@@ -50,9 +50,12 @@ export class ClientesComponent implements OnInit {
           return this.service.getClientes(e.id).pipe(take(1));
         })
       )
-      .subscribe((e) => {
-        this.clients = e;
-        this.isLoading = false;
+      .subscribe({
+        next: (e) => {
+          this.clients = e as ClientRow[];
+          this.isLoading = false;
+        },
+        error: (err) => console.log(err),
       });
   }
 }

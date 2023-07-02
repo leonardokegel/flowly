@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ClientRow } from '@shared/components/table-list/table-list.model';
 import { Observable, catchError, throwError } from 'rxjs';
+import { IDadosClientesState } from 'src/app/store/app-state';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +13,10 @@ export class ClientesService {
 
   constructor(private http: HttpClient) {}
 
-  getClientes(idUsuario: string): Observable<ClientRow[]> {
-    console.log(idUsuario)
-    return this.http.get<ClientRow[]>(`${this.baseUrl}/${idUsuario}`).pipe(
+  getClientes(idUsuario: string, view = 'completa'): Observable<ClientRow[] | IDadosClientesState[]> {
+    return this.http.get<ClientRow[] | IDadosClientesState[]>(`${this.baseUrl}/${idUsuario}`, {
+      params: new HttpParams().set('view', view)
+    }).pipe(
       catchError((err) => {
         console.log(err);
         return throwError(() => err.error);

@@ -1,7 +1,7 @@
 <div class="overflow-x-auto border rounded-md  border-basic-300 bg-basic-100">
     <div class="max-md:hidden grid border-b text-left border-basic-300 min-w-fit"
         [ngStyle]="{'grid-template-columns': gridColumns}">
-        <div *ngFor="let column of columnsArray | slice:1"
+        <div *ngFor="let column of columnsArray | slice:2"
             class="p-4 font-semibold text-basic-600 overflow-hidden min-w-[200px] w-[16%]">
             {{ column | titlecase }}
         </div>
@@ -9,7 +9,7 @@
     <div *ngFor="let row of rowsArray"
         class="max-md:block max-md:p-4 grid border-b last:border-b-0 text-left border-basic-300 min-w-fit"
         [ngStyle]="{'grid-template-columns': gridColumns}">
-        <ng-container *ngFor="let item of row | slice:1">
+        <ng-container *ngFor="let item of row | slice:2">
             <div class="
                     max-md:first:p-0
                     max-md:first:mb-4

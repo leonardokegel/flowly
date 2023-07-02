@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { DadosSessaoState } from './store/dados-sessao/dados-sessao.state';
+import { DadosClienteState } from './store/dados-clientes/dados-clientes.state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,7 @@ import { DadosSessaoState } from './store/dados-sessao/dados-sessao.state';
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
-    NgxsModule.forRoot([DadosSessaoState], {
+    NgxsModule.forRoot([DadosSessaoState, DadosClienteState], {
       developmentMode: !environment.production,
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),

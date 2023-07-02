@@ -1,4 +1,4 @@
-<app-page-layout>
+<app-page-layout *ngIf="!isLoading">
     <div class="pt-4 pb-2 w-full">
         <app-page-header page="Contratos" (openPopup)="openModal($event, true)" [haveSettings]="true"></app-page-header>
     </div>
