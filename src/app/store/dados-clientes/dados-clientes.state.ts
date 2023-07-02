@@ -13,14 +13,10 @@ import {
 @Injectable()
 export class DadosClienteState {
   @Action(ObterDadosClientesAction)
-  obterDadosClientesAction(
-    { getState, patchState }: StateContext<IDadosClientesState[]>,
-    { dadosClientes }: { dadosClientes: IDadosClientesState[] }
-  ) {
-    const clientesState = getState();
-
+  obterDadosClientesAction(ctx: StateContext<IDadosClientesState[]>, payload: ObterDadosClientesAction) {
+    const clientesState = ctx.getState();
     if (clientesState.length === 0) {
-      patchState({ ...dadosClientes });
+      ctx.setState(payload.dadosClientes);
     }
   }
 
