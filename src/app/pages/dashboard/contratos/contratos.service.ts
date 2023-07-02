@@ -1,5 +1,5 @@
 import { Observable, catchError, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ContractsRow } from '@shared/components/table-list/table-list.model';
 @Injectable({
@@ -11,8 +11,10 @@ export class ContratosService {
 
   constructor(private http: HttpClient) {}
 
-  getContratos(idCliente: string): Observable<ContractsRow[]> {
-    return this.http.get<ContractsRow[]>(`${this.baseUrl}/${idCliente}`).pipe(
+  getContratos(idsCliente: string[]): Observable<ContractsRow[]> {
+    return this.http.get<ContractsRow[]>(`${this.baseUrl}`, {
+      params: new HttpParams().set('id', idsCliente.toString())
+    }).pipe(
       catchError((err) => {
         return throwError(() => err.error);
       })

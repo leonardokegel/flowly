@@ -1,9 +1,12 @@
-import { take } from 'rxjs';
+import { switchMap, take } from 'rxjs';
 import { ContratosService } from './contratos.service';
 import { Component, OnInit } from '@angular/core';
 import { ContractsRow } from '@shared/components/table-list/table-list.model';
 import { ModalComponent } from '@shared/modal/modal.component';
 import { ModalService } from '@shared/modal/modal.service';
+import { Store } from '@ngxs/store';
+import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
+import { IDadosClientesState } from 'src/app/store/app-state';
 
 @Component({
   selector: 'app-contratos',
@@ -16,7 +19,8 @@ export class ContratosComponent implements OnInit {
 
   constructor(
     private modalService: ModalService,
-    private service: ContratosService
+    private service: ContratosService,
+    private store: Store
   ) {}
 
   openModal(modal: string, hasBackdropClick: boolean) {
@@ -33,29 +37,25 @@ export class ContratosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getContratos();
+  }
+
+  getContratos(): void {
     this.isLoading = true;
-    this.service
-      .getContratos('3')
-      .pipe(take(1))
-      .subscribe({
-        next: (e) => {
-          console.log(e)
-          this.contracts = e;
-          this.isLoading = false;
-        },
-        error: (err) => console.log(err),
+    const ids: string[] = [];
+    this.store
+      .select(DadosClienteState)
+      .pipe(
+        switchMap((clientes: IDadosClientesState[]) => {
+          console.log(clientes);
+          clientes.map((e: IDadosClientesState) => ids.push(e.id));
+          console.log(ids);
+          return this.service.getContratos(ids).pipe(take(1));
+        })
+      )
+      .subscribe((e) => {
+        this.contracts = e;
+        this.isLoading = false;
       });
-    // this.contracts = [
-    //   {
-    //     id: '1',
-    //     titulo: 'Desenvolvimento do cicrApp',
-    //     status: 1,
-    //     cliente: {
-    //         id: '1',
-    //         empresa: 'Cricrano Inc.',
-    //         nome: 'Cicrano Cicranildo',
-    //     },
-    //   }
-    // ]
   }
 }
