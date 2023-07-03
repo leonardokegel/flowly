@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -13,9 +13,14 @@ export class PropostasService {
   constructor(private http: HttpClient) {}
 
   postPropostas(proposta: unknown, idCliente: string): Observable<unknown> {
+    if (!idCliente) {
+      return of([]);
+    }
+
     return this.http
       .post<unknown>(`${this.baseUrl}/${idCliente}`, {
-        body: proposta,
+        titulo: proposta,
+        status: 0,
       })
       .pipe(
         catchError((err) => {

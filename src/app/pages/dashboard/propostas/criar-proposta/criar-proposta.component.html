@@ -9,7 +9,7 @@
         <div class="flex gap-2">
           <app-select
             label="Cliente"
-            [control]="propostaForm.get('clientes')"
+            [control]="propostaForm.get('cliente')"
             [classUp]="['w-1/2']"
             [options]="clientesFormatado$ | async"
           >
@@ -30,16 +30,11 @@
         </div>
 
         <div class="flex gap-2">
-          <app-button
-            (clickButton)="loginUser()"
-            colorBg="warning"
-            [disabled]="propostaForm.invalid"
-            [classUp]="['w-full', 'mt-4']"
-          >
+          <app-button colorBg="warning" [classUp]="['w-full', 'mt-4']">
             Voltar
           </app-button>
           <app-button
-            (clickButton)="loginUser()"
+            (clickButton)="criaProposta()"
             colorBg="primary"
             [disabled]="propostaForm.invalid"
             [classUp]="['w-full', 'mt-4']"
@@ -47,6 +42,8 @@
             Cadastrar
           </app-button>
         </div>
+
+        {{ propostaForm.value | json }}
       </form>
     </div>
   </div>

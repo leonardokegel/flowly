@@ -1,8 +1,8 @@
 import { switchMap, take } from 'rxjs';
 import { ContratosService } from './contratos.service';
 import { Component, OnInit } from '@angular/core';
+import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ContractsRow } from '@shared/components/table-list/table-list.model';
-import { ModalComponent } from '@shared/modal/modal.component';
 import { ModalService } from '@shared/modal/modal.service';
 import { Store } from '@ngxs/store';
 import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';

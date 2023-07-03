@@ -19,6 +19,7 @@
   <select
     id="countries"
     class="font-heebo border-gray-200 mt-2 w-full rounded-xl border-solid p-4 text-base"
+    [formControl]="control"
   >
     <option selected>Selecione</option>
     <option *ngFor="let option of options | keyvalue" value="{{ option.key }}">

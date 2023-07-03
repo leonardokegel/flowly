@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { Observable, of, switchMap, take } from 'rxjs';
 
@@ -14,7 +15,8 @@ import { DadosClienteState } from './../../../../store/dados-clientes/dados-clie
 export class CriarPropostaComponent {
   constructor(
     private formBuilder: FormBuilder,
-    private service: PropostasService
+    private service: PropostasService,
+    private router: Router
   ) {
     this.clientesFormatado$ = this.clientes$?.pipe(
       switchMap((e: any) => {
@@ -40,21 +42,28 @@ export class CriarPropostaComponent {
     titulo: ['', Validators.compose([Validators.required])],
   });
 
-  loginUser() {
+  errorMessage = '';
+
+  criaProposta() {
     if (this.propostaForm.invalid) {
       return;
     }
 
-    this.isLoading = true;
-    this.service.postPropostas(this.propostaForm.value, '').pipe(take(1));
-    // .subscribe({
-    //   next: (responseApi) => {
-    //     console.log(responseApi);
-    //     this.store.dispatch(new ObterDadosSessaoAction(responseApi));
+    const { titulo, cliente } = this.propostaForm.value;
 
-    //     this.router.navigate(['/dashboard']);
-    //   },
-    //   error: (err) => (this.errorMessage = err.mensagem),
-    // });
+    console.log({ titulo, cliente });
+
+    this.isLoading = true;
+
+    this.service
+      .postPropostas(titulo, cliente)
+      .pipe(take(1))
+      .subscribe({
+        next: (responseApi) => {
+          console.log(responseApi);
+          this.router.navigate(['/dashboard/propostas/']);
+        },
+        error: (err) => (this.errorMessage = err.mensagem),
+      });
   }
 }

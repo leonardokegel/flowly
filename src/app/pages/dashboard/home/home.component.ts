@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalComponent } from '@shared/modal/modal.component';
+import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ModalService } from '@shared/modal/modal.service';
 
 @Component({

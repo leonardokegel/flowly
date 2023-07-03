@@ -1,0 +1,54 @@
+<form
+  [formGroup]="createForm"
+  class="w-full rounded-md border border-basic-300 bg-basic-100"
+>
+  <div class="border-b border-basic-300 p-4">
+    <h2 class="text-lg font-bold">Novo Cliente</h2>
+    <p class="text-base font-semibold">Criar novo cliente</p>
+  </div>
+
+  <div class="p-4">
+    <app-input
+      label="Nome da Empresa"
+      [type]="'text'"
+      [control]="createForm.get('empresa')"
+    ></app-input>
+
+    <app-input
+      label="Nome do Cliente"
+      [type]="'text'"
+      [control]="createForm.get('nome')"
+    ></app-input>
+
+    <app-input
+      label="E-mail"
+      [type]="'email'"
+      [control]="createForm.get('email')"
+    ></app-input>
+
+    <app-input
+      label="Telefone"
+      [type]="'text'"
+      [control]="createForm.get('telefone')"
+    ></app-input>
+
+    <div *ngIf="errorMessage !== ''" class="error-style">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-3 border-t border-basic-300 p-4">
+    <button
+      (mouseup)="cancel()"
+      class="rounded-md bg-transparent px-5 py-3 font-semibold text-txt-default transition-colors hover:bg-basic-300"
+    >
+      Cancelar
+    </button>
+    <button
+      (mouseup)="createProposta()"
+      class="rounded-md bg-primary-500 px-5 py-3 font-semibold text-txt-alternate transition-colors hover:bg-primary-600"
+    >
+      Salvar
+    </button>
+  </div>
+</form>

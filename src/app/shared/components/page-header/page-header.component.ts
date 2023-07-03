@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ModalType } from '@shared/modal/modal.model';
+import { ModalType } from '@shared/components/modal/modal.model';
 
 @Component({
   selector: 'app-page-header',
@@ -11,9 +11,11 @@ export class PageHeaderComponent implements OnInit {
   page = 'Clientes';
 
   settingsModal= '' as ModalType;
+  createModal = '' as ModalType; 
 
   ngOnInit(): void {
     this.settingsModal = `SETTINGS_${this.page.slice(0, -1).toUpperCase()}` as ModalType;
+    this.createModal = `CREATE_${this.page.slice(0, -1).toUpperCase()}` as ModalType;
   }
 
   @Input()
