@@ -8,6 +8,7 @@ import { BadgeStatusComponent } from './components/badge-status/badge-status.com
 import { ButtonComponent } from './components/button/button.component';
 import { CardComponent } from './components/card/card.component';
 import { CreateClienteComponent } from './components/create-cliente/create-cliente.component';
+import { CreateContratoComponent } from './components/create-contrato/create-contrato.component';
 import { CreatePropostaComponent } from './components/create-proposta/create-proposta.component';
 import { DocumentStatusComponent } from './components/document-status/document-status.component';
 import { InputComponent } from './components/input/input.component';
@@ -70,6 +71,7 @@ const components = [
   CreateClienteComponent,
   ModalComponent,
   CreatePropostaComponent,
+  CreateContratoComponent,
 ];
 
 @NgModule({

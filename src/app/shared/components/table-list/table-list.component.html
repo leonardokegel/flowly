@@ -16,19 +16,19 @@
     </div>
   </div>
   <div
-    *ngFor="let row of rowsArray"
+    *ngFor="let row of rowsArray; let i = index"
     class="grid min-w-fit border-b border-basic-300 text-left last:border-b-0 max-md:block max-md:p-4"
     [ngStyle]="{ 'grid-template-columns': gridColumns }"
   >
-    <ng-container *ngFor="let item of row | slice : 1">
+    <ng-container *ngFor="let item of row | slice : 1; let last = last">
       <div
         class="overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:rounded-md max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
       >
         <app-table-cel [item]="item" />
       </div>
-    </ng-container>
-    <ng-container>
+
       <div
+        *ngIf="last"
         class="flex gap-2 overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:rounded-md max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
       >
         <button>
@@ -38,7 +38,11 @@
           ></app-icon-pencil-line>
         </button>
         <button>
-          <app-icon-trash stroke="#4c6107" width="24"></app-icon-trash>
+          <app-icon-trash
+            stroke="#4c6107"
+            width="24"
+            (click)="clickButtonDelete.emit(rowsArray[i][0])"
+          ></app-icon-trash>
         </button>
       </div>
     </ng-container>

@@ -14,6 +14,8 @@ export class PropostasComponent implements OnInit {
   constructor(private modalService: ModalService) {}
 
   openModal(modal: string, hasBackdropClick: boolean) {
+    console.log(modal);
+
     this.modalService.open(ModalComponent, {
       data: {
         title: 'Modal',

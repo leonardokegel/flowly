@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Row } from './table-list.model';
 
@@ -10,6 +10,9 @@ import { Row } from './table-list.model';
 export class TableListComponent implements OnInit {
   @Input()
   rows: Row[] = [];
+
+  @Output()
+  clickButtonDelete = new EventEmitter<unknown>();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rowsArray: any[] = [];

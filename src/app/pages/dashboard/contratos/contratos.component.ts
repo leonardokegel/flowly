@@ -1,12 +1,13 @@
-import { switchMap, take } from 'rxjs';
-import { ContratosService } from './contratos.service';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ContractsRow } from '@shared/components/table-list/table-list.model';
 import { ModalService } from '@shared/modal/modal.service';
-import { Store } from '@ngxs/store';
-import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
+import { switchMap, take } from 'rxjs';
 import { IDadosClientesState } from 'src/app/store/app-state';
+import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
+
+import { ContratosService } from './contratos.service';
 
 @Component({
   selector: 'app-contratos',
@@ -24,10 +25,10 @@ export class ContratosComponent implements OnInit {
   ) {}
 
   openModal(modal: string, hasBackdropClick: boolean) {
+    console.log(modal);
+
     this.modalService.open(ModalComponent, {
       data: {
-        title: 'Modal',
-        subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         modalType: modal,
       },
       hasBackdropClick: hasBackdropClick,
@@ -55,5 +56,23 @@ export class ContratosComponent implements OnInit {
         this.contracts = e;
         this.isLoading = false;
       });
+  }
+
+  deleteContrato(evento: any) {
+    console.log(evento);
+
+    this.service
+      .deletar(evento[1])
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          console.log('excluido');
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
+
+    console.log('deleta');
   }
 }

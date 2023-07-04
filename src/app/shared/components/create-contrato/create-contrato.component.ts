@@ -1,23 +1,23 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { MODAL_DATA } from '@shared/modal/modal-tokens';
 import { ModalRef } from '@shared/modal/modal.ref';
 import { Observable, of, switchMap, take } from 'rxjs';
+import { ContratosService } from 'src/app/pages/dashboard/contratos/contratos.service';
 import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
 
-import { PropostasService } from './../../../pages/dashboard/propostas/propostas.service';
-
 @Component({
-  selector: 'app-create-proposta',
-  templateUrl: './create-proposta.component.html',
-  styleUrls: ['./create-proposta.component.scss'],
+  selector: 'app-create-contrato',
+  templateUrl: './create-contrato.component.html',
 })
-export class CreatePropostaComponent {
+export class CreateContratoComponent {
   constructor(
     private formBuilder: FormBuilder,
     private modalRef: ModalRef,
-    private service: PropostasService,
+    private service: ContratosService,
+    private router: Router,
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     @Inject(MODAL_DATA) public data: any
   ) {
@@ -52,21 +52,21 @@ export class CreatePropostaComponent {
 
     const { titulo, cliente } = this.createForm.value;
 
-    console.log({ titulo, cliente });
-
     this.isLoading = true;
 
     this.service
-      .postPropostas(titulo, cliente)
+      .criar(titulo, cliente)
       .pipe(take(1))
       .subscribe({
-        next: (responseApi) => {
-          console.log(responseApi);
+        next: () => {
           setTimeout(() => {
             this.modalRef.close();
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => this.router.navigate(['/dashboard/contratos']));
           }, 50);
         },
-        error: (err) => (this.errorMessage = err.mensagem),
+        error: (err: any) => (this.errorMessage = err.mensagem),
       });
   }
 
