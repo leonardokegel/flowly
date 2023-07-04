@@ -13,17 +13,41 @@ export class ClientesService {
 
   constructor(private http: HttpClient) {}
 
-  getClientes(idUsuario: string, view = 'completa'): Observable<ClientRow[] | IDadosClientesState[]> {
+  getClientes(
+    idUsuario: string,
+    view = 'completa'
+  ): Observable<ClientRow[] | IDadosClientesState[]> {
     if (!idUsuario) {
       return of([]);
     }
-    return this.http.get<ClientRow[] | IDadosClientesState[]>(`${this.baseUrl}/${idUsuario}`, {
-      params: new HttpParams().set('view', view)
-    }).pipe(
+    return this.http
+      .get<ClientRow[] | IDadosClientesState[]>(
+        `${this.baseUrl}/${idUsuario}`,
+        {
+          params: new HttpParams().set('view', view),
+        }
+      )
+      .pipe(
+        catchError((err) => {
+          console.log(err);
+          return throwError(() => err.error);
+        })
+      );
+  }
+
+  cadastraCliente(idUsuario: string, body: IDadosClientesRequest) {
+    return this.http.post<IDadosClientesRequest>(`${this.baseUrl}/${idUsuario}`, body).pipe(
       catchError((err) => {
         console.log(err);
         return throwError(() => err.error);
       })
     );
   }
+}
+
+export interface IDadosClientesRequest {
+  empresa: string;
+  nome: string;
+  email: string;
+  telefone?: string;
 }
