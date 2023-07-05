@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Select } from '@ngxs/store';
 import { MODAL_DATA } from '@shared/modal/modal-tokens';
 import { ModalRef } from '@shared/modal/modal.ref';
-import { Observable, of, switchMap, take } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
+// import { take } from 'rxjs';
 import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
 
-import { PropostasService } from './../../../pages/dashboard/propostas/propostas.service';
-import { Router } from '@angular/router';
+// import { PropostasService } from './../../../pages/dashboard/propostas/propostas.service';
+// import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-proposta',
@@ -15,12 +16,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-proposta.component.scss'],
 })
 export class CreatePropostaComponent {
-  href = '';
+  // href = '';
   constructor(
     private formBuilder: FormBuilder,
-    private modalRef: ModalRef,
-    private service: PropostasService,
-    private router: Router,
+    public modalRef: ModalRef,
+    // private service: PropostasService,
+    // private router: Router,
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     @Inject(MODAL_DATA) public data: any
   ) {
@@ -35,7 +36,7 @@ export class CreatePropostaComponent {
       })
     );
 
-    this.href = this.router.url
+    // this.href = this.router.url
   }
 
   @Select(DadosClienteState)
@@ -43,43 +44,48 @@ export class CreatePropostaComponent {
 
   clientesFormatado$: Observable<any> | undefined;
 
-  isLoading = false;
+  // isLoading = false;
 
   createForm: FormGroup = this.formBuilder.group({
     cliente: ['', Validators.compose([Validators.required])],
     titulo: ['', Validators.compose([Validators.required])],
   });
 
-  errorMessage = '';
+  // errorMessage = '';
 
-  createProposta() {
-    if (this.createForm?.invalid) return;
+  // createProposta() {
+  //   if (this.createForm?.invalid) return;
 
-    const { titulo, cliente } = this.createForm.value;
+  //   const { titulo, cliente } = this.createForm.value;
 
-    this.isLoading = true;
+  //   this.isLoading = true;
 
-    this.service
-      .criar(titulo, cliente)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          setTimeout(() => {
-            this.modalRef.close();
-            this.router
-              .navigateByUrl('/', { skipLocationChange: true })
-              .then(() => this.router.navigate([this.href]));
-          }, 50);
-        },
-        error: (err) => (this.errorMessage = err.mensagem),
-      });
-  }
+  //   this.service
+  //     .criar(titulo, cliente)
+  //     .pipe(take(1))
+  //     .subscribe({
+  //       next: () => {
+  //         setTimeout(() => {
+  //           this.modalRef.close();
+  //           this.router
+  //             .navigateByUrl('/', { skipLocationChange: true })
+  //             .then(() => this.router.navigate([this.href]));
+  //         }, 50);
+  //       },
+  //       error: (err) => (this.errorMessage = err.mensagem),
+  //     });
+  // }
 
   cancel() {
     this.createForm.reset();
-    console.log(this.createForm.value);
     setTimeout(() => {
-      this.modalRef.close();
+      this.modalRef.close([false]);
+    }, 200);
+  }
+
+  continuar() {
+    setTimeout(() => {
+      this.modalRef.close([true, this.createForm.value]);
     }, 200);
   }
 }

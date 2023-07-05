@@ -22,14 +22,16 @@ export class ClientesComponent implements OnInit {
     private modalService: ModalService,
     private store: Store,
     private service: ClientesService
-  ) {}
+  ) { }
 
-  openModal(modal: string, hasBackdropClick: boolean) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  openModal(modal: string, content?: any) {
     this.modalService.open(ModalComponent, {
       data: {
         modalType: modal,
+        content: content
       },
-      hasBackdropClick: hasBackdropClick,
+      hasBackdropClick: true,
     });
   }
 
@@ -55,4 +57,33 @@ export class ClientesComponent implements OnInit {
         error: (err) => console.log(err),
       });
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // editeCliente(cliente: any) {
+  //   this.modalService.open(ModalComponent, {
+  //     data: {
+  //       modalType: 'CONFIRM',
+  //       content: {
+  //         titulo: 'Deletar Proposta',
+  //         subtitulo: `Tem certeza que deseja deletar ${cliente.nome}`,
+  //         label: 'deletar',
+  //       }
+  //     },
+  //     hasBackdropClick: true,
+  //   }).afterClosed().subscribe(result => {
+  //     if (result) {
+  //       this.service
+  //         .deletar(proposta.id)
+  //         .pipe(take(1))
+  //         .subscribe({
+  //           next: () => {
+  //             this.router
+  //               .navigateByUrl('/', { skipLocationChange: true })
+  //               .then(() => this.router.navigate([this.href]));
+  //           },
+  //           error: (err) => console.log(err),
+  //         });
+  //     }
+  //   })
+  // }
 }

@@ -31,7 +31,7 @@
         *ngIf="last"
         class="flex gap-2 overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:rounded-md max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
       >
-        <button (click)="clickButtonEdit.emit(rowsArray[i][0])">
+        <button (click)="clickButtonEdit.emit(rows[i])">
           <app-icon-pencil-line
             stroke="#4c6107"
             width="24"

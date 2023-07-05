@@ -59,6 +59,32 @@ export class PropostasComponent implements OnInit {
 
   }
 
+  errorMessage = '';
+
+  createProposta() {
+    this.modalService.open(ModalComponent, {
+      data: {
+        modalType: 'CREATE_PROPOSTA',
+      },
+      hasBackdropClick: true,
+    }).afterClosed().subscribe(result => {
+      if (result) {
+          const { titulo, cliente } = result[1];
+          this.service
+            .criar(titulo, cliente)
+            .pipe(take(1))
+            .subscribe({
+              next: () => {
+                this.router
+                  .navigateByUrl('/', { skipLocationChange: true })
+                  .then(() => this.router.navigate([this.href]));
+              },
+              error: (err) => (this.errorMessage = err.mensagem),
+            });
+      }
+    })
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   deleteProposta(proposta: any) {
     this.modalService.open(ModalComponent, {
