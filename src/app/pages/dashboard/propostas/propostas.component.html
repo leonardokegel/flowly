@@ -1,4 +1,4 @@
-<app-page-layout>
+<app-page-layout *ngIf="!isLoading">
   <div class="w-full pb-2 pt-4">
     <app-page-header
       page="Propostas"
@@ -7,6 +7,9 @@
     ></app-page-header>
   </div>
   <div class="w-full flex-grow">
-    <app-table-list [rows]="proposals"></app-table-list>
+    <app-table-list
+      [rows]="proposals"
+      (clickButtonDelete)="deleteProposta($event)"
+    ></app-table-list>
   </div>
 </app-page-layout>

@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ProposalsRow } from '@shared/components/table-list/table-list.model';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -30,14 +31,23 @@ export class PropostasService {
       );
   }
 
-  // getClientes(idUsuario: string, view = 'completa'): Observable<ClientRow[] | IDadosClientesState[]> {
-  //   return this.http.get<ClientRow[] | IDadosClientesState[]>(`${this.baseUrl}/${idUsuario}`, {
-  //     params: new HttpParams().set('view', view)
-  //   }).pipe(
-  //     catchError((err) => {
-  //       console.log(err);
-  //       return throwError(() => err.error);
-  //     })
-  //   );
-  // }
+  getPropostas(idsCliente: string[]): Observable<ProposalsRow[]> {
+    return this.http
+      .get<ProposalsRow[]>(`${this.baseUrl}`, {
+        params: new HttpParams().set('id', idsCliente.toString()),
+      })
+      .pipe(
+        catchError((err) => {
+          return throwError(() => err.error);
+        })
+      );
+  }
+
+  deleteProposta(idContrato: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${idContrato}`).pipe(
+      catchError((err) => {
+        return throwError(() => err.error);
+      })
+    );
+  }
 }
