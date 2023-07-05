@@ -1,14 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-interface DocumentStatus {
-  id: string
-  title: string
-  client: {
-    id: string
-    name: string
-  }
-  status: number
-}
+import { ContractsRow, ProposalsRow } from '../table-list/table-list.model';
 
 @Component({
   selector: 'app-document-status',
@@ -20,9 +11,9 @@ export class DocumentStatusComponent {
   documentType!: 'proposta' | 'contrato';
 
   @Input()
-  documentStatus: DocumentStatus[] = [
-    { id: '1', title: 'Ciação de site', client: {id: '1', name: 'Fulano de tal' }, status: 1 },
-    { id: '2', title: 'Desenvolvimento de Aplicação', client: {id: '2', name: 'Cicrano' }, status: 2 },
-    { id: '3', title: 'Design de Logo', client: {id: '3', name: 'Fulaninho' }, status: 4 }
+  documents: ProposalsRow[] | ContractsRow[] = [
+    { id: '1', titulo: 'Ciação de site', cliente: {id: '1', nome: 'Fulano de tal', empresa: 'Fulanos Inc' }, status: 1 },
+    { id: '1', titulo: 'Desenvolvimento de Aplicação', cliente: {id: '1', nome: 'Fulaninho', empresa: 'Fulaninho Lmt' }, status: 2 },
+    { id: '1', titulo: 'Design de Logo', cliente: {id: '1', nome: 'Cicrano', empresa: 'Cicranos' }, status: 4 },
   ];
 }

@@ -12,7 +12,7 @@ export class TableListComponent implements OnInit {
   rows: Row[] = [];
 
   @Output()
-  clickButtonDelete = new EventEmitter<unknown>();
+  clickButtonDelete = new EventEmitter<Row>();
 
   @Output()
   clickButtonEdit = new EventEmitter<unknown>();

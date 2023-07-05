@@ -18,13 +18,16 @@ import { Router } from '@angular/router';
 export class ContratosComponent implements OnInit {
   contracts: ContractsRow[] = [];
   isLoading = false;
+  href = '';
 
   constructor(
     private modalService: ModalService,
     private service: ContratosService,
     private store: Store,
     private router: Router
-  ) { }
+  ) {
+    this.href = this.router.url
+  }
 
   openModal(modal: string, hasBackdropClick: boolean) {
     this.modalService.open(ModalComponent, {
@@ -57,17 +60,32 @@ export class ContratosComponent implements OnInit {
 
   }
 
-  deleteContrato(evento: any) {
-    this.service
-      .deletar(evento[1])
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.router
-            .navigateByUrl('/', { skipLocationChange: true })
-            .then(() => this.router.navigate(['/dashboard/contratos']));
-        },
-        error: (err) => console.log(err),
-      });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  deleteContrato(contrato: any) {
+    this.modalService.open(ModalComponent, {
+      data: {
+        modalType: 'CONFIRM',
+        content: {
+          titulo: 'Deletar Contrato',
+          subtitulo: `Tem certeza que deseja deletar ${contrato.titulo}`,
+          label: 'deletar',
+        }
+      },
+      hasBackdropClick: true,
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.service
+          .deletar(contrato.id)
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.router
+                .navigateByUrl('/', { skipLocationChange: true })
+                .then(() => this.router.navigate([this.href]));
+            },
+            error: (err) => console.log(err),
+          });
+      }
+    })
   }
 }

@@ -13,6 +13,8 @@ import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.s
   templateUrl: './create-contrato.component.html',
 })
 export class CreateContratoComponent {
+  href = '';
+
   constructor(
     private formBuilder: FormBuilder,
     private modalRef: ModalRef,
@@ -31,6 +33,7 @@ export class CreateContratoComponent {
         return of(options);
       })
     );
+    this.href = this.router.url
   }
 
   @Select(DadosClienteState)
@@ -63,7 +66,7 @@ export class CreateContratoComponent {
             this.modalRef.close();
             this.router
               .navigateByUrl('/', { skipLocationChange: true })
-              .then(() => this.router.navigate(['/dashboard/contratos']));
+              .then(() => this.router.navigate([this.href]));
           }, 50);
         },
         error: (err: any) => (this.errorMessage = err.mensagem),

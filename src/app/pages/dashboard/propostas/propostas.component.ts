@@ -16,24 +16,24 @@ import { PropostasService } from './propostas.service';
 })
 export class PropostasComponent implements OnInit {
   proposals!: ProposalsRow[];
-  showModal = false;
   isLoading = false;
+  href = '';
 
   constructor(
     private modalService: ModalService,
     private service: PropostasService,
     private store: Store,
     private router: Router
-  ) {}
+  ) {
+    this.href = this.router.url
+  }
 
-  openModal(modal: string, hasBackdropClick: boolean) {
-    console.log(modal);
-
+  openModal(modal: string) {
     this.modalService.open(ModalComponent, {
       data: {
         modalType: modal,
       },
-      hasBackdropClick: hasBackdropClick,
+      hasBackdropClick: true,
     });
   }
 
@@ -59,22 +59,32 @@ export class PropostasComponent implements OnInit {
 
   }
 
-  toggleModal() {
-    this.showModal = !this.showModal;
-  }
-
-  deleteProposta(id: any) {
-    this.service
-      .deletar(id[1])
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.router
-            .navigateByUrl('/', { skipLocationChange: true })
-            .then(() => this.router.navigate(['/dashboard/propostas']));
-          console.log('excluido');
-        },
-        error: (err) => console.log(err),
-      });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  deleteProposta(proposta: any) {
+    this.modalService.open(ModalComponent, {
+      data: {
+        modalType: 'CONFIRM',
+        content: {
+          titulo: 'Deletar Proposta',
+          subtitulo: `Tem certeza que deseja deletar ${proposta.titulo}`,
+          label: 'deletar',
+        }
+      },
+      hasBackdropClick: true,
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.service
+          .deletar(proposta.id)
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.router
+                .navigateByUrl('/', { skipLocationChange: true })
+                .then(() => this.router.navigate([this.href]));
+            },
+            error: (err) => console.log(err),
+          });
+      }
+    })
   }
 }

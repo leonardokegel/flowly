@@ -1,0 +1,12 @@
+<div class="w-full bg-basic-100 border border-basic-300 rounded-md">
+    <div class="border-b border-basic-300 p-4">
+        <h2 class="text-lg font-bold">{{ data.content.titulo }}</h2>
+    </div>
+    <div class="p-4">
+        <p class="text-base font-medium">{{ data.content.subtitulo }}</p>
+    </div>
+    <div class="flex gap-3 justify-end border-t border-basic-300 p-4">
+        <app-button (mouseup)="modalRef.close(false)" colorBg="ghost">Cancelar</app-button>
+        <app-button (mouseup)="modalRef.close(true)" colorBg="danger">{{ data.content.label }}</app-button>
+    </div>
+</div>

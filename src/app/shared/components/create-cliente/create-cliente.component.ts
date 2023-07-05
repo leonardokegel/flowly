@@ -15,6 +15,8 @@ import { DadosSessaoState } from 'src/app/store/dados-sessao/dados-sessao.state'
   styleUrls: ['./create-cliente.component.scss'],
 })
 export class CreateClienteComponent {
+  href = '';
+
   constructor(
     private formBuilder: FormBuilder,
     private modalRef: ModalRef,
@@ -23,7 +25,9 @@ export class CreateClienteComponent {
     private router: Router,
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     @Inject(MODAL_DATA) public data: any
-  ) {}
+  ) {
+    this.href = this.router.url
+  }
 
   createForm: FormGroup = this.formBuilder.group({
     empresa: ['', [Validators.required]],
@@ -53,7 +57,7 @@ export class CreateClienteComponent {
             this.modalRef.close();
             this.router
               .navigateByUrl('/', { skipLocationChange: true })
-              .then(() => this.router.navigate(['dashboard/clientes']));
+              .then(() => this.router.navigate([this.href]));
           }, 200);
         },
         error: (err) => console.log(err),

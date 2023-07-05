@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-proposta.component.scss'],
 })
 export class CreatePropostaComponent {
+  href = '';
   constructor(
     private formBuilder: FormBuilder,
     private modalRef: ModalRef,
@@ -33,6 +34,8 @@ export class CreatePropostaComponent {
         return of(options);
       })
     );
+
+    this.href = this.router.url
   }
 
   @Select(DadosClienteState)
@@ -65,7 +68,7 @@ export class CreatePropostaComponent {
             this.modalRef.close();
             this.router
               .navigateByUrl('/', { skipLocationChange: true })
-              .then(() => this.router.navigate(['/dashboard/propostas']));
+              .then(() => this.router.navigate([this.href]));
           }, 50);
         },
         error: (err) => (this.errorMessage = err.mensagem),
