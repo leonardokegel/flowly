@@ -16,6 +16,5 @@ export class ModalComponent {
 
   close() {
     this.modalRef.close();
-    console.log('Close', this.data.modalType);
   }
 }

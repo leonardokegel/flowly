@@ -24,19 +24,15 @@ export class ContratosComponent implements OnInit {
     private service: ContratosService,
     private store: Store,
     private router: Router
-  ) {}
+  ) { }
 
   openModal(modal: string, hasBackdropClick: boolean) {
-    console.log(modal);
-
     this.modalService.open(ModalComponent, {
       data: {
         modalType: modal,
       },
       hasBackdropClick: hasBackdropClick,
     });
-
-    console.log('Open', modal);
   }
 
   ngOnInit(): void {
@@ -58,6 +54,7 @@ export class ContratosComponent implements OnInit {
         this.contracts = e;
         this.isLoading = false;
       });
+
   }
 
   deleteContrato(evento: any) {
@@ -66,7 +63,6 @@ export class ContratosComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: () => {
-          console.log('excluido');
           this.router
             .navigateByUrl('/', { skipLocationChange: true })
             .then(() => this.router.navigate(['/dashboard/contratos']));

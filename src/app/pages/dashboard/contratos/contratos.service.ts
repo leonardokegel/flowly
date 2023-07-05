@@ -13,7 +13,7 @@ export class ContratosService {
   constructor(private http: HttpClient) {}
 
   criar(
-    contrato: ICriarContatoRequest,
+    contrato: ICriarContratoRequest,
     idCliente: string
   ): Observable<unknown> {
     if (!idCliente) {
@@ -21,7 +21,7 @@ export class ContratosService {
     }
 
     return this.http
-      .post<ICriarContatoRequest>(`${this.baseUrl}/${idCliente}`, {
+      .post<ICriarContratoRequest>(`${this.baseUrl}/${idCliente}`, {
         titulo: contrato,
         status: 0,
       })
@@ -62,7 +62,7 @@ export class ContratosService {
   }
 }
 
-export interface ICriarContatoRequest {
+export interface ICriarContratoRequest {
   titulo: string;
   status: number;
 }

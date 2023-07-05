@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ProposalsRow } from '@shared/components/table-list/table-list.model';
 import { ModalService } from '@shared/modal/modal.service';
-import { PropostasService } from './propostas.service';
 import { Store } from '@ngxs/store';
+import { Router } from '@angular/router';
+import { IDadosClientesState } from 'src/app/store/app-state';
 import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
 import { switchMap, take } from 'rxjs';
-import { IDadosClientesState } from 'src/app/store/app-state';
-import { Router } from '@angular/router';
+import { PropostasService } from './propostas.service';
 
 @Component({
   selector: 'app-propostas',
@@ -31,21 +31,17 @@ export class PropostasComponent implements OnInit {
 
     this.modalService.open(ModalComponent, {
       data: {
-        title: 'Modal',
-        subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         modalType: modal,
       },
       hasBackdropClick: hasBackdropClick,
     });
-
-    console.log('Open', modal);
   }
 
   ngOnInit(): void {
     this.getPropostas();
   }
 
-  getPropostas() {
+  getPropostas(): void {
     this.isLoading = true;
     const ids: string[] = [];
     this.store
@@ -60,6 +56,7 @@ export class PropostasComponent implements OnInit {
         this.proposals = e;
         this.isLoading = false;
       });
+
   }
 
   toggleModal() {
@@ -68,7 +65,7 @@ export class PropostasComponent implements OnInit {
 
   deleteProposta(id: any) {
     this.service
-      .deleteProposta(id[1])
+      .deletar(id[1])
       .pipe(take(1))
       .subscribe({
         next: () => {

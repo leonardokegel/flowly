@@ -1,8 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProposalsRow } from '@shared/components/table-list/table-list.model';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, Observable, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +12,16 @@ export class PropostasService {
 
   constructor(private http: HttpClient) {}
 
-  postPropostas(proposta: unknown, idCliente: string): Observable<unknown> {
+  criar(
+    proposta: ICriarPropostaRequest,
+    idCliente: string
+  ): Observable<unknown> {
     if (!idCliente) {
       return of([]);
     }
 
     return this.http
-      .post<unknown>(`${this.baseUrl}/${idCliente}`, {
+      .post<ICriarPropostaRequest>(`${this.baseUrl}/${idCliente}`, {
         titulo: proposta,
         status: 0,
       })
@@ -31,7 +33,23 @@ export class PropostasService {
       );
   }
 
+  deletar(idProposta: string): Observable<unknown> {
+    if (!idProposta) {
+      return of([]);
+    }
+
+    return this.http.delete<unknown>(`${this.baseUrl}/${idProposta}`).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => err.error);
+      })
+    );
+  }
+
   getPropostas(idsCliente: string[]): Observable<ProposalsRow[]> {
+    if (!idsCliente) {
+      return of([]);
+    }
     return this.http
       .get<ProposalsRow[]>(`${this.baseUrl}`, {
         params: new HttpParams().set('id', idsCliente.toString()),
@@ -42,12 +60,9 @@ export class PropostasService {
         })
       );
   }
+}
 
-  deleteProposta(idContrato: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${idContrato}`).pipe(
-      catchError((err) => {
-        return throwError(() => err.error);
-      })
-    );
-  }
+export interface ICriarPropostaRequest {
+  titulo: string;
+  status: number;
 }

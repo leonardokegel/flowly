@@ -19,15 +19,11 @@ export class ProjetosComponent implements OnInit {
       {
         data:
         {
-          title: 'Modal',
-          subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
           modalType: modal
         },
         hasBackdropClick: hasBackdropClick
       }
     );
-
-    console.log('Open', modal);
   }
 
   ngOnInit(): void {

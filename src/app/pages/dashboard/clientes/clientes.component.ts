@@ -27,14 +27,10 @@ export class ClientesComponent implements OnInit {
   openModal(modal: string, hasBackdropClick: boolean) {
     this.modalService.open(ModalComponent, {
       data: {
-        title: 'Modal',
-        subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         modalType: modal,
       },
       hasBackdropClick: hasBackdropClick,
     });
-
-    console.log('Open', modal);
   }
 
   ngOnInit(): void {

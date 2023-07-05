@@ -35,10 +35,8 @@
     </div>
 
     <div class="flex gap-3 justify-end border-t border-basic-300 p-4">
-        <button (mouseup)="cancel()"
-            class="px-5 py-3 rounded-md font-semibold text-txt-default bg-transparent hover:bg-basic-300 transition-colors">Cancelar</button>
-        <button (mouseup)="createCliente()"
-            class="px-5 py-3 rounded-md font-semibold text-txt-alternate bg-primary-500 hover:bg-primary-600 transition-colors">Salvar</button>
+        <app-button (mouseup)="cancel()" colorBg="ghost">Cancelar</app-button>
+        <app-button (mouseup)="createCliente()">Salvar</app-button>
     </div>
 
 </form>

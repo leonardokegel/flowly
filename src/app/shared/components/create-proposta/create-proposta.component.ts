@@ -54,21 +54,18 @@ export class CreatePropostaComponent {
 
     const { titulo, cliente } = this.createForm.value;
 
-    console.log({ titulo, cliente });
-
     this.isLoading = true;
 
     this.service
-      .postPropostas(titulo, cliente)
+      .criar(titulo, cliente)
       .pipe(take(1))
       .subscribe({
-        next: (responseApi) => {
-          console.log(responseApi);
+        next: () => {
           setTimeout(() => {
             this.modalRef.close();
             this.router
               .navigateByUrl('/', { skipLocationChange: true })
-              .then(() => this.router.navigate(['/dashboard/contratos']));
+              .then(() => this.router.navigate(['/dashboard/propostas']));
           }, 50);
         },
         error: (err) => (this.errorMessage = err.mensagem),

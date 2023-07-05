@@ -1,4 +1,4 @@
-<div class="overflow-x-auto rounded-md border border-basic-300 bg-basic-100">
+<div *ngIf="rowsArray.length !== 0; else empty" class="overflow-x-auto rounded-md border border-basic-300 bg-basic-100">
   <div
     class="grid min-w-fit border-b border-basic-300 text-left max-md:hidden"
     [ngStyle]="{ 'grid-template-columns': gridColumns }"
@@ -48,3 +48,9 @@
     </ng-container>
   </div>
 </div>
+
+<ng-template #empty>
+<div class="rounded-md border border-basic-300 bg-basic-100 p-8">
+  <span class="font-semibold text-txt-disabled text-sm">...</span>
+</div>
+</ng-template>
