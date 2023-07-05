@@ -5,12 +5,12 @@
   >
     <div
       *ngFor="let column of columnsArray | slice : 1"
-      class="w-[16%] min-w-[200px] overflow-hidden p-4 font-semibold text-basic-600"
+      class="overflow-hidden p-4 font-semibold text-basic-600"
     >
       {{ column | titlecase }}
     </div>
     <div
-      class="w-[16%] min-w-[200px] overflow-hidden p-4 font-semibold text-basic-600"
+      class="overflow-hidden p-4 font-semibold text-basic-600"
     >
       Açoes
     </div>
@@ -31,17 +31,16 @@
         *ngIf="last"
         class="flex gap-2 overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:rounded-md max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
       >
-        <button>
+        <button (click)="clickButtonEdit.emit(rowsArray[i][0])">
           <app-icon-pencil-line
             stroke="#4c6107"
             width="24"
           ></app-icon-pencil-line>
         </button>
-        <button>
+        <button (click)="clickButtonDelete.emit(rowsArray[i][0])">
           <app-icon-trash
             stroke="#4c6107"
             width="24"
-            (click)="clickButtonDelete.emit(rowsArray[i][0])"
           ></app-icon-trash>
         </button>
       </div>

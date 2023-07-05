@@ -14,6 +14,9 @@ export class TableListComponent implements OnInit {
   @Output()
   clickButtonDelete = new EventEmitter<unknown>();
 
+  @Output()
+  clickButtonEdit = new EventEmitter<unknown>();
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rowsArray: any[] = [];
   columnsArray: string[] = [];

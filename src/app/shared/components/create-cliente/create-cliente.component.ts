@@ -42,7 +42,7 @@ export class CreateClienteComponent {
         take(1),
         switchMap((e: IDadosSessaoState) => {
           return this.service
-            .cadastraCliente(e.id, this.createForm.value)
+            .criar(e.id, this.createForm.value)
             .pipe(take(1));
         })
       )

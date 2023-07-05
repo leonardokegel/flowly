@@ -13,6 +13,15 @@ export class ClientesService {
 
   constructor(private http: HttpClient) {}
 
+  criar(idUsuario: string, body: IDadosClientesRequest) {
+    return this.http.post<IDadosClientesRequest>(`${this.baseUrl}/${idUsuario}`, body).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => err.error);
+      })
+    );
+  }
+
   getClientes(
     idUsuario: string,
     view = 'completa'
@@ -35,14 +44,6 @@ export class ClientesService {
       );
   }
 
-  cadastraCliente(idUsuario: string, body: IDadosClientesRequest) {
-    return this.http.post<IDadosClientesRequest>(`${this.baseUrl}/${idUsuario}`, body).pipe(
-      catchError((err) => {
-        console.log(err);
-        return throwError(() => err.error);
-      })
-    );
-  }
 }
 
 export interface IDadosClientesRequest {

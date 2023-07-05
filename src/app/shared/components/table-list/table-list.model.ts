@@ -9,6 +9,7 @@ export type ClientRow = {
     empresa: string
     nome: string
     email: string
+    telefone?: string
     propostas: document[]
     contratos: document[]
 }
