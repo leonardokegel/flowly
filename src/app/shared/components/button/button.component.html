@@ -18,9 +18,9 @@
     duration-150
     ease-in-out
     disabled:opacity-50
+    {{ buttonColor }}
     {{ classUp.join(' ') }}
   "
-  [ngClass]="buttonAlternate"
   [disabled]="disabled"
   (click)="clickButton.emit()"
 >
