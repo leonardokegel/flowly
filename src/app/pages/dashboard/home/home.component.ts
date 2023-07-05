@@ -17,14 +17,10 @@ export class HomeComponent {
       {
         data:
         {
-          title: 'Modal',
-          subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
           modalType: modal
         },
         hasBackdropClick: hasBackdropClick
       }
     );
-
-    console.log('Open', modal);
   }
 }

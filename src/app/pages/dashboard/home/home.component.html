@@ -6,19 +6,14 @@
     </app-card>
   </div>
 
-  <div class="flex-grow w-3/5">
-    <app-card [card]="{ title: 'Mensagens Recentes', icon: 'email', openPopup: 'CREATE_EMAIL' }"
-      (openPopup)="openModal($event, true)">
-      <app-messages></app-messages>
-      <!-- <button (click)="opeModal()">Open Modal</button> -->
-    </app-card>
-  </div>
-
-  <div class="flex-grow min-w-max flex gap-4 flex-col">
+  <div class="flex-grow min-w-max w-1/3">
     <app-card [card]="{ title: 'Propostas enviadas', icon: 'plus', openPopup: 'CREATE_PROPOSTA' }"
       (openPopup)="openModal($event, true)">
       <app-document-status documentType="proposta"></app-document-status>
     </app-card>
+  </div>
+
+  <div class="flex-grow min-w-max w-1/3">
     <app-card [card]="{ title: 'Contratos enviadas', icon: 'plus', openPopup: 'CREATE_CONTRATO' }"
       (openPopup)="openModal($event, true)">
       <app-document-status documentType="contrato"></app-document-status>

@@ -10,6 +10,7 @@ import { IconCardType } from './icon-card.model';
     fill="none" 
     xmlns="http://www.w3.org/2000/svg"
     [ngSwitch]="iconType"
+    style="display: block;"
   >
     <path 
       *ngSwitchCase="'plus'"

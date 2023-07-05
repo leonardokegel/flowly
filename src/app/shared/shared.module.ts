@@ -36,6 +36,7 @@ import { IconSidebarComponent } from './icons/icon-sidebar/icon-sidebar.componen
 import { IconTrashComponent } from './icons/icon-trash/icon-trash.component';
 import { IconWarningCircleComponent } from './icons/icon-warning-circle/icon-warning-circle.component';
 import { ModalModule } from './modal/modal.module';
+import { CreateProjetoComponent } from './components/create-projeto/create-projeto.component';
 
 const images = [ImgFlowlyComponent];
 const icons = [
@@ -72,6 +73,7 @@ const components = [
   ModalComponent,
   CreatePropostaComponent,
   CreateContratoComponent,
+  CreateProjetoComponent
 ];
 
 @NgModule({

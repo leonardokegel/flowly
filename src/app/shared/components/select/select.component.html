@@ -1,7 +1,7 @@
 <div class="relative my-4">
   <label
     for="txt-{{ label }}"
-    class="uppercase"
+    [class]="labelClass"
     [ngClass]="
       control?.errors && control?.touched ? 'text-red-400' : 'text-gray-400'
     "
@@ -18,7 +18,7 @@
 
   <select
     id="countries"
-    class="font-heebo border-gray-200 mt-2 w-full rounded-xl border-solid p-4 text-base"
+    [class]="inputClass"
     [formControl]="control"
   >
     <option selected>Selecione</option>

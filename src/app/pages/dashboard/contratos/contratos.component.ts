@@ -8,6 +8,7 @@ import { IDadosClientesState } from 'src/app/store/app-state';
 import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
 
 import { ContratosService } from './contratos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contratos',
@@ -21,20 +22,17 @@ export class ContratosComponent implements OnInit {
   constructor(
     private modalService: ModalService,
     private service: ContratosService,
-    private store: Store
-  ) {}
+    private store: Store,
+    private router: Router
+  ) { }
 
   openModal(modal: string, hasBackdropClick: boolean) {
-    console.log(modal);
-
     this.modalService.open(ModalComponent, {
       data: {
         modalType: modal,
       },
       hasBackdropClick: hasBackdropClick,
     });
-
-    console.log('Open', modal);
   }
 
   ngOnInit(): void {
@@ -56,23 +54,22 @@ export class ContratosComponent implements OnInit {
         this.contracts = e;
         this.isLoading = false;
       });
+    
   }
 
   deleteContrato(evento: any) {
-    console.log(evento);
-
     this.service
       .deletar(evento[1])
       .pipe(take(1))
       .subscribe({
         next: () => {
-          console.log('excluido');
+          this.router
+            .navigateByUrl('/', { skipLocationChange: true })
+            .then(() => this.router.navigate(['/dashboard/contratos']));
         },
         error: (err: any) => {
           console.log(err);
         },
       });
-
-    console.log('deleta');
   }
 }

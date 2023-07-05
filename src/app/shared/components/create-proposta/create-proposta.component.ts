@@ -7,6 +7,7 @@ import { Observable, of, switchMap, take } from 'rxjs';
 import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
 
 import { PropostasService } from './../../../pages/dashboard/propostas/propostas.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-proposta',
@@ -18,6 +19,7 @@ export class CreatePropostaComponent {
     private formBuilder: FormBuilder,
     private modalRef: ModalRef,
     private service: PropostasService,
+    private router: Router,
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     @Inject(MODAL_DATA) public data: any
   ) {
@@ -52,18 +54,18 @@ export class CreatePropostaComponent {
 
     const { titulo, cliente } = this.createForm.value;
 
-    console.log({ titulo, cliente });
-
     this.isLoading = true;
 
     this.service
-      .postPropostas(titulo, cliente)
+      .criar(titulo, cliente)
       .pipe(take(1))
       .subscribe({
-        next: (responseApi) => {
-          console.log(responseApi);
+        next: () => {
           setTimeout(() => {
             this.modalRef.close();
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => this.router.navigate(['/dashboard/propostas']));
           }, 50);
         },
         error: (err) => (this.errorMessage = err.mensagem),

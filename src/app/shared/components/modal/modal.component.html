@@ -1,7 +1,4 @@
-<div
-  class="min-w-[50] rounded-lg border border-basic-300 bg-basic-100 shadow"
-  [ngSwitch]="data.modalType"
->
+<div class="min-w-[50] rounded-lg border border-basic-300 bg-basic-100 shadow" [ngSwitch]="data.modalType">
   <ng-container *ngSwitchDefault>
     <div class="border-b border-basic-300 p-4">
       <h2 class="text-lg font-bold">
@@ -21,18 +18,8 @@
       </p>
     </div>
     <div class="flex justify-end gap-3 border-t border-basic-300 p-4">
-      <button
-        (click)="close()"
-        class="rounded-md bg-transparent px-5 py-3 font-semibold text-txt-default transition-colors hover:bg-basic-300"
-      >
-        Cancelar
-      </button>
-      <button
-        (click)="close()"
-        class="rounded-md bg-primary-500 px-5 py-3 font-semibold text-txt-alternate transition-colors hover:bg-primary-600"
-      >
-        Salvar
-      </button>
+      <app-button (click)="close()" colorBg="ghost">Cancelar</app-button>
+      <app-button (click)="close()">Salvar</app-button>
     </div>
   </ng-container>
   <ng-container *ngSwitchCase="'CREATE_CLIENTE'">
@@ -43,5 +30,8 @@
   </ng-container>
   <ng-container *ngSwitchCase="'CREATE_CONTRATO'">
     <app-create-contrato></app-create-contrato>
+  </ng-container>
+  <ng-container *ngSwitchCase="'CREATE_PROJETO'">
+    <app-create-projeto />
   </ng-container>
 </div>
