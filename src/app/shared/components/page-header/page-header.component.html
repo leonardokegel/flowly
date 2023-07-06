@@ -4,43 +4,25 @@
   </div>
 
   <div class="max-sm:hidden">
-    <label
-      for="search"
-      class="sr-only mb-2 text-sm font-medium text-txt-disabled"
-      >Search</label
-    >
+    <label for="search" class="sr-only mb-2 text-sm font-medium text-txt-disabled">Search</label>
     <div class="relative">
-      <input
-        type="search"
-        id="search"
+      <input type="search" id="search"
         class="block w-full rounded-xl border border-basic-500 bg-basic-300 p-3 pr-10 placeholder:text-txt-disabled focus:border-primary-500 focus:ring-primary-500"
-        [placeholder]="'buscar ' + page | lowercase"
-        required
-      />
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-txt-disabled"
-      >
+        [placeholder]="'buscar ' + page | lowercase" required />
+      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-txt-disabled">
         <app-icon-search width="28" />
       </div>
     </div>
   </div>
 
-  <div
-    class="w-0.5 self-stretch rounded-full bg-basic-600 opacity-20 max-sm:hidden"
-  ></div>
+  <div class="w-0.5 self-stretch rounded-full bg-basic-600 opacity-20 max-sm:hidden"></div>
 
-  <button
-    *ngIf="haveSettings"
-    class="text-txt-disabled transition-all hover:scale-105 hover:text-txt-accent"
-    (click)="openPopup.emit(settingsModal)"
-  >
+  <button *ngIf="haveSettings" class="text-txt-disabled transition-all hover:scale-105 hover:text-txt-accent"
+    (click)="openPopup.emit(settingsModal)">
     <app-icon-settings width="30" />
   </button>
 
-  <button
-    class="transition-all hover:scale-105 hover:text-txt-accent"
-    (click)="openPopup.emit(createModal)"
-  >
-    <app-icon-plus width="35" [round]="true" />
+  <button class="transition-all hover:scale-105 hover:text-txt-accent" (click)="openPopup.emit(createModal)">
+    <app-icon-plus width="45" [round]="true" />
   </button>
 </div>

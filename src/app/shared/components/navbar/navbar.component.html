@@ -3,16 +3,13 @@
   [ngClass]="sidebarHovered || isOpen ? 'ml-60' : 'ml-16'"
 >
   <div class="flex w-full flex-wrap items-center justify-between px-3">
-    <button
-      class="flex h-full rounded-md bg-transparent p-2 text-basic-600 hover:text-primary-500"
-      (click)="onClick()"
-    >
+    <app-button buttonColor="icon" (click)="onClick()">
       <app-icon-menu
         [iconType]="sidebarHovered || isOpen ? 'open' : 'close'"
         width="30"
-        class="block h-auto w-full"
+        
       ></app-icon-menu>
-    </button>
+    </app-button>
 
     <div class="flex items-center gap-2">
       <button

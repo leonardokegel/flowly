@@ -6,7 +6,7 @@
         <p class="text-base font-medium">{{ data.content.subtitulo }}</p>
     </div>
     <div class="flex gap-3 justify-end border-t border-basic-300 p-4">
-        <app-button (mouseup)="modalRef.close(false)" colorBg="ghost">Cancelar</app-button>
-        <app-button (mouseup)="modalRef.close(true)" colorBg="danger">{{ data.content.label }}</app-button>
+        <app-button (mouseup)="modalRef.close(false)" buttonColor="ghost">Cancelar</app-button>
+        <app-button (mouseup)="modalRef.close(true)" buttonColor="danger">{{ data.content.label }}</app-button>
     </div>
 </div>

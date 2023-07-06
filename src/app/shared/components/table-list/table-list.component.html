@@ -1,35 +1,36 @@
-<div *ngIf="rowsArray.length !== 0; else empty" class="overflow-x-auto rounded-md border border-basic-300 bg-basic-100">
+<div *ngIf="!isEmpty" class="overflow-x-auto rounded-md border border-basic-300 bg-basic-100">
   <div
-    class="grid min-w-fit border-b border-basic-300 text-left max-md:hidden"
-    [ngStyle]="{ 'grid-template-columns': gridColumns }"
+    class="flex min-w-fit border-b border-basic-300 text-left max-md:hidden"
   >
     <div
       *ngFor="let column of columnsArray | slice : 1"
-      class="overflow-hidden p-4 font-semibold text-basic-600"
+      class="flex-grow overflow-hidden p-4 font-semibold text-basic-600"
+      [ngClass]="column === 'status' || column === 'valor' || column === 'data_inicio' ? 'w-36': 'w-52'"
     >
       {{ column | titlecase }}
     </div>
     <div
-      class="overflow-hidden p-4 font-semibold text-basic-600"
+      class="w-24 overflow-hidden p-4 font-semibold text-basic-600"
     >
       Açoes
     </div>
   </div>
   <div
     *ngFor="let row of rowsArray; let i = index"
-    class="grid min-w-fit border-b border-basic-300 text-left last:border-b-0 max-md:block max-md:p-4"
-    [ngStyle]="{ 'grid-template-columns': gridColumns }"
+    class="flex min-w-fit border-b border-basic-300 text-left last:border-b-0 max-md:block max-md:p-4"
+
   >
-    <ng-container *ngFor="let item of row | slice : 1; let last = last">
+    <ng-container *ngFor="let item of row | slice : 1; let last = last; let index = index">
       <div
-        class="overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:rounded-md max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
+        class="flex-grow overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:w-full max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
+        [ngClass]="columnsArray[index + 1] === 'status' || columnsArray[index + 1] === 'valor' || columnsArray[index + 1] === 'data_inicio'  ? 'w-36': 'w-52'"
       >
         <app-table-cel [item]="item" />
       </div>
 
       <div
         *ngIf="last"
-        class="flex gap-2 overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:rounded-md max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
+        class="w-24 flex gap-2 overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:w-full max-md:rounded-b-md max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
       >
         <button (click)="clickButtonEdit.emit(rows[i])">
           <app-icon-pencil-line
@@ -48,8 +49,8 @@
   </div>
 </div>
 
-<ng-template #empty>
-<div class="rounded-md border border-basic-300 bg-basic-100 p-8">
+
+<div *ngIf="isEmpty" class="rounded-md border border-basic-300 bg-basic-100 p-8">
   <span class="font-semibold text-txt-disabled text-sm">...</span>
 </div>
-</ng-template>
+

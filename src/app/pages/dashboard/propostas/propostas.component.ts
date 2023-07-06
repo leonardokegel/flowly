@@ -54,7 +54,9 @@ export class PropostasComponent implements OnInit {
       )
       .subscribe((e) => {
         this.proposals = e;
-        this.isLoading = false;
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
       });
 
   }
@@ -75,9 +77,8 @@ export class PropostasComponent implements OnInit {
             .pipe(take(1))
             .subscribe({
               next: () => {
-                this.router
-                  .navigateByUrl('/', { skipLocationChange: true })
-                  .then(() => this.router.navigate([this.href]));
+                this.getPropostas();
+                this.modalService.openNotification({ data: { message: `Proposta "${titulo}" criada com sucesso`, color: 'success'}});
               },
               error: (err) => (this.errorMessage = err.mensagem),
             });
@@ -107,6 +108,8 @@ export class PropostasComponent implements OnInit {
               this.router
                 .navigateByUrl('/', { skipLocationChange: true })
                 .then(() => this.router.navigate([this.href]));
+
+              this.modalService.openNotification({ data: { message: `Proposta "${proposta.titulo}" deletada`, color: 'danger'}})
             },
             error: (err) => console.log(err),
           });

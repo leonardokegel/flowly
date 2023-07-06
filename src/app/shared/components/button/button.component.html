@@ -1,24 +1,8 @@
 <button
   type="button"
   class="
-    rounded-md
-    font-semibold 
-    inline-block
-    px-5 
-    py-3 
-    bg-{{ colorBg }}-600
-    text-txt-alternate 
-    leading-tight
-    hover:bg-{{ colorBg }}-700
-    focus:bg-{{ colorBg }}-700
-    focus:outline-none
-    focus:ring-0
-    active:bg-{{ colorBg }}-800
-    transition
-    duration-150
-    ease-in-out
-    disabled:opacity-50
-    {{ buttonColor }}
+    button 
+    {{ buttonClasses }} 
     {{ classUp.join(' ') }}
   "
   [disabled]="disabled"

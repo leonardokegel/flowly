@@ -39,6 +39,7 @@ import { ModalModule } from './modal/modal.module';
 import { CreateProjetoComponent } from './components/create-projeto/create-projeto.component';
 import { ConfirmMessageComponent } from './components/confirm-message/confirm-message.component';
 import { EditClienteComponent } from './components/edit-cliente/edit-cliente.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 const images = [ImgFlowlyComponent];
 const icons = [
@@ -77,7 +78,8 @@ const components = [
   CreateContratoComponent,
   CreateProjetoComponent,
   ConfirmMessageComponent,
-  EditClienteComponent
+  EditClienteComponent,
+  NotificationComponent
 ];
 
 @NgModule({

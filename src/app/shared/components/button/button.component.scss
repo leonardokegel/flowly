@@ -1,0 +1,20 @@
+button {
+    @apply rounded-md;
+    @apply font-semibold;
+    @apply inline-block;
+    @apply px-5;
+    @apply py-3;
+    @apply leading-tight;
+    @apply transition;
+    @apply duration-150;
+    @apply ease-in-out;
+}
+
+button:focus {
+    @apply outline-none;
+    @apply ring-0;
+}
+
+button:disabled {
+    @apply opacity-50;
+}
