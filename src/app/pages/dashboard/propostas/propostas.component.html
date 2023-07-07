@@ -13,6 +13,7 @@
     <app-table-list
       [rows]="proposals"
       (clickButtonDelete)="deleteProposta($event)"
+      (clickButtonEdit)="editProposta($event)"
       *ngIf="!isLoading"
     ></app-table-list>
   </div>

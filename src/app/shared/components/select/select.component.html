@@ -21,7 +21,6 @@
     [class]="inputClass"
     [formControl]="control"
   >
-    <option selected>Selecione</option>
     <option *ngFor="let option of options | keyvalue" value="{{ option.key }}">
       {{ option.value }}
     </option>

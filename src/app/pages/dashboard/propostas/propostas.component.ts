@@ -71,17 +71,17 @@ export class PropostasComponent implements OnInit {
       hasBackdropClick: true,
     }).afterClosed().subscribe(result => {
       if (result) {
-          const { titulo, cliente } = result[1];
-          this.service
-            .criar(titulo, cliente)
-            .pipe(take(1))
-            .subscribe({
-              next: () => {
-                this.getPropostas();
-                this.modalService.openNotification({ data: { message: `Proposta "${titulo}" criada com sucesso`, color: 'success'}});
-              },
-              error: (err) => (this.errorMessage = err.mensagem),
-            });
+        const { titulo, cliente } = result[1];
+        this.service
+          .criar(titulo, cliente)
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.getPropostas();
+              this.modalService.openNotification({ data: { message: `Proposta "${titulo}" criada com sucesso`, color: 'success' } });
+            },
+            error: (err) => (this.errorMessage = err.mensagem),
+          });
       }
     })
   }
@@ -109,7 +109,37 @@ export class PropostasComponent implements OnInit {
                 .navigateByUrl('/', { skipLocationChange: true })
                 .then(() => this.router.navigate([this.href]));
 
-              this.modalService.openNotification({ data: { message: `Proposta "${proposta.titulo}" deletada`, color: 'danger'}})
+              this.modalService.openNotification({ data: { message: `Proposta "${proposta.titulo}" deletada`, color: 'danger' } })
+            },
+            error: (err) => console.log(err),
+          });
+      }
+    })
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  editProposta(proposta: any) {
+    this.modalService.open(ModalComponent, {
+      data: {
+        modalType: 'EDIT_PROPOSTA',
+        content: {
+          id: proposta.id,
+          clienteId: proposta.cliente.id,
+          titulo: proposta.titulo
+        }
+      },
+      hasBackdropClick: true,
+    }).afterClosed().subscribe(result => {
+      console.log(result[0]);
+      
+      if (result[0]) {
+        this.service
+          .editProposta(proposta)
+          .pipe(take(1))
+          .subscribe({
+            next: (response) => {
+              console.log(response);
+              this.modalService.openNotification({ data: { message: `Proposta "${proposta.titulo}" deletada`, color: 'danger' } })
             },
             error: (err) => console.log(err),
           });

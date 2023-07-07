@@ -60,9 +60,29 @@ export class PropostasService {
         })
       );
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  editProposta(proposta: IEditarPropostaRequest): Observable<any> {
+    if (!proposta) {
+      return of();
+    }
+    return this.http
+      .put(`${this.baseUrl}/${proposta.id}`, proposta)
+      .pipe(
+        catchError((err) => {
+          return throwError(() => err.error);
+        })
+      );
+  }
 }
 
 export interface ICriarPropostaRequest {
+  titulo: string;
+  status: number;
+}
+
+export interface IEditarPropostaRequest {
+  id: string;
   titulo: string;
   status: number;
 }
