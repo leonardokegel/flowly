@@ -1,3 +1,21 @@
 .layout {
+    --scrollbar-foreground: theme('colors.basic.500');
+    --scrollbar-background: transparent;
+    
+    scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
     height: calc(100% - 80px);
+}
+
+.layout::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.layout::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-foreground);
+    @apply rounded-full;
+}
+
+.layout::-webkit-scrollbar-track {
+    background: var(--scrollbar-background);
 }
