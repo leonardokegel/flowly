@@ -26,7 +26,7 @@ export class ContratosComponent implements OnInit {
     private store: Store,
     private router: Router
   ) {
-    this.href = this.router.url
+    this.href = this.router.url;
   }
 
   openModal(modal: string, hasBackdropClick: boolean) {
@@ -57,35 +57,44 @@ export class ContratosComponent implements OnInit {
         this.contracts = e;
         this.isLoading = false;
       });
-
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   deleteContrato(contrato: any) {
-    this.modalService.open(ModalComponent, {
-      data: {
-        modalType: 'CONFIRM',
-        content: {
-          titulo: 'Deletar Contrato',
-          subtitulo: `Tem certeza que deseja deletar ${contrato.titulo}`,
-          label: 'deletar',
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'CONFIRM',
+          content: {
+            titulo: 'Deletar Contrato',
+            subtitulo: `Tem certeza que deseja deletar ${contrato.titulo}?`,
+            label: 'deletar',
+          },
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.service
+            .deletar(contrato.id)
+            .pipe(take(1))
+            .subscribe({
+              next: () => {
+                this.router
+                  .navigateByUrl('/', { skipLocationChange: true })
+                  .then(() => this.router.navigate([this.href]));
+
+                this.modalService.openNotification({
+                  data: {
+                    message: `Contrato "${contrato.titulo}" deletado`,
+                    color: 'danger',
+                  },
+                });
+              },
+              error: () => this.modalService.openNotification({ data: { message: `Erro ao deletar o contrato!`, color: 'danger'}}),
+            });
         }
-      },
-      hasBackdropClick: true,
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.service
-          .deletar(contrato.id)
-          .pipe(take(1))
-          .subscribe({
-            next: () => {
-              this.router
-                .navigateByUrl('/', { skipLocationChange: true })
-                .then(() => this.router.navigate([this.href]));
-            },
-            error: (err) => console.log(err),
-          });
-      }
-    })
+      });
   }
 }

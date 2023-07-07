@@ -9,6 +9,7 @@ import { DadosSessaoState } from 'src/app/store/dados-sessao/dados-sessao.state'
 
 import { ClientesService } from './clientes.service';
 import { Router } from '@angular/router';
+import { RemoverDadosClientesAction } from 'src/app/store/dados-clientes/dados-clientes.action';
 
 @Component({
   selector: 'app-clientes',
@@ -69,7 +70,7 @@ export class ClientesComponent implements OnInit {
         modalType: 'CONFIRM',
         content: {
           titulo: 'Deletar Cliente',
-          subtitulo: `Tem certeza que deseja deletar ${cliente.nome}`,
+          subtitulo: `Tem certeza que deseja deletar ${cliente.nome}?`,
           label: 'deletar',
         }
       },
@@ -81,6 +82,7 @@ export class ClientesComponent implements OnInit {
           .pipe(take(1))
           .subscribe({
             next: () => {
+              this.store.dispatch(RemoverDadosClientesAction);
               this.router
                 .navigateByUrl('/', { skipLocationChange: true })
                 .then(() => this.router.navigate([this.href]));

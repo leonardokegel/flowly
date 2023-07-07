@@ -93,7 +93,7 @@ export class PropostasComponent implements OnInit {
         modalType: 'CONFIRM',
         content: {
           titulo: 'Deletar Proposta',
-          subtitulo: `Tem certeza que deseja deletar ${proposta.titulo}`,
+          subtitulo: `Tem certeza que deseja deletar ${proposta.titulo}?`,
           label: 'deletar',
         }
       },
@@ -111,7 +111,7 @@ export class PropostasComponent implements OnInit {
 
               this.modalService.openNotification({ data: { message: `Proposta "${proposta.titulo}" deletada`, color: 'danger'}})
             },
-            error: (err) => console.log(err),
+            error: () => this.modalService.openNotification({ data: { message: `Erro ao deletar a proposta!`, color: 'danger'}}),
           });
       }
     })

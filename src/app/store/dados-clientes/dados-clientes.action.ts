@@ -9,3 +9,8 @@ export class RemoverDadosClientesAction {
   static readonly type = '[Dados Clientes] Remover';
 }
 
+export class SetCliente {
+  static readonly type = '[Dados Clientes] Adicionar';
+  constructor(public cliente: IDadosClientesState) {}
+}
+

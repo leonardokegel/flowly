@@ -6,7 +6,8 @@ import { MODAL_DATA } from '@shared/modal/modal-tokens';
 import { ModalRef } from '@shared/modal/modal.ref';
 import { switchMap, take } from 'rxjs';
 import { ClientesService } from 'src/app/pages/dashboard/clientes/clientes.service';
-import { IDadosSessaoState } from 'src/app/store/app-state';
+import { IDadosClientesState, IDadosSessaoState } from 'src/app/store/app-state';
+import { SetCliente } from 'src/app/store/dados-clientes/dados-clientes.action';
 import { DadosSessaoState } from 'src/app/store/dados-sessao/dados-sessao.state';
 
 @Component({
@@ -51,7 +52,8 @@ export class CreateClienteComponent {
         })
       )
       .subscribe({
-        next: () => {
+        next: (e) => {
+          this.store.dispatch(new SetCliente(e as IDadosClientesState));
           console.log('Cliente Salvo');
           setTimeout(() => {
             this.modalRef.close();
