@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { ProposalsRow } from '@shared/components/table-list/table-list.model';
 import { catchError, Observable, of, throwError } from 'rxjs';
 
+import { IProposta } from './propostas.component';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,6 +26,26 @@ export class PropostasService {
       .post<ICriarPropostaRequest>(`${this.baseUrl}/${idCliente}`, {
         titulo: proposta,
         status: 0,
+      })
+      .pipe(
+        catchError((err) => {
+          console.log(err);
+          return throwError(() => err.error);
+        })
+      );
+  }
+
+  editar(idProposta: any, proposta: any): Observable<unknown> {
+    if (!idProposta) {
+      return of([]);
+    }
+
+    console.log(idProposta, proposta);
+
+    return this.http
+      .put<IProposta>(`${this.baseUrl}/${idProposta}`, {
+        titulo: proposta.titulo,
+        status: proposta.status,
       })
       .pipe(
         catchError((err) => {

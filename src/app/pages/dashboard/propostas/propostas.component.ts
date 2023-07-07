@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ProposalsRow } from '@shared/components/table-list/table-list.model';
 import { ModalService } from '@shared/modal/modal.service';
-import { Store } from '@ngxs/store';
-import { Router } from '@angular/router';
+import { switchMap, take } from 'rxjs';
 import { IDadosClientesState } from 'src/app/store/app-state';
 import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
-import { switchMap, take } from 'rxjs';
+
 import { PropostasService } from './propostas.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class PropostasComponent implements OnInit {
     private store: Store,
     private router: Router
   ) {
-    this.href = this.router.url
+    this.href = this.router.url;
   }
 
   openModal(modal: string) {
@@ -58,19 +59,21 @@ export class PropostasComponent implements OnInit {
           this.isLoading = false;
         }, 500);
       });
-
   }
 
   errorMessage = '';
 
   createProposta() {
-    this.modalService.open(ModalComponent, {
-      data: {
-        modalType: 'CREATE_PROPOSTA',
-      },
-      hasBackdropClick: true,
-    }).afterClosed().subscribe(result => {
-      if (result) {
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'CREATE_PROPOSTA',
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
           const { titulo, cliente } = result[1];
           this.service
             .criar(titulo, cliente)
@@ -78,42 +81,105 @@ export class PropostasComponent implements OnInit {
             .subscribe({
               next: () => {
                 this.getPropostas();
-                this.modalService.openNotification({ data: { message: `Proposta "${titulo}" criada com sucesso`, color: 'success'}});
+                this.modalService.openNotification({
+                  data: {
+                    message: `Proposta "${titulo}" criada com sucesso`,
+                    color: 'success',
+                  },
+                });
               },
               error: (err) => (this.errorMessage = err.mensagem),
             });
-      }
-    })
+        }
+      });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   deleteProposta(proposta: any) {
-    this.modalService.open(ModalComponent, {
-      data: {
-        modalType: 'CONFIRM',
-        content: {
-          titulo: 'Deletar Proposta',
-          subtitulo: `Tem certeza que deseja deletar ${proposta.titulo}`,
-          label: 'deletar',
-        }
-      },
-      hasBackdropClick: true,
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.service
-          .deletar(proposta.id)
-          .pipe(take(1))
-          .subscribe({
-            next: () => {
-              this.router
-                .navigateByUrl('/', { skipLocationChange: true })
-                .then(() => this.router.navigate([this.href]));
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'CONFIRM',
+          content: {
+            titulo: 'Deletar Proposta',
+            subtitulo: `Tem certeza que deseja deletar ${proposta.titulo}`,
+            label: 'deletar',
+          },
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.service
+            .deletar(proposta.id)
+            .pipe(take(1))
+            .subscribe({
+              next: () => {
+                this.router
+                  .navigateByUrl('/', { skipLocationChange: true })
+                  .then(() => this.router.navigate([this.href]));
 
-              this.modalService.openNotification({ data: { message: `Proposta "${proposta.titulo}" deletada`, color: 'danger'}})
-            },
-            error: (err) => console.log(err),
-          });
-      }
-    })
+                this.modalService.openNotification({
+                  data: {
+                    message: `Proposta "${proposta.titulo}" deletada`,
+                    color: 'success',
+                  },
+                });
+              },
+              error: (err) => console.log(err),
+            });
+        }
+      });
   }
+
+  editProposta(proposta: any) {
+    console.log(proposta);
+
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'EDIT_PROPOSTA',
+          proposta,
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          const { titulo, status } = result[1];
+          this.service
+            .editar(proposta.id, {
+              titulo: titulo,
+              status: status,
+            })
+            .pipe(take(1))
+            .subscribe({
+              next: () => {
+                this.getPropostas();
+                this.modalService.openNotification({
+                  data: {
+                    message: `Proposta "${proposta.titulo}" editada com sucesso`,
+                    color: 'success',
+                  },
+                });
+              },
+              error: (err) => (this.errorMessage = err.mensagem),
+            });
+        }
+      });
+  }
+}
+
+export interface IProposta {
+  id?: string;
+  titulo: string;
+  status: number;
+  // cliente: ICliente;
+}
+
+export interface ICliente {
+  empresa: string;
+  id: number;
+  nome: string;
 }

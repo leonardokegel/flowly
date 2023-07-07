@@ -1,4 +1,7 @@
-<div class="min-w-[50] rounded-lg border border-basic-300 bg-basic-100 shadow" [ngSwitch]="data.modalType">
+<div
+  class="min-w-[50] rounded-lg border border-basic-300 bg-basic-100 shadow"
+  [ngSwitch]="data.modalType"
+>
   <ng-container *ngSwitchDefault>
     <div class="border-b border-basic-300 p-4">
       <h2 class="text-lg font-bold">
@@ -28,6 +31,9 @@
   <ng-container *ngSwitchCase="'CREATE_PROPOSTA'">
     <app-create-proposta></app-create-proposta>
   </ng-container>
+  <ng-container *ngSwitchCase="'EDIT_PROPOSTA'">
+    <app-edit-proposta></app-edit-proposta>
+  </ng-container>
   <ng-container *ngSwitchCase="'CREATE_CONTRATO'">
     <app-create-contrato></app-create-contrato>
   </ng-container>
@@ -35,9 +41,9 @@
     <app-create-projeto />
   </ng-container>
   <ng-container *ngSwitchCase="'CONFIRM'">
-    <app-confirm-message/>
+    <app-confirm-message />
   </ng-container>
   <ng-container *ngSwitchCase="'EDIT_CLIENTE'">
-    <app-edit-cliente/>
+    <app-edit-cliente />
   </ng-container>
 </div>

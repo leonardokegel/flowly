@@ -20,9 +20,11 @@ export class DadosSessaoState {
     { getState, patchState }: StateContext<IDadosSessaoState>,
     payload: { dadosSessao: IDadosSessaoState }
   ) {
-    const { id, email, nome, token } = getState();
+    const dadosSessao = getState();
+    const { id, email, nome, token } = dadosSessao;
 
     if (!id || !email || !nome || !token) {
+      localStorage.setItem('dadosSessao', JSON.stringify(payload.dadosSessao));
       patchState(payload.dadosSessao);
     }
   }

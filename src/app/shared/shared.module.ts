@@ -7,15 +7,20 @@ import { ImgFlowlyComponent } from './brand/img-flowly/img-flowly.component';
 import { BadgeStatusComponent } from './components/badge-status/badge-status.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CardComponent } from './components/card/card.component';
+import { ConfirmMessageComponent } from './components/confirm-message/confirm-message.component';
 import { CreateClienteComponent } from './components/create-cliente/create-cliente.component';
 import { CreateContratoComponent } from './components/create-contrato/create-contrato.component';
+import { CreateProjetoComponent } from './components/create-projeto/create-projeto.component';
 import { CreatePropostaComponent } from './components/create-proposta/create-proposta.component';
 import { DocumentStatusComponent } from './components/document-status/document-status.component';
+import { EditClienteComponent } from './components/edit-cliente/edit-cliente.component';
+import { EditPropostaComponent } from './components/edit-proposta/edit-proposta.component';
 import { InputComponent } from './components/input/input.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { NotificationComponent } from './components/notification/notification.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 import { ProjectStatusComponent } from './components/project-status/project-status.component';
@@ -36,10 +41,6 @@ import { IconSidebarComponent } from './icons/icon-sidebar/icon-sidebar.componen
 import { IconTrashComponent } from './icons/icon-trash/icon-trash.component';
 import { IconWarningCircleComponent } from './icons/icon-warning-circle/icon-warning-circle.component';
 import { ModalModule } from './modal/modal.module';
-import { CreateProjetoComponent } from './components/create-projeto/create-projeto.component';
-import { ConfirmMessageComponent } from './components/confirm-message/confirm-message.component';
-import { EditClienteComponent } from './components/edit-cliente/edit-cliente.component';
-import { NotificationComponent } from './components/notification/notification.component';
 
 const images = [ImgFlowlyComponent];
 const icons = [
@@ -75,11 +76,12 @@ const components = [
   CreateClienteComponent,
   ModalComponent,
   CreatePropostaComponent,
+  EditPropostaComponent,
   CreateContratoComponent,
   CreateProjetoComponent,
   ConfirmMessageComponent,
   EditClienteComponent,
-  NotificationComponent
+  NotificationComponent,
 ];
 
 @NgModule({
