@@ -8,6 +8,8 @@ import { IDadosSessaoState } from 'src/app/store/app-state';
 import { DadosSessaoState } from 'src/app/store/dados-sessao/dados-sessao.state';
 
 import { ClientesService } from './clientes.service';
+import { Router } from '@angular/router';
+import { RemoverDadosClientesAction } from 'src/app/store/dados-clientes/dados-clientes.action';
 
 @Component({
   selector: 'app-clientes',
@@ -17,19 +19,23 @@ import { ClientesService } from './clientes.service';
 export class ClientesComponent implements OnInit {
   clients: ClientRow[] = [];
   isLoading = false;
+  href = '';
 
   constructor(
     private modalService: ModalService,
     private store: Store,
-    private service: ClientesService
-  ) { }
+    private service: ClientesService,
+    private router: Router
+  ) {
+    this.href = this.router.url;
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   openModal(modal: string, content?: any) {
     this.modalService.open(ModalComponent, {
       data: {
         modalType: modal,
-        content: content
+        content: content,
       },
       hasBackdropClick: true,
     });
@@ -56,6 +62,37 @@ export class ClientesComponent implements OnInit {
         },
         error: (err) => console.log(err),
       });
+  }
+
+  deleteCliente(cliente: any) {
+    this.modalService.open(ModalComponent, {
+      data: {
+        modalType: 'CONFIRM',
+        content: {
+          titulo: 'Deletar Cliente',
+          subtitulo: `Tem certeza que deseja deletar ${cliente.nome}?`,
+          label: 'deletar',
+        }
+      },
+      hasBackdropClick: true,
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.service
+          .deletar(cliente.id)
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.store.dispatch(RemoverDadosClientesAction);
+              this.router
+                .navigateByUrl('/', { skipLocationChange: true })
+                .then(() => this.router.navigate([this.href]));
+
+              this.modalService.openNotification({ data: { message: `Cliente "${cliente.nome}" deletado`, color: 'danger'}})
+            },
+            error: () => this.modalService.openNotification({ data: { message: `Erro ao deletar o cliente!`, color: 'danger'}}),
+          });
+      }
+    })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

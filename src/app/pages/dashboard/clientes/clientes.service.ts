@@ -14,12 +14,14 @@ export class ClientesService {
   constructor(private http: HttpClient) {}
 
   criar(idUsuario: string, body: IDadosClientesRequest) {
-    return this.http.post<IDadosClientesRequest>(`${this.baseUrl}/${idUsuario}`, body).pipe(
-      catchError((err) => {
-        console.log(err);
-        return throwError(() => err.error);
-      })
-    );
+    return this.http
+      .post<IDadosClientesRequest>(`${this.baseUrl}/${idUsuario}`, body)
+      .pipe(
+        catchError((err) => {
+          console.log(err);
+          return throwError(() => err.error);
+        })
+      );
   }
 
   getClientes(
@@ -44,6 +46,18 @@ export class ClientesService {
       );
   }
 
+  deletar(idCliente: string): Observable<unknown> {
+    if (!idCliente) {
+      return of([]);
+    }
+
+    return this.http.delete<unknown>(`${this.baseUrl}/${idCliente}`).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => err.error);
+      })
+    );
+  }
 }
 
 export interface IDadosClientesRequest {
