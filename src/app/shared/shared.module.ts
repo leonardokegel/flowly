@@ -13,7 +13,6 @@ import { CreateContratoComponent } from './components/create-contrato/create-con
 import { CreateProjetoComponent } from './components/create-projeto/create-projeto.component';
 import { CreatePropostaComponent } from './components/create-proposta/create-proposta.component';
 import { DocumentStatusComponent } from './components/document-status/document-status.component';
-import { EditClienteComponent } from './components/edit-cliente/edit-cliente.component';
 import { EditPropostaComponent } from './components/edit-proposta/edit-proposta.component';
 import { InputComponent } from './components/input/input.component';
 import { LoadingComponent } from './components/loading/loading.component';
@@ -80,8 +79,8 @@ const components = [
   CreateContratoComponent,
   CreateProjetoComponent,
   ConfirmMessageComponent,
-  EditClienteComponent,
   NotificationComponent,
+  EditPropostaComponent,
 ];
 
 @NgModule({

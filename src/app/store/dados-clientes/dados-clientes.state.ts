@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
 
 import { IDadosClientesState } from '../app-state';
-import { ObterDadosClientesAction, RemoverDadosClientesAction } from './dados-clientes.action';
+import {
+  ObterDadosClientesAction,
+  RemoverDadosClientesAction,
+  SetCliente,
+} from './dados-clientes.action';
 
 @State<IDadosClientesState[]>({
   name: 'DadosClientes',
@@ -22,9 +26,17 @@ export class DadosClienteState {
   }
 
   @Action(RemoverDadosClientesAction)
-  removerDadosClientesAction({
-    patchState,
-  }: StateContext<IDadosClientesState[]>) {
-    patchState([]);
+  removerDadosClientesAction(ctx: StateContext<IDadosClientesState[]>) {
+    ctx.setState([]);
+  }
+
+  @Action(SetCliente)
+  setCliente(
+    ctx: StateContext<IDadosClientesState[]>,
+    payload: SetCliente
+  ) {
+    const cliente = ctx.getState();
+
+    ctx.setState([...cliente, payload.cliente]);
   }
 }
