@@ -13,6 +13,11 @@
     >
       <app-loading></app-loading>
     </div>
-    <app-table-list *ngIf="!isLoading" [rows]="projects" (clickButtonDelete)="deleteProjeto($event)"></app-table-list>
+    <app-table-list
+      *ngIf="!isLoading"
+      [rows]="projects"
+      (clickButtonDelete)="deleteProjeto($event)"
+      (clickButtonEdit)="editProjeto($event)"
+    ></app-table-list>
   </div>
 </app-page-layout>

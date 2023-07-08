@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { switchMap, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '@shared/components/modal/modal.component';
@@ -67,7 +68,8 @@ export class ProjetosComponent implements OnInit {
       .subscribe({
         next: (result) => {
           if (result[0]) {
-            const { status, titulo, data_inicio, valor, descricao, cliente } = result[1];
+            const { status, titulo, data_inicio, valor, descricao, cliente } =
+              result[1];
             this.service
               .cadastrar(cliente, {
                 status,
@@ -121,12 +123,58 @@ export class ProjetosComponent implements OnInit {
                   },
                 });
               },
-              error: () => this.modalService.openNotification({
-                data: {
-                  message: `Erro ao deletar projeto!`,
-                  color: 'danger',
-                },
-              })
+              error: () =>
+                this.modalService.openNotification({
+                  data: {
+                    message: `Erro ao deletar projeto!`,
+                    color: 'danger',
+                  },
+                }),
+            });
+        }
+      });
+  }
+
+  editProjeto(projeto: any) {
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'EDIT_PROJETO',
+          projeto,
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result[0]) {
+          const { status, titulo, data_inicio, valor, descricao } = result[1];
+          this.service
+            .editar({
+              id: projeto.id,
+              status,
+              titulo,
+              data_inicio,
+              valor,
+              descricao,
+            })
+            .pipe(take(1))
+            .subscribe({
+              next: (e) => {
+                this.getProjetos();
+                this.modalService.openNotification({
+                  data: {
+                    message: `Projeto "${e.titulo}" editado com sucesso`,
+                    color: 'success',
+                  },
+                });
+              },
+              error: () =>
+                this.modalService.openNotification({
+                  data: {
+                    message: `Erro ao editar projeto!`,
+                    color: 'danger',
+                  },
+                }),
             });
         }
       });

@@ -135,7 +135,6 @@ export class PropostasComponent implements OnInit {
   }
 
   editProposta(proposta: any) {
-    console.log(proposta);
 
     this.modalService
       .open(ModalComponent, {
