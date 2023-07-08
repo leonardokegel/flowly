@@ -13,13 +13,10 @@ import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.s
   templateUrl: './create-contrato.component.html',
 })
 export class CreateContratoComponent {
-  href = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private modalRef: ModalRef,
-    private service: ContratosService,
-    private router: Router,
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     @Inject(MODAL_DATA) public data: any
   ) {
@@ -29,11 +26,9 @@ export class CreateContratoComponent {
         e.map((el: { id: any; nome: any }) => {
           Object.assign(options, { [el.id]: el.nome });
         });
-
         return of(options);
       })
     );
-    this.href = this.router.url
   }
 
   @Select(DadosClienteState)
@@ -50,34 +45,17 @@ export class CreateContratoComponent {
 
   errorMessage = '';
 
-  createProposta() {
-    if (this.createForm?.invalid) return;
-
-    const { titulo, cliente } = this.createForm.value;
-
-    this.isLoading = true;
-
-    this.service
-      .criar(titulo, cliente)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          setTimeout(() => {
-            this.modalRef.close();
-            this.router
-              .navigateByUrl('/', { skipLocationChange: true })
-              .then(() => this.router.navigate([this.href]));
-          }, 50);
-        },
-        error: (err: any) => (this.errorMessage = err.mensagem),
-      });
-  }
-
   cancel() {
     this.createForm.reset();
     console.log(this.createForm.value);
     setTimeout(() => {
       this.modalRef.close();
+    }, 200);
+  }
+
+  continuar() {
+    setTimeout(() => {
+      this.modalRef.close([true, this.createForm.value]);
     }, 200);
   }
 }

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-
-import { IDadosSessaoState } from './store/app-state';
 import { ObterDadosSessaoAction } from './store/dados-sessao/dados-sessao.action';
 
 @Component({
@@ -11,12 +9,10 @@ import { ObterDadosSessaoAction } from './store/dados-sessao/dados-sessao.action
 })
 export class AppComponent {
   constructor(private store: Store) {
-    const dadosSessaoLocalStorage: IDadosSessaoState = JSON.parse(
-      localStorage.getItem('dadosSessao') || ''
-    );
+    const dadosSessaoLocalStorage = localStorage.getItem('dadosSessao');
 
     if (dadosSessaoLocalStorage) {
-      this.store.dispatch(new ObterDadosSessaoAction(dadosSessaoLocalStorage));
+      this.store.dispatch(new ObterDadosSessaoAction(JSON.parse(dadosSessaoLocalStorage)));
     }
   }
 

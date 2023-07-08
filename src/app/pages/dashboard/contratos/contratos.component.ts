@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { ModalComponent } from '@shared/components/modal/modal.component';
@@ -55,11 +56,12 @@ export class ContratosComponent implements OnInit {
       )
       .subscribe((e) => {
         this.contracts = e;
-        this.isLoading = false;
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
       });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   deleteContrato(contrato: any) {
     this.modalService
       .open(ModalComponent, {
@@ -81,10 +83,7 @@ export class ContratosComponent implements OnInit {
             .pipe(take(1))
             .subscribe({
               next: () => {
-                this.router
-                  .navigateByUrl('/', { skipLocationChange: true })
-                  .then(() => this.router.navigate([this.href]));
-
+                this.getContratos();
                 this.modalService.openNotification({
                   data: {
                     message: `Contrato "${contrato.titulo}" deletado`,
@@ -92,7 +91,85 @@ export class ContratosComponent implements OnInit {
                   },
                 });
               },
-              error: () => this.modalService.openNotification({ data: { message: `Erro ao deletar o contrato!`, color: 'danger'}}),
+              error: () =>
+                this.modalService.openNotification({
+                  data: {
+                    message: `Erro ao deletar o contrato!`,
+                    color: 'danger',
+                  },
+                }),
+            });
+        }
+      });
+  }
+
+  editContrato(contrato: any) {
+    const id: string = contrato.id;
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'EDIT_CONTRATO',
+          contrato,
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe({
+        next: (e) => {
+          if (e) {
+            const { titulo, status } = e[1];
+            this.service
+              .editar({id ,titulo, status })
+              .pipe(take(1))
+              .subscribe({
+                next: (e) => {
+                  this.getContratos();
+                  this.modalService.openNotification({
+                    data: {
+                      message: `Contrato "${e.titulo}" alterado`,
+                      color: 'success',
+                    },
+                  })
+                },
+                error: () =>
+                  this.modalService.openNotification({
+                    data: {
+                      message: `Erro ao editar o contrato!`,
+                      color: 'danger',
+                    },
+                  }),
+              });
+          }
+        },
+      });
+  }
+
+  createContrato() {
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'CREATE_CONTRATO',
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          const { titulo, cliente } = result[1];
+          this.service
+            .criar(titulo, cliente)
+            .pipe(take(1))
+            .subscribe({
+              next: () => {
+                this.getContratos();
+                this.modalService.openNotification({
+                  data: {
+                    message: `Contrato "${titulo}" criado com sucesso!`,
+                    color: 'success',
+                  },
+                });
+              },
+              error: (err) => console.log(err),
             });
         }
       });

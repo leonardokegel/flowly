@@ -3,27 +3,22 @@
   class="w-full rounded-md border border-basic-300 bg-basic-100"
 >
   <div class="border-b border-basic-300 p-4">
-    <h2 class="text-lg font-bold">Novo Contrato</h2>
+    <h2 class="text-lg font-bold">Editar Contrato</h2>
   </div>
 
   <div class="p-4">
-    <app-select
-      label="Cliente"
-      [control]="createForm.get('cliente')"
-      [classUp]="['w-1/2']"
-      [options]="clientesFormatado$ | async"
-    >
-    </app-select>
-
     <app-input
       label="Titulo"
       [type]="'text'"
       [control]="createForm.get('titulo')"
     ></app-input>
 
-    <div *ngIf="errorMessage !== ''" class="error-style">
-      <p>{{ errorMessage }}</p>
-    </div>
+    <app-select
+      label="Status"
+      [control]="createForm.get('status')"
+      [classUp]="['w-1/2']"
+    >
+    </app-select>
   </div>
 
   <div class="flex justify-end gap-3 border-t border-basic-300 p-4">

@@ -88,7 +88,7 @@ export class PropostasComponent implements OnInit {
                   },
                 });
               },
-              error: (err) => (this.errorMessage = err.mensagem),
+              error: (err) => console.log(err),
             });
         }
       });

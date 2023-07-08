@@ -60,9 +60,30 @@ export class ContratosService {
         })
       );
   }
+
+  editar(
+    contrato: IEditarContratoRequest
+  ): Observable<IEditarContratoResponse> {
+    return this.http.put<IEditarContratoResponse>(`${this.baseUrl}/${contrato.id}`, contrato).pipe(
+      catchError((err) => {
+        return throwError(() => err.error);
+      })
+    );
+  }
 }
 
 export interface ICriarContratoRequest {
+  titulo: string;
+  status: number;
+}
+
+export interface IEditarContratoRequest {
+  id: string;
+  titulo: string;
+  status: number;
+}
+
+export interface IEditarContratoResponse {
   titulo: string;
   status: number;
 }

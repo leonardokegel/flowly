@@ -16,12 +16,9 @@ import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.s
   styleUrls: ['./create-proposta.component.scss'],
 })
 export class CreatePropostaComponent {
-  // href = '';
   constructor(
     private formBuilder: FormBuilder,
     public modalRef: ModalRef,
-    // private service: PropostasService,
-    // private router: Router,
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     @Inject(MODAL_DATA) public data: any
   ) {
@@ -51,30 +48,7 @@ export class CreatePropostaComponent {
     titulo: ['', Validators.compose([Validators.required])],
   });
 
-  // errorMessage = '';
 
-  // createProposta() {
-  //   if (this.createForm?.invalid) return;
-
-  //   const { titulo, cliente } = this.createForm.value;
-
-  //   this.isLoading = true;
-
-  //   this.service
-  //     .criar(titulo, cliente)
-  //     .pipe(take(1))
-  //     .subscribe({
-  //       next: () => {
-  //         setTimeout(() => {
-  //           this.modalRef.close();
-  //           this.router
-  //             .navigateByUrl('/', { skipLocationChange: true })
-  //             .then(() => this.router.navigate([this.href]));
-  //         }, 50);
-  //       },
-  //       error: (err) => (this.errorMessage = err.mensagem),
-  //     });
-  // }
 
   cancel() {
     this.createForm.reset();
