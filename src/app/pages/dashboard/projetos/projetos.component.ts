@@ -1,4 +1,4 @@
-import { switchMap } from 'rxjs';
+import { switchMap, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ProjectsRow } from '@shared/components/table-list/table-list.model';
@@ -89,6 +89,46 @@ export class ProjetosComponent implements OnInit {
               });
           }
         },
+      });
+  }
+
+  deleteProjeto(projeto: any) {
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'CONFIRM',
+          content: {
+            titulo: 'Deletar Projeto',
+            subtitulo: `Tem certeza que deseja deletar "${projeto.titulo}"?`,
+            label: 'deletar',
+          },
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.service
+            .deletar(projeto.id)
+            .pipe(take(1))
+            .subscribe({
+              next: () => {
+                this.getProjetos();
+                this.modalService.openNotification({
+                  data: {
+                    message: `Projeto "${projeto.titulo}" deletado!`,
+                    color: 'success',
+                  },
+                });
+              },
+              error: () => this.modalService.openNotification({
+                data: {
+                  message: `Erro ao deletar projeto!`,
+                  color: 'danger',
+                },
+              })
+            });
+        }
       });
   }
 }

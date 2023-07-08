@@ -32,6 +32,15 @@ export class ProjetosService {
       })
     );
   }
+
+  deletar(idProjeto: string): Observable<unknown> {
+    return this.http.delete<unknown>(`${this.baseUrl}/${idProjeto}`).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => err.error);
+      })
+    );
+  }
 }
 
 export interface ICadastroProjetosRequest {
