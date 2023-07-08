@@ -41,6 +41,7 @@ import { IconTrashComponent } from './icons/icon-trash/icon-trash.component';
 import { IconWarningCircleComponent } from './icons/icon-warning-circle/icon-warning-circle.component';
 import { ModalModule } from './modal/modal.module';
 import { EditContratosComponent } from './components/edit-contratos/edit-contratos.component';
+import { EditClienteComponent } from './components/edit-cliente/edit-cliente.component';
 
 const images = [ImgFlowlyComponent];
 const icons = [
@@ -86,7 +87,7 @@ const components = [
 
 @NgModule({
   imports: [CommonModule, RouterModule, ReactiveFormsModule, ModalModule],
-  declarations: [...images, ...icons, ...components, EditContratosComponent],
+  declarations: [...images, ...icons, ...components, EditContratosComponent, EditClienteComponent],
   exports: [...images, ...icons, ...components],
 })
 export class SharedModule {}

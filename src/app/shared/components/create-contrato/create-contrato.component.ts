@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { MODAL_DATA } from '@shared/modal/modal-tokens';
 import { ModalRef } from '@shared/modal/modal.ref';
-import { Observable, of, switchMap, take } from 'rxjs';
-import { ContratosService } from 'src/app/pages/dashboard/contratos/contratos.service';
+import { Observable, of, switchMap } from 'rxjs';
 import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
 
 @Component({
@@ -17,7 +16,6 @@ export class CreateContratoComponent {
   constructor(
     private formBuilder: FormBuilder,
     private modalRef: ModalRef,
-    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     @Inject(MODAL_DATA) public data: any
   ) {
     this.clientesFormatado$ = this.clientes$?.pipe(

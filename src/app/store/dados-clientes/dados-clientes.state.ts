@@ -3,6 +3,7 @@ import { Action, State, StateContext } from '@ngxs/store';
 
 import { IDadosClientesState } from '../app-state';
 import {
+  EditCliente,
   ObterDadosClientesAction,
   RemoverDadosClientesAction,
   SetCliente,
@@ -38,5 +39,17 @@ export class DadosClienteState {
     const cliente = ctx.getState();
 
     ctx.setState([...cliente, payload.cliente]);
+  }
+
+  @Action(EditCliente)
+  editCliente(
+    ctx: StateContext<IDadosClientesState[]>,
+    payload: SetCliente
+  ) {
+    const state = ctx.getState();
+
+    const newState = state.filter((e) => e.id !== payload.cliente.id);
+    ctx.setState([...newState, payload.cliente]);
+
   }
 }

@@ -58,9 +58,28 @@ export class ClientesService {
       })
     );
   }
+
+  editar(body: IDadosClientesRequest): Observable<IDadosClientesResponse> {
+    return this.http.put<IDadosClientesResponse>(`${this.baseUrl}/${body.id}`, body).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => err.error);
+      })
+    );
+  }
 }
 
 export interface IDadosClientesRequest {
+  id?: string;
+  empresa: string;
+  nome: string;
+  email: string;
+  telefone?: string;
+}
+
+export interface IDadosClientesResponse {
+  id: string;
+  userId: string;
   empresa: string;
   nome: string;
   email: string;

@@ -116,7 +116,7 @@ export class ContratosComponent implements OnInit {
       .afterClosed()
       .subscribe({
         next: (e) => {
-          if (e) {
+          if (e[0]) {
             const { titulo, status } = e[1];
             this.service
               .editar({id ,titulo, status })

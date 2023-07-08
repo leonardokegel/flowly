@@ -4,26 +4,30 @@ import { MODAL_DATA } from '@shared/modal/modal-tokens';
 import { ModalRef } from '@shared/modal/modal.ref';
 
 @Component({
-  selector: 'app-edit-contratos',
-  templateUrl: './edit-contratos.component.html',
-  styleUrls: ['./edit-contratos.component.scss']
+  selector: 'app-edit-cliente',
+  templateUrl: './edit-cliente.component.html',
+  styleUrls: ['./edit-cliente.component.scss']
 })
-export class EditContratosComponent {
+export class EditClienteComponent {
 
   constructor(
     private formBuilder: FormBuilder,
     public modalRef: ModalRef,
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-    @Inject(MODAL_DATA) public data: IDataContrato
+    @Inject(MODAL_DATA) public data: IDataCliente
   ) {}
 
   createForm: FormGroup = this.formBuilder.group({
-    titulo: [
-      this.data.contrato.titulo,
+    empresa: [
+      this.data.cliente.empresa,
       Validators.compose([Validators.required]),
     ],
-    status: [
-      this.data.contrato.status,
+    nome: [
+      this.data.cliente.nome,
+      Validators.compose([Validators.required]),
+    ],
+    email: [
+      this.data.cliente.email,
       Validators.compose([Validators.required]),
     ],
   });
@@ -42,17 +46,12 @@ export class EditContratosComponent {
   }
 }
 
-export interface IDataContrato {
+export interface IDataCliente {
   modalType: string;
-  contrato: {
-    id: number;
-    titulo: string;
-    status: number;
-    cliente: {
-      id: number;
-      empresa: string;
-      nome: string;
-    };
+  cliente: {
+    empresa: string;
+    nome: string;
+    email: string;
   };
-}
 
+}

@@ -14,3 +14,8 @@ export class SetCliente {
   constructor(public cliente: IDadosClientesState) {}
 }
 
+export class EditCliente {
+  static readonly type = '[Dados Clientes] Editar';
+  constructor(public cliente: IDadosClientesState) {}
+}
+

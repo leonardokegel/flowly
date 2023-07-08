@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
@@ -146,7 +147,7 @@ export class PropostasComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result) => {
-        if (result) {
+        if (result[0]) {
           const { titulo, status } = result[1];
           this.service
             .editar(proposta.id, {
@@ -175,7 +176,6 @@ export interface IProposta {
   id?: string;
   titulo: string;
   status: number;
-  // cliente: ICliente;
 }
 
 export interface ICliente {
