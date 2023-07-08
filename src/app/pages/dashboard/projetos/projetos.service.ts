@@ -23,4 +23,31 @@ export class ProjetosService {
         })
       );
   }
+
+  cadastrar(idCliente: string, body: ICadastroProjetosRequest): Observable<ICadastroProjetoResponse> {
+    return this.http.post<ICadastroProjetoResponse>(`${this.baseUrl}/${idCliente}`, body).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => err.error);
+      })
+    );
+  }
+}
+
+export interface ICadastroProjetosRequest {
+  status: string;
+  titulo: string;
+  data_inicio: string;
+  valor: string;
+  descricao: string;
+}
+
+export interface ICadastroProjetoResponse {
+  id: number;
+  clientId: number;
+  status: string;
+  titulo: string;
+  data_inicio: string;
+  valor: string;
+  descricao: string;
 }

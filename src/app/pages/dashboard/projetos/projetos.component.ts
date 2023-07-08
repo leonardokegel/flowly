@@ -54,4 +54,41 @@ export class ProjetosComponent implements OnInit {
         }, 500);
       });
   }
+
+  createProjeto() {
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'CREATE_PROJETO',
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe({
+        next: (result) => {
+          if (result[0]) {
+            const { status, titulo, data_inicio, valor, descricao, cliente } = result[1];
+            this.service
+              .cadastrar(cliente, {
+                status,
+                titulo,
+                data_inicio,
+                valor,
+                descricao,
+              })
+              .subscribe({
+                next: (e) => {
+                  this.getProjetos();
+                  this.modalService.openNotification({
+                    data: {
+                      message: `Projeto "${e.titulo}" criado com sucesso!`,
+                      color: 'success',
+                    },
+                  });
+                },
+              });
+          }
+        },
+      });
+  }
 }

@@ -28,16 +28,12 @@ export class CreatePropostaComponent {
         return of(options);
       })
     );
-
-    // this.href = this.router.url
   }
 
   @Select(DadosClienteState)
   clientes$: Observable<any> | undefined;
 
   clientesFormatado$: Observable<any> | undefined;
-
-  // isLoading = false;
 
   createForm: FormGroup = this.formBuilder.group({
     cliente: ['', Validators.compose([Validators.required])],

@@ -1,26 +1,42 @@
-<form [formGroup]="createForm" class="w-full bg-basic-100 border border-basic-300 rounded-md">
-    <div class="border-b border-basic-300 p-4">
-        <h2 class="text-lg font-bold">Novo Projeto</h2>
-        <p class="text-base font-semibold">Criar novo projeto</p>
-    </div>
+<form
+  [formGroup]="createForm"
+  class="w-full rounded-md border border-basic-300 bg-basic-100"
+>
+  <div class="border-b border-basic-300 p-4">
+    <h2 class="text-lg font-bold">Novo Projeto</h2>
+    <p class="text-base font-semibold">Criar novo projeto</p>
+  </div>
 
-    <div class="p-4">
-        <app-input label="Título" [control]="createForm.get('titulo')"></app-input>
+  <div class="p-4">
+    <app-select
+      label="Cliente"
+      [control]="createForm.get('cliente')"
+      [classUp]="['w-1/2']"
+      [options]="clientesFormatado$ | async"
+    >
+    </app-select>
+    <app-input label="Título" [control]="createForm.get('titulo')"></app-input>
 
-        <app-select label="Status" [control]="createForm.get('status')"></app-select>
+    <app-select
+      label="Status"
+      [control]="createForm.get('status')"
+    ></app-select>
 
-        <app-input label="Data de inicio" [control]="createForm.get('data_inicio')"></app-input>
+    <app-input
+      label="Data de inicio"
+      [control]="createForm.get('data_inicio')"
+    ></app-input>
 
-        <app-input label="Valor" [control]="createForm.get('valor')"></app-input>
+    <app-input label="Valor" [control]="createForm.get('valor')"></app-input>
 
-        <div *ngIf="errorMessage !== ''" class="error-style">
-            <p>{{ errorMessage }}</p>
-        </div>
-    </div>
+    <app-input
+      label="Descrição"
+      [control]="createForm.get('descricao')"
+    ></app-input>
+  </div>
 
-    <div class="flex gap-3 justify-end border-t border-basic-300 p-4">
-        <app-button (mouseup)="cancel()" buttonColor="ghost">Cancelar</app-button>
-        <app-button (mouseup)="createCliente()">Salvar</app-button>
-    </div>
-
+  <div class="flex justify-end gap-3 border-t border-basic-300 p-4">
+    <app-button (mouseup)="cancel()" buttonColor="ghost">Cancelar</app-button>
+    <app-button (mouseup)="continuar()">Salvar</app-button>
+  </div>
 </form>
