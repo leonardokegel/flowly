@@ -15,16 +15,17 @@ export type ClientRow = {
 }
 
 export type ProjectsRow = {
-    id: string
-    titulo: string
-    status: number
+    id: string;
+    titulo: string;
+    status: number;
+    data_inicio: string;
+    valor: string;
+    descricao: string;
     cliente: {
-        id: string
-        empresa: string
-        nome: string
+        id: string;
+        empresa: string;
+        nome: string;
     }
-    data_inicio: string
-    valor: string
 }
 
 export type ProposalsRow = {
