@@ -1,20 +1,21 @@
-import { DadosClienteState } from './../../../store/dados-clientes/dados-clientes.state';
 import { Component, OnInit } from '@angular/core';
-import { ModalComponent } from '@shared/components/modal/modal.component';
-import { ModalService } from '@shared/modal/modal.service';
-import { PropostasService } from '../propostas/propostas.service';
 import { Store } from '@ngxs/store';
+import { ModalComponent } from '@shared/components/modal/modal.component';
+import { ProjectStatus } from '@shared/components/project-status/project-status.component';
 import { ContractsRow, ProjectsRow, ProposalsRow } from '@shared/components/table-list/table-list.model';
-import { IDadosClientesState } from 'src/app/store/app-state';
+import { ModalService } from '@shared/modal/modal.service';
 import { switchMap, take } from 'rxjs';
+import { IDadosClientesState } from 'src/app/store/app-state';
+
 import { ContratosService } from '../contratos/contratos.service';
 import { ProjetosService } from '../projetos/projetos.service';
-import { ProjectStatus } from '@shared/components/project-status/project-status.component';
+import { PropostasService } from '../propostas/propostas.service';
+import { DadosClienteState } from './../../../store/dados-clientes/dados-clientes.state';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   proposals!: ProposalsRow[];
@@ -24,22 +25,19 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private modalService: ModalService,
-    private serviceProposal: PropostasService,
-    private serviceContract: ContratosService,
+    private propostaService: PropostasService,
+    private contratoService: ContratosService,
     private store: Store,
     private serviceProject: ProjetosService
-  ) { }
+  ) {}
 
   openModal(modal: string) {
-    this.modalService.open(
-      ModalComponent,
-      {
-        data: {
-          modalType: modal
-        },
-        hasBackdropClick: true
-      }
-    );
+    this.modalService.open(ModalComponent, {
+      data: {
+        modalType: modal,
+      },
+      hasBackdropClick: true,
+    });
   }
 
   ngOnInit(): void {
@@ -56,14 +54,13 @@ export class HomeComponent implements OnInit {
       .pipe(
         switchMap((clientes: IDadosClientesState[]) => {
           clientes.map((e: IDadosClientesState) => ids.push(e.id));
-          return this.serviceProposal.getPropostas(ids).pipe(take(1));
+          return this.propostaService.getPropostas(ids).pipe(take(1));
         })
       )
       .subscribe((e) => {
         this.proposals = e.slice(0, 5);
         this.isLoading = false;
       });
-
   }
 
   getContratos(): void {
@@ -74,14 +71,13 @@ export class HomeComponent implements OnInit {
       .pipe(
         switchMap((clientes: IDadosClientesState[]) => {
           clientes.map((e: IDadosClientesState) => ids.push(e.id));
-          return this.serviceContract.getContratos(ids).pipe(take(1));
+          return this.contratoService.getContratos(ids).pipe(take(1));
         })
       )
       .subscribe((e) => {
         this.contracts = e.slice(0, 5);
         this.isLoading = false;
       });
-
   }
 
   getProjetos() {
@@ -114,7 +110,71 @@ export class HomeComponent implements OnInit {
   }
 
   countStatus(projetos: ProjectsRow[], status: number): string {
-    const count = projetos.filter((projeto) => projeto.status === status)?.length;
+    const count = projetos.filter(
+      (projeto) => projeto.status === status
+    )?.length;
     return count?.toString();
+  }
+
+  createProposta() {
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'CREATE_PROPOSTA',
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          const { titulo, cliente } = result[1];
+          this.propostaService
+            .criar(titulo, cliente)
+            .pipe(take(1))
+            .subscribe({
+              next: () => {
+                this.getContratos();
+                this.modalService.openNotification({
+                  data: {
+                    message: `Contrato "${titulo}" criado com sucesso!`,
+                    color: 'success',
+                  },
+                });
+              },
+              error: (err) => console.log(err),
+            });
+        }
+      });
+  }
+
+  createContrato() {
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'CREATE_CONTRATO',
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          const { titulo, cliente } = result[1];
+          this.contratoService
+            .criar(titulo, cliente)
+            .pipe(take(1))
+            .subscribe({
+              next: () => {
+                this.getContratos();
+                this.modalService.openNotification({
+                  data: {
+                    message: `Contrato "${titulo}" criado com sucesso!`,
+                    color: 'success',
+                  },
+                });
+              },
+              error: (err) => console.log(err),
+            });
+        }
+      });
   }
 }

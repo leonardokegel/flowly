@@ -1,10 +1,17 @@
-<div class="border rounded-md  border-basic-300 bg-basic-100">
-  <div class="flex gap-2 items-center p-4 border-b border-basic-300">
-    <h3 class="flex-grow font-semibold text-lg">
+<div class="rounded-md border border-basic-300 bg-basic-100">
+  <div class="flex items-center gap-2 border-b border-basic-300 p-4">
+    <h3 class="flex-grow text-lg font-semibold">
       {{ card.title }}
     </h3>
-    <div class="bg-basic-600 opacity-20 self-stretch rounded-full w-0.5"></div>
-    <app-button buttonColor="icon" (click)="openPopup.emit(card.openPopup)">
+    <div
+      *ngIf="card.icon"
+      class="w-0.5 self-stretch rounded-full bg-basic-600 opacity-20"
+    ></div>
+    <app-button
+      *ngIf="card.icon"
+      buttonColor="icon"
+      (click)="openPopup.emit(card.openPopup)"
+    >
       <app-icon-card [iconType]="card.icon"></app-icon-card>
     </app-button>
   </div>
