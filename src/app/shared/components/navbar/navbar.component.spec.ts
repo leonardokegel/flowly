@@ -1,7 +1,5 @@
 import { NavbarComponent } from './navbar.component';
 
-
-
 describe('NavbarComponent', () => {
   const component = new NavbarComponent();
 

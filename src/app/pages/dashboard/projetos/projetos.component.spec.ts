@@ -1,22 +1,28 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ModalService } from '@shared/modal/modal.service';
 import { ProjetosComponent } from './projetos.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ProjetosService } from './projetos.service';
+import { Store } from '@ngxs/store';
+
+const modalServiceStub = {
+  open: jest.fn(),
+  openNotification: jest.fn(),
+} as unknown as ModalService;
+
+const serviceProjectStub = {
+  getProjetos: jest.fn(),
+} as unknown as ProjetosService;
+
+const storeStub = {
+  select: jest.fn(),
+  dispatch: jest.fn(),
+} as unknown as Store;
+
 
 describe('ProjetosComponent', () => {
   let component: ProjetosComponent;
-  let fixture: ComponentFixture<ProjetosComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
-      declarations: [ ProjetosComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(ProjetosComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new ProjetosComponent(modalServiceStub, serviceProjectStub, storeStub);
   });
 
   it('should create', () => {

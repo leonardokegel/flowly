@@ -1,20 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ModalRef } from '@shared/modal/modal.ref';
 import { CreateProjetoComponent } from './create-projeto.component';
+import { FormBuilder } from '@angular/forms';
+import { Store } from '@ngxs/store';
+
+const modalRefStub = {
+  close: jest.fn(),
+} as unknown as ModalRef;
+
+const data = {};
+
+const formBuilderStub = {
+  group: jest.fn(),
+} as unknown as FormBuilder;
+
+const storeStub = {
+  select: jest.fn(),
+  dispatch: jest.fn(),
+  pipe: jest.fn()
+} as unknown as Store;
 
 describe('CreateProjetoComponent', () => {
   let component: CreateProjetoComponent;
-  let fixture: ComponentFixture<CreateProjetoComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CreateProjetoComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(CreateProjetoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new CreateProjetoComponent(formBuilderStub, modalRefStub, storeStub, data)
   });
 
   it('should create', () => {

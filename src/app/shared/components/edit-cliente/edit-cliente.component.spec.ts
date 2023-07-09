@@ -1,20 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ModalRef } from '@shared/modal/modal.ref';
 import { EditClienteComponent } from './edit-cliente.component';
+import { FormBuilder } from '@angular/forms';
+
+const modalRefStub = {
+  close: jest.fn(),
+} as unknown as ModalRef;
+
+const data = {
+  modalType: '',
+  cliente: {
+    empresa: '',
+    nome: '',
+    email: '',
+  },
+};
+
+const formBuilderStub = {
+  group: jest.fn(),
+} as unknown as FormBuilder;
 
 describe('EditClienteComponent', () => {
   let component: EditClienteComponent;
-  let fixture: ComponentFixture<EditClienteComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ EditClienteComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(EditClienteComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new EditClienteComponent(formBuilderStub, modalRefStub, data);
   });
 
   it('should create', () => {

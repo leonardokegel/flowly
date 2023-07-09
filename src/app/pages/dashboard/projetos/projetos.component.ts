@@ -1,3 +1,4 @@
+import { DadosClienteState } from './../../../store/dados-clientes/dados-clientes.state';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { switchMap, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
@@ -6,7 +7,6 @@ import { ProjectsRow } from '@shared/components/table-list/table-list.model';
 import { ModalService } from '@shared/modal/modal.service';
 import { ProjetosService } from './projetos.service';
 import { Store } from '@ngxs/store';
-import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
 import { IDadosClientesState } from 'src/app/store/app-state';
 
 @Component({

@@ -1,20 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ConfirmMessageComponent } from './confirm-message.component';
+import { ModalRef } from '@shared/modal/modal.ref';
 
+const modalRefStub = {
+  close: jest.fn(),
+} as unknown as ModalRef
+
+const data = {}
 describe('ConfirmMessageComponent', () => {
   let component: ConfirmMessageComponent;
-  let fixture: ComponentFixture<ConfirmMessageComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ConfirmMessageComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(ConfirmMessageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new ConfirmMessageComponent(modalRefStub, data)
   });
 
   it('should create', () => {

@@ -1,11 +1,11 @@
+import { ObterDadosClientesAction } from './../../store/dados-clientes/dados-clientes.action';
+import { DadosSessaoState } from './../../store/dados-sessao/dados-sessao.state';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { SidebarLink } from '@shared/components/sidebar-link/sidebar-link';
 import { ClientesService } from './clientes/clientes.service';
-import { DadosSessaoState } from 'src/app/store/dados-sessao/dados-sessao.state';
 import { IDadosClientesState, IDadosSessaoState } from 'src/app/store/app-state';
 import { switchMap, take } from 'rxjs';
-import { ObterDadosClientesAction } from 'src/app/store/dados-clientes/dados-clientes.action';
 
 @Component({
   selector: 'app-dashboard',

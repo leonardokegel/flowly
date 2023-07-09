@@ -1,19 +1,31 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder } from '@angular/forms';
 import { CreateContratoComponent } from './create-contrato.component';
+import { ModalRef } from '@shared/modal/modal.ref';
+import { Store } from '@ngxs/store';
+
+const modalRefStub = {
+  close: jest.fn(),
+} as unknown as ModalRef;
+
+const data = {};
+
+const formBuilderStub = {
+  group: jest.fn(),
+} as unknown as FormBuilder;
+
+const storeStub = {
+  select: jest.fn(),
+  dispatch: jest.fn(),
+  pipe: jest.fn()
+} as unknown as Store;
 
 describe('CreateContratoComponent', () => {
   let component: CreateContratoComponent;
-  let fixture: ComponentFixture<CreateContratoComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [CreateContratoComponent],
-    }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateContratoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new CreateContratoComponent(formBuilderStub, modalRefStub, storeStub, data);
+
   });
 
   it('should create', () => {

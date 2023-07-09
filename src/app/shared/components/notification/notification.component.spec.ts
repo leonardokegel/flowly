@@ -1,20 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { NotificationComponent } from './notification.component';
+import { IDataModal, NotificationComponent } from './notification.component';
+import { ModalRef } from '@shared/modal/modal.ref';
 
 describe('NotificationComponent', () => {
+
+  const modalRefStub = {
+    close: jest.fn(),
+  } as unknown as ModalRef
+
+  const data = {
+    message: '',
+    color: 'success'
+  } as unknown as IDataModal
+
   let component: NotificationComponent;
-  let fixture: ComponentFixture<NotificationComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ NotificationComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(NotificationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new NotificationComponent(modalRefStub, data)
   });
 
   it('should create', () => {

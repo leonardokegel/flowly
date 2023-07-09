@@ -10,8 +10,7 @@ import { NotificationColor } from './notification.model';
 })
 export class NotificationComponent {
   constructor(
-    private modalRef: ModalRef, 
-    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+    private modalRef: ModalRef,
     @Inject(MODAL_DATA) public data: IDataModal
   ){
     setTimeout(() => {
@@ -26,7 +25,7 @@ export class NotificationComponent {
   }
 }
 
-interface IDataModal {
+export interface IDataModal {
   message: string
   color: NotificationColor
 }

@@ -1,3 +1,5 @@
+import { EditCliente, RemoverDadosClientesAction } from './../../../store/dados-clientes/dados-clientes.action';
+import { DadosSessaoState } from './../../../store/dados-sessao/dados-sessao.state';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
@@ -6,11 +8,9 @@ import { ClientRow } from '@shared/components/table-list/table-list.model';
 import { ModalService } from '@shared/modal/modal.service';
 import { switchMap, take } from 'rxjs';
 import { IDadosClientesState, IDadosSessaoState } from 'src/app/store/app-state';
-import { DadosSessaoState } from 'src/app/store/dados-sessao/dados-sessao.state';
 
 import { ClientesService } from './clientes.service';
 import { Router } from '@angular/router';
-import { EditCliente, RemoverDadosClientesAction } from 'src/app/store/dados-clientes/dados-clientes.action';
 
 @Component({
   selector: 'app-clientes',

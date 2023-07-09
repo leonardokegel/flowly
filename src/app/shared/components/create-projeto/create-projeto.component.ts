@@ -1,36 +1,24 @@
+import { DadosClienteState } from './../../../store/dados-clientes/dados-clientes.state';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { switchMap, of, Observable } from 'rxjs';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MODAL_DATA } from '@shared/modal/modal-tokens';
 import { ModalRef } from '@shared/modal/modal.ref';
-import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
-import { Select } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-create-projeto',
   templateUrl: './create-projeto.component.html',
   styleUrls: ['./create-projeto.component.scss']
 })
-export class CreateProjetoComponent {
+export class CreateProjetoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private modalRef: ModalRef,
+    private store: Store,
     @Inject(MODAL_DATA) public data: any
-  ) {
-    this.clientesFormatado$ = this.clientes$?.pipe(
-      switchMap((e: any) => {
-        const options = {};
-        e.map((el: { id: any; nome: any }) => {
-          Object.assign(options, { [el.id]: el.nome });
-        });
-
-        return of(options);
-      })
-    );
-  }
-
-  @Select(DadosClienteState)
-  clientes$: Observable<any> | undefined;
+  ) { }
 
   clientesFormatado$: Observable<any> | undefined;
 
@@ -42,6 +30,18 @@ export class CreateProjetoComponent {
     valor: ['', [Validators.required]],
     descricao: ['', Validators.required]
   });
+
+  ngOnInit(): void {
+    this.clientesFormatado$ = this.store.select(DadosClienteState).pipe(
+      switchMap((e: any) => {
+        const options = {};
+        e.map((el: { id: any; nome: any }) => {
+          Object.assign(options, { [el.id]: el.nome });
+        });
+        return of(options);
+      })
+    );
+  }
 
   cancel() {
     this.createForm.reset();

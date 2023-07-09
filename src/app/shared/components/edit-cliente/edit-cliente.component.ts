@@ -13,7 +13,6 @@ export class EditClienteComponent {
   constructor(
     private formBuilder: FormBuilder,
     public modalRef: ModalRef,
-    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     @Inject(MODAL_DATA) public data: IDataCliente
   ) {}
 

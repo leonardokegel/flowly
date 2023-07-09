@@ -1,11 +1,10 @@
+import { DadosClienteState } from './../../../store/dados-clientes/dados-clientes.state';
 import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ModalService } from '@shared/modal/modal.service';
 import { PropostasService } from '../propostas/propostas.service';
 import { Store } from '@ngxs/store';
-import { Router } from '@angular/router';
 import { ContractsRow, ProjectsRow, ProposalsRow } from '@shared/components/table-list/table-list.model';
-import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
 import { IDadosClientesState } from 'src/app/store/app-state';
 import { switchMap, take } from 'rxjs';
 import { ContratosService } from '../contratos/contratos.service';

@@ -1,3 +1,6 @@
+import { DadosSessaoState } from './../../../store/dados-sessao/dados-sessao.state';
+import { SetCliente } from './../../../store/dados-clientes/dados-clientes.action';
+import { ClientesService } from './../../../pages/dashboard/clientes/clientes.service';
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -5,10 +8,7 @@ import { Store } from '@ngxs/store';
 import { MODAL_DATA } from '@shared/modal/modal-tokens';
 import { ModalRef } from '@shared/modal/modal.ref';
 import { switchMap, take } from 'rxjs';
-import { ClientesService } from 'src/app/pages/dashboard/clientes/clientes.service';
 import { IDadosClientesState, IDadosSessaoState } from 'src/app/store/app-state';
-import { SetCliente } from 'src/app/store/dados-clientes/dados-clientes.action';
-import { DadosSessaoState } from 'src/app/store/dados-sessao/dados-sessao.state';
 
 @Component({
   selector: 'app-create-cliente',
