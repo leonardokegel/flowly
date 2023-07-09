@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProposalsRow } from '@shared/components/table-list/table-list.model';
@@ -83,7 +84,6 @@ export class PropostasService {
       );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   editProposta(proposta: IEditarPropostaRequest): Observable<any> {
     if (!proposta) {
       return of();
