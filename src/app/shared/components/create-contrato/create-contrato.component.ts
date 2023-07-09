@@ -44,7 +44,6 @@ export class CreateContratoComponent implements OnInit {
 
   cancel() {
     this.createForm.reset();
-    console.log(this.createForm.value);
     setTimeout(() => {
       this.modalRef.close();
     }, 200);

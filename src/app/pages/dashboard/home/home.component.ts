@@ -97,7 +97,6 @@ export class HomeComponent implements OnInit {
       )
       .subscribe((e) => {
         this.status = this.projectStatus(e);
-        console.log(this.status)
         this.isLoading = false;
       });
   }

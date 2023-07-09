@@ -41,8 +41,6 @@ export class PropostasService {
       return of([]);
     }
 
-    console.log(idProposta, proposta);
-
     return this.http
       .put<IProposta>(`${this.baseUrl}/${idProposta}`, {
         titulo: proposta.titulo,

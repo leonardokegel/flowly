@@ -54,7 +54,6 @@ export class CreateClienteComponent {
       .subscribe({
         next: (e) => {
           this.store.dispatch(new SetCliente(e as IDadosClientesState));
-          console.log('Cliente Salvo');
           setTimeout(() => {
             this.modalRef.close();
             this.router
@@ -68,7 +67,6 @@ export class CreateClienteComponent {
 
   cancel() {
     this.createForm.reset();
-    console.log(this.createForm.value);
     setTimeout(() => {
       this.modalRef.close();
     }, 200);
