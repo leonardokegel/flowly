@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  baseUrl = 'https://flowly-api.onrender.com/';
+  baseUrl = 'http://flowly.eba-fxmwzwfp.us-east-1.elasticbeanstalk.com/';
 
   constructor(private http: HttpClient) {}
 
@@ -15,13 +16,14 @@ export class LoginService {
       .post<ISignUpResponse>(`${this.baseUrl}users/register`, form)
       .pipe(
         catchError((err) => {
+          console.log(err);
+
           return throwError(() => err.error);
         })
       );
   }
 
   signIn(form: ISignIn): Observable<ISignInResponse> {
-    console.log(form)
     return this.http
       .post<ISignInResponse>(`${this.baseUrl}users/login`, form)
       .pipe(catchError((err) => throwError(() => err.error)));

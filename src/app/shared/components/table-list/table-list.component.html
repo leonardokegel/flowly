@@ -1,32 +1,56 @@
-<div class="overflow-x-auto border rounded-md  border-basic-300 bg-basic-100">
-    <div class="max-md:hidden grid border-b text-left border-basic-300 min-w-fit"
-        [ngStyle]="{'grid-template-columns': gridColumns}">
-        <div *ngFor="let column of columnsArray | slice:1"
-            class="p-4 font-semibold text-basic-600 overflow-hidden min-w-[200px] w-[16%]">
-            {{ column | titlecase }}
-        </div>
+<div *ngIf="!isEmpty" class="overflow-x-auto rounded-md border border-basic-300 bg-basic-100">
+  <div
+    class="flex min-w-fit border-b border-basic-300 text-left max-md:hidden"
+  >
+    <div
+      *ngFor="let column of columnsArray | slice : 1"
+      class="flex-grow overflow-hidden p-4 font-semibold text-basic-600"
+      [ngClass]="column === 'status' || column === 'valor' || column === 'data_inicio' ? 'w-36': 'w-52'"
+    >
+      {{ column | titlecase }}
     </div>
-    <div *ngFor="let row of rowsArray"
-        class="max-md:block max-md:p-4 grid border-b last:border-b-0 text-left border-basic-300 min-w-fit"
-        [ngStyle]="{'grid-template-columns': gridColumns}">
-        <ng-container *ngFor="let item of row | slice:1">
-            <div class="
-                    max-md:first:p-0 
-                    max-md:first:mb-4 
-                    max-md:first:font-bold
-                    max-md:first:bg-transparent
-                    max-md:py-2
-                    max-md:bg-basic-200
-                    max-md:first:text-txt-accent
-                    max-md:rounded-md
-                    font-medium 
-                    whitespace-nowrap 
-                    text-ellipsis 
-                    overflow-hidden 
-                    p-4
-                ">
-                <app-table-cel [item]="item" />
-            </div>
-        </ng-container>
+    <div
+      class="w-24 overflow-hidden p-4 font-semibold text-basic-600"
+    >
+      Açoes
     </div>
+  </div>
+  <div
+    *ngFor="let row of rowsArray; let i = index"
+    class="flex min-w-fit border-b border-basic-300 text-left last:border-b-0 max-md:block max-md:p-4"
+
+  >
+    <ng-container *ngFor="let item of row | slice : 1; let last = last; let index = index">
+      <div
+        class="flex-grow overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:w-full max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
+        [ngClass]="columnsArray[index + 1] === 'status' || columnsArray[index + 1] === 'valor' || columnsArray[index + 1] === 'data_inicio'  ? 'w-36': 'w-52'"
+      >
+        <app-table-cel [item]="item" />
+      </div>
+
+      <div
+        *ngIf="last"
+        class="w-24 flex gap-2 overflow-hidden text-ellipsis whitespace-nowrap p-4 font-medium max-md:w-full max-md:rounded-b-md max-md:bg-basic-200 max-md:py-2 max-md:first:mb-4 max-md:first:bg-transparent max-md:first:p-0 max-md:first:font-bold max-md:first:text-txt-accent"
+      >
+        <button (click)="clickButtonEdit.emit(rows[i])">
+          <app-icon-pencil-line
+            stroke="#4c6107"
+            width="24"
+          ></app-icon-pencil-line>
+        </button>
+        <button (click)="clickButtonDelete.emit(rows[i])">
+          <app-icon-trash
+            stroke="#4c6107"
+            width="24"
+          ></app-icon-trash>
+        </button>
+      </div>
+    </ng-container>
+  </div>
 </div>
+
+
+<div *ngIf="isEmpty" class="rounded-md border border-basic-300 bg-basic-100 p-8">
+  <span class="font-semibold text-txt-disabled text-sm">...</span>
+</div>
+

@@ -1,8 +1,23 @@
 <app-page-layout>
-    <div class="pt-4 pb-2 w-full">
-        <app-page-header page="Projetos" (openPopup)="openModal($event, true)" [haveSettings]="true"></app-page-header>
+  <div class="w-full pb-2 pt-4">
+    <app-page-header
+      page="Projetos"
+      (openPopup)="createProjeto()"
+      [haveSettings]="true"
+    ></app-page-header>
+  </div>
+  <div class="w-full flex-grow">
+    <div
+      *ngIf="isLoading"
+      class="w-full rounded-md border border-basic-300 bg-basic-100 p-8 text-txt-accent"
+    >
+      <app-loading></app-loading>
     </div>
-    <div class="flex-grow w-full">
-        <app-table-list [rows]="projects"></app-table-list>
-    </div>
+    <app-table-list
+      *ngIf="!isLoading"
+      [rows]="projects"
+      (clickButtonDelete)="deleteProjeto($event)"
+      (clickButtonEdit)="editProjeto($event)"
+    ></app-table-list>
+  </div>
 </app-page-layout>

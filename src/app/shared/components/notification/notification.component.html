@@ -1,0 +1,17 @@
+<div *ngIf="data.color === 'success'" class="w-full flex items-center gap-6 border rounded p-6 bg-primary-100 border-primary-300 text-primary-600">
+    <p>{{ data.message }}</p>
+    <app-button buttonColor="icon" [classUp]="['text-primary-600', 'hover:scale-95']" (clickButton)="close()">
+        <div class="rotate-45">
+            <app-icon-plus width="15"></app-icon-plus>
+        </div>
+    </app-button>
+</div>
+
+<div *ngIf="data.color === 'danger'" class="w-full flex items-center gap-6 border rounded p-6 bg-danger-100 border-danger-300 text-danger-600">
+    <p>{{ data.message }}</p>
+    <app-button buttonColor="icon" [classUp]="['text-danger-600', 'hover:scale-95']" (clickButton)="close()">
+        <div class="rotate-45">
+            <app-icon-plus width="15"></app-icon-plus>
+        </div>
+    </app-button>
+</div>

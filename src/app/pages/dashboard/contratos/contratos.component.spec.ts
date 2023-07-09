@@ -1,22 +1,36 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ModalService } from '@shared/modal/modal.service';
 import { ContratosComponent } from './contratos.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { ContratosService } from './contratos.service';
+import { Router } from '@angular/router';
+
+const modalServiceStub = {
+  open: jest.fn(),
+  openNotification: jest.fn(),
+} as unknown as ModalService;
+
+const storeStub = {
+  select: jest.fn(),
+  dispatch: jest.fn(),
+} as unknown as Store;
+
+const serviceStub = {
+  getClientes: jest.fn(),
+  deletar: jest.fn(),
+  editar: jest.fn(),
+} as unknown as ContratosService;
+
+const routerStub = {
+  url: '',
+  navigate: jest.fn(),
+  navigateByUrl: jest.fn(),
+} as unknown as Router;
 
 describe('ContratosComponent', () => {
   let component: ContratosComponent;
-  let fixture: ComponentFixture<ContratosComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
-      declarations: [ ContratosComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(ContratosComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new ContratosComponent(modalServiceStub, serviceStub, storeStub, routerStub);
   });
 
   it('should create', () => {

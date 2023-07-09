@@ -1,0 +1,28 @@
+<div class="relative my-4">
+  <label
+    for="txt-{{ label }}"
+    [class]="labelClass"
+    [ngClass]="
+      control?.errors && control?.touched ? 'text-red-400' : 'text-gray-400'
+    "
+  >
+    {{ label }}
+    {{
+      control?.errors && control?.touched && control.hasError("required")
+        ? " - obrigatório"
+        : control?.errors && control?.touched && control.hasError("email")
+        ? " - invalido"
+        : ""
+    }}
+  </label>
+
+  <select
+    id="countries"
+    [class]="inputClass"
+    [formControl]="control"
+  >
+    <option *ngFor="let option of options | keyvalue" value="{{ option.key }}">
+      {{ option.value }}
+    </option>
+  </select>
+</div>

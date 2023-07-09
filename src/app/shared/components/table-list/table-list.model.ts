@@ -9,21 +9,23 @@ export type ClientRow = {
     empresa: string
     nome: string
     email: string
+    telefone?: string
     propostas: document[]
     contratos: document[]
 }
 
 export type ProjectsRow = {
-    id: string
-    titulo: string
-    status: number
+    id: string;
+    titulo: string;
+    status: number;
+    data_inicio: string;
+    valor: string;
+    descricao: string;
     cliente: {
-        id: string
-        empresa: string
-        nome: string
+        id: string;
+        empresa: string;
+        nome: string;
     }
-    data_inicio: string
-    valor: string
 }
 
 export type ProposalsRow = {

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IconCardType } from '@shared/icons/icon-card/icon-card.model';
-import { ModalType } from '@shared/modal/modal.model';
+import { ModalType } from '@shared/components/modal/modal.model';
 
 interface Card {
   title: string,
