@@ -4,11 +4,13 @@ import { ModalService } from '@shared/modal/modal.service';
 import { PropostasService } from '../propostas/propostas.service';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
-import { ContractsRow, ProposalsRow } from '@shared/components/table-list/table-list.model';
+import { ContractsRow, ProjectsRow, ProposalsRow } from '@shared/components/table-list/table-list.model';
 import { DadosClienteState } from 'src/app/store/dados-clientes/dados-clientes.state';
 import { IDadosClientesState } from 'src/app/store/app-state';
 import { switchMap, take } from 'rxjs';
 import { ContratosService } from '../contratos/contratos.service';
+import { ProjetosService } from '../projetos/projetos.service';
+import { ProjectStatus } from '@shared/components/project-status/project-status.component';
 
 @Component({
   selector: 'app-home',
@@ -19,13 +21,14 @@ export class HomeComponent implements OnInit {
   proposals!: ProposalsRow[];
   contracts!: ContractsRow[];
   isLoading = false;
+  status: ProjectStatus[] = [];
 
   constructor(
     private modalService: ModalService,
     private serviceProposal: PropostasService,
     private serviceContract: ContratosService,
     private store: Store,
-    private router: Router
+    private serviceProject: ProjetosService
   ) { }
 
   openModal(modal: string) {
@@ -43,6 +46,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getPropostas();
     this.getContratos();
+    this.getProjetos();
   }
 
   getPropostas(): void {
@@ -81,4 +85,38 @@ export class HomeComponent implements OnInit {
 
   }
 
+  getProjetos() {
+    this.isLoading = true;
+    const ids: string[] = [];
+    this.store
+      .select(DadosClienteState)
+      .pipe(
+        switchMap((clientes: IDadosClientesState[]) => {
+          clientes.map((e: IDadosClientesState) => ids.push(e.id));
+          return this.serviceProject.buscar(ids);
+        })
+      )
+      .subscribe((e) => {
+        this.status = this.projectStatus(e);
+        console.log(this.status)
+        this.isLoading = false;
+      });
+  }
+
+  projectStatus(projetos: ProjectsRow[]): ProjectStatus[] {
+    const status: ProjectStatus[] = [
+      { title: 'Rascunho', count: this.countStatus(projetos, 0) },
+      { title: 'Enviado', count: this.countStatus(projetos, 1) },
+      { title: 'Visualizado', count: this.countStatus(projetos, 2) },
+      { title: 'Rejeitado', count: this.countStatus(projetos, 3) },
+      { title: 'Aceito', count: this.countStatus(projetos, 4) },
+      { title: 'Assinado', count: this.countStatus(projetos, 5) },
+    ];
+    return status;
+  }
+
+  countStatus(projetos: ProjectsRow[], status: number): string {
+    const count = projetos.filter((projeto) => projeto.status === status)?.length;
+    return count?.toString();
+  }
 }

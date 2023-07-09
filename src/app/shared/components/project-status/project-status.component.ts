@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-interface ProjectStatus {
+export interface ProjectStatus {
   title: string
   count: string
 }

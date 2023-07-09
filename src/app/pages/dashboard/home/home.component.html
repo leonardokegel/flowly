@@ -2,7 +2,7 @@
   <div class="flex-grow w-full">
     <app-card [card]="{ title: 'Projetos Ativos', icon: 'plus', openPopup: 'CREATE_PROJETO' }"
       (openPopup)="openModal($event)">
-      <app-project-status></app-project-status>
+      <app-project-status *ngIf="!isLoading" [projectStatus]="status"></app-project-status>
     </app-card>
   </div>
 
