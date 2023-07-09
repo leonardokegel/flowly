@@ -12,11 +12,15 @@
 
     <div class="flex items-center gap-2">
       <div class="flex px-3">
-        <img
-          src="assets/images/Avatar.jpg"
-          class="mr-3 h-10 rounded-full"
-          alt="Flowly Logo"
-        />
+        <div
+          class="circle mr-3 h-10"
+          [ngStyle]="{ 'background-color': circleColor }"
+        >
+          <div class="initials">
+            {{ initials }}
+          </div>
+        </div>
+
         <span class="self-center whitespace-nowrap text-sm font-semibold">{{
           (userName$ | async)?.nome | titlecase
         }}</span>
