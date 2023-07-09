@@ -7,19 +7,10 @@
       <app-icon-menu
         [iconType]="sidebarHovered || isOpen ? 'open' : 'close'"
         width="30"
-        
       ></app-icon-menu>
     </app-button>
 
     <div class="flex items-center gap-2">
-      <button
-        class="flex h-full w-10 rounded-full bg-transparent p-2 hover:bg-basic-300"
-      >
-        <app-icon-plus class="block h-auto w-full"></app-icon-plus>
-      </button>
-      <div
-        class="w-0.5 self-stretch rounded-full bg-basic-600 opacity-20"
-      ></div>
       <div class="flex px-3">
         <img
           src="assets/images/Avatar.jpg"
@@ -30,6 +21,17 @@
           (userName$ | async)?.nome | titlecase
         }}</span>
       </div>
+      <div
+        class="w-0.5 self-stretch rounded-full bg-basic-600 opacity-20"
+      ></div>
+      <button
+        class="flex h-full w-10 rounded-full bg-transparent p-2 hover:bg-basic-300"
+      >
+        <app-icon-plus
+          class="block h-auto w-full rotate-45"
+          (click)="logout()"
+        ></app-icon-plus>
+      </button>
     </div>
   </div>
 </nav>

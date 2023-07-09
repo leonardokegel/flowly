@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
@@ -22,7 +23,7 @@ export class NavbarComponent {
   @Select(DadosSessaoState)
   userName$: Observable<IDadosSessaoState> | undefined;
 
-  constructor() {
+  constructor(private router: Router) {
     this.openSidebar.subscribe((open: boolean) => {
       this.isOpen = open;
     });
@@ -30,5 +31,11 @@ export class NavbarComponent {
 
   onClick() {
     this.isOpen ? this.openSidebar.emit(false) : this.openSidebar.emit(true);
+  }
+
+  logout() {
+    localStorage.removeItem('dadosSessao');
+    localStorage.clear();
+    this.router.navigate(['/sign-in']);
   }
 }
