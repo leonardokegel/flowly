@@ -45,7 +45,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: dist
-          path: .
+          path: dist/flowly
 
       - name: Deploy
-        run: aws s3 sync . s3://flowly-dev
+        run: aws s3 sync dist/flowly s3://flowly-dev
