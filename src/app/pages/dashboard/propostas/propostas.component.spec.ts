@@ -2,7 +2,7 @@ import { ModalService } from '@shared/modal/modal.service';
 import { PropostasComponent } from './propostas.component';
 import { Store } from '@ngxs/store';
 import { PropostasService } from './propostas.service';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 
 const modalServiceStub = {
   open: jest.fn(),
@@ -21,17 +21,17 @@ const storeStub = {
   dispatch: jest.fn(),
 } as unknown as Store;
 
-const routerStub = {
-  url: '',
-  navigate: jest.fn(),
-  navigateByUrl: jest.fn(),
-} as unknown as Router;
+// const routerStub = {
+//   url: '',
+//   navigate: jest.fn(),
+//   navigateByUrl: jest.fn(),
+// } as unknown as Router;
 
 describe('PropostasComponent', () => {
   let component: PropostasComponent;
 
   beforeEach(async () => {
-    component = new PropostasComponent(modalServiceStub, propostasServiceStub, storeStub, routerStub);
+    component = new PropostasComponent(modalServiceStub, propostasServiceStub, storeStub);
   });
 
   it('should create', () => {
