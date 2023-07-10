@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RemoverDadosSessaoAction } from './../../../store/dados-sessao/dados-sessao.action';
+import { RemoverDadosClientesAction } from './../../../store/dados-clientes/dados-clientes.action';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-
-import { IDadosSessaoState } from './../../../store/app-state';
+import { Store } from '@ngxs/store';
 import { DadosSessaoState } from './../../../store/dados-sessao/dados-sessao.state';
 
 @Component({
@@ -11,7 +10,7 @@ import { DadosSessaoState } from './../../../store/dados-sessao/dados-sessao.sta
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @Input()
   sidebarHovered = false;
 
@@ -20,8 +19,7 @@ export class NavbarComponent {
 
   isOpen = false;
 
-  @Select(DadosSessaoState)
-  userName$: Observable<IDadosSessaoState> | undefined;
+  userName = '';
 
   initials: string | undefined;
   circleColor: string | undefined;
@@ -33,9 +31,16 @@ export class NavbarComponent {
     '#3670B2', // blue
   ];
 
-  constructor(private router: Router) {
-    this.userName$?.subscribe((e: any) => {
-      console.log(e.nome);
+  constructor(private router: Router, private store: Store) {
+
+    this.openSidebar.subscribe((open: boolean) => {
+      this.isOpen = open;
+    });
+  }
+
+  ngOnInit(): void {
+    this.store.select(DadosSessaoState).subscribe((e) => {
+      this.userName = e.nome;
       let initials = '';
 
       for (let i = 0; i < e?.nome?.length; i++) {
@@ -55,16 +60,9 @@ export class NavbarComponent {
       this.circleColor =
         this.colors[Math.floor(Math.random() * Math.floor(this.colors.length))];
 
-      console.log(initials);
-      console.log(this.initials);
-
       this.initials = initials;
-      console.log(this.initials);
     });
 
-    this.openSidebar.subscribe((open: boolean) => {
-      this.isOpen = open;
-    });
   }
 
   onClick() {
@@ -74,6 +72,8 @@ export class NavbarComponent {
   logout() {
     localStorage.removeItem('dadosSessao');
     localStorage.clear();
+    this.store.dispatch(RemoverDadosClientesAction);
+    this.store.dispatch(RemoverDadosSessaoAction);
     this.router.navigate(['/sign-in']);
   }
 }
