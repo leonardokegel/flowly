@@ -24,10 +24,11 @@
 
     <app-input
       label="Data de inicio"
+      [type]="'date'"
       [control]="createForm.get('data_inicio')"
     ></app-input>
 
-    <app-input label="Valor" [control]="createForm.get('valor')"></app-input>
+    <app-input label="Valor (em R$)" [control]="createForm.get('valor')"></app-input>
 
     <app-input
       label="Descrição"
