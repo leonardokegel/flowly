@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
 
 import { IDadosSessaoState } from './../app-state';
-import { ObterDadosSessaoAction } from './dados-sessao.action';
+import { ObterDadosSessaoAction, RemoverDadosSessaoAction } from './dados-sessao.action';
 
 @State<IDadosSessaoState>({
   name: 'DadosSessao',
@@ -27,5 +27,15 @@ export class DadosSessaoState {
       localStorage.setItem('dadosSessao', JSON.stringify(payload.dadosSessao));
       patchState(payload.dadosSessao);
     }
+  }
+
+  @Action(RemoverDadosSessaoAction)
+  removerDadosClientesAction(ctx: StateContext<IDadosSessaoState>) {
+    ctx.setState({
+      id: '',
+      nome: '',
+      email: '',
+      token: '',
+    });
   }
 }
