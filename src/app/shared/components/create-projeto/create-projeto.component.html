@@ -8,6 +8,10 @@
   </div>
 
   <div class="p-4">
+    <div *ngIf="errorMessage !== ''" class="bg-danger-100 text-danger-500 p-2 text-sm font-medium border border-danger-200 rounded-md mb-4">
+      <p>{{ errorMessage }}</p>
+    </div>
+    
     <app-select
       label="Cliente"
       [control]="createForm.get('cliente')"
@@ -28,7 +32,7 @@
       [control]="createForm.get('data_inicio')"
     ></app-input>
 
-    <app-input label="Valor (em R$)" [control]="createForm.get('valor')"></app-input>
+    <app-input label="Valor (em R$)" [type]="'number'" [control]="createForm.get('valor')"></app-input>
 
     <app-input
       label="Descrição"

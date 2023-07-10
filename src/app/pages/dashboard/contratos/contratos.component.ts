@@ -9,7 +9,6 @@ import { switchMap, take } from 'rxjs';
 import { IDadosClientesState } from 'src/app/store/app-state';
 
 import { ContratosService } from './contratos.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contratos',
@@ -19,25 +18,12 @@ import { Router } from '@angular/router';
 export class ContratosComponent implements OnInit {
   contracts: ContractsRow[] = [];
   isLoading = false;
-  href = '';
 
   constructor(
     private modalService: ModalService,
     private service: ContratosService,
     private store: Store,
-    private router: Router
-  ) {
-    this.href = this.router.url;
-  }
-
-  openModal(modal: string, hasBackdropClick: boolean) {
-    this.modalService.open(ModalComponent, {
-      data: {
-        modalType: modal,
-      },
-      hasBackdropClick: hasBackdropClick,
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getContratos();
@@ -91,10 +77,10 @@ export class ContratosComponent implements OnInit {
                   },
                 });
               },
-              error: () =>
+              error: (err) =>
                 this.modalService.openNotification({
                   data: {
-                    message: `Erro ao deletar o contrato!`,
+                    message: `Erro ao tentar deletar: ${err.message}`,
                     color: 'danger',
                   },
                 }),
@@ -119,7 +105,7 @@ export class ContratosComponent implements OnInit {
           if (e[0]) {
             const { titulo, status } = e[1];
             this.service
-              .editar({id ,titulo, status })
+              .editar({ id, titulo, status })
               .pipe(take(1))
               .subscribe({
                 next: (e) => {
@@ -131,10 +117,10 @@ export class ContratosComponent implements OnInit {
                     },
                   })
                 },
-                error: () =>
+                error: (err) =>
                   this.modalService.openNotification({
                     data: {
-                      message: `Erro ao editar o contrato!`,
+                      message: `Erro ao tentar editar contrato: ${err.message}`,
                       color: 'danger',
                     },
                   }),
@@ -169,7 +155,13 @@ export class ContratosComponent implements OnInit {
                   },
                 });
               },
-              error: (err) => console.log(err),
+              error: (err) =>
+                this.modalService.openNotification({
+                  data: {
+                    message: `Erro ao tentar criar contrato: ${err.message}`,
+                    color: 'danger',
+                  },
+                }),
             });
         }
       });

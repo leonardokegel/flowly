@@ -1,4 +1,4 @@
-import { EditCliente, RemoverDadosClientesAction } from './../../../store/dados-clientes/dados-clientes.action';
+import { EditCliente, RemoverDadosClientesAction, SetCliente } from './../../../store/dados-clientes/dados-clientes.action';
 import { DadosSessaoState } from './../../../store/dados-sessao/dados-sessao.state';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +10,6 @@ import { switchMap, take } from 'rxjs';
 import { IDadosClientesState, IDadosSessaoState } from 'src/app/store/app-state';
 
 import { ClientesService } from './clientes.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clientes',
@@ -20,27 +19,12 @@ import { Router } from '@angular/router';
 export class ClientesComponent implements OnInit {
   clients: ClientRow[] = [];
   isLoading = false;
-  href = '';
 
   constructor(
     private modalService: ModalService,
     private store: Store,
     private service: ClientesService,
-    private router: Router
-  ) {
-    this.href = this.router.url;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  openModal(modal: string, content?: any) {
-    this.modalService.open(ModalComponent, {
-      data: {
-        modalType: modal,
-        content: content,
-      },
-      hasBackdropClick: true,
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getClients();
@@ -59,7 +43,9 @@ export class ClientesComponent implements OnInit {
       .subscribe({
         next: (e) => {
           this.clients = e as ClientRow[];
-          this.isLoading = false;
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 500);
         },
         error: (err) => console.log(err),
       });
@@ -87,10 +73,7 @@ export class ClientesComponent implements OnInit {
             .subscribe({
               next: () => {
                 this.store.dispatch(RemoverDadosClientesAction);
-                this.router
-                  .navigateByUrl('/', { skipLocationChange: true })
-                  .then(() => this.router.navigate([this.href]));
-
+                this.getClients();
                 this.modalService.openNotification({
                   data: {
                     message: `Cliente "${cliente.nome}" deletado`,
@@ -98,10 +81,10 @@ export class ClientesComponent implements OnInit {
                   },
                 });
               },
-              error: () =>
+              error: (err) =>
                 this.modalService.openNotification({
                   data: {
-                    message: `Erro ao deletar o cliente!`,
+                    message: `Erro ao tentar deletar: ${err.message}`,
                     color: 'danger',
                   },
                 }),
@@ -136,9 +119,61 @@ export class ClientesComponent implements OnInit {
                   },
                 });
               },
+              error: (err) =>
+                this.modalService.openNotification({
+                  data: {
+                    message: `Erro ao tentar editar cliente: ${err.message}`,
+                    color: 'danger',
+                  },
+                }),
             });
           }
         },
       });
   }
+
+  createCliente() {
+    this.modalService
+      .open(ModalComponent, {
+        data: {
+          modalType: 'CREATE_CLIENTE',
+        },
+        hasBackdropClick: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result[0]) {
+          this.store
+            .select(DadosSessaoState)
+            .pipe(
+              take(1),
+              switchMap((e: IDadosSessaoState) => {
+                return this.service
+                  .criar(e.id, result[1])
+                  .pipe(take(1));
+              })
+            )
+            .subscribe({
+              next: (e) => {
+                this.store.dispatch(new SetCliente(e as IDadosClientesState));
+                this.getClients();
+                this.modalService.openNotification({
+                  data: {
+                    message: `Cliente "${result[1].nome}" criado com sucesso!`,
+                    color: 'success',
+                  },
+                });
+              },
+              error: (err) =>
+                this.modalService.openNotification({
+                  data: {
+                    message: `Erro ao tentar criar cliente: ${err.message}`,
+                    color: 'danger',
+                  },
+                }),
+            });
+        }
+      });
+  }
+
 }

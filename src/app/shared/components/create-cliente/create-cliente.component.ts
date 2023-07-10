@@ -39,36 +39,46 @@ export class CreateClienteComponent {
 
   errorMessage = '';
 
-  createCliente() {
-    if (this.createForm?.invalid) return;
-    this.store
-      .select(DadosSessaoState)
-      .pipe(
-        take(1),
-        switchMap((e: IDadosSessaoState) => {
-          return this.service
-            .criar(e.id, this.createForm.value)
-            .pipe(take(1));
-        })
-      )
-      .subscribe({
-        next: (e) => {
-          this.store.dispatch(new SetCliente(e as IDadosClientesState));
-          setTimeout(() => {
-            this.modalRef.close();
-            this.router
-              .navigateByUrl('/', { skipLocationChange: true })
-              .then(() => this.router.navigate([this.href]));
-          }, 200);
-        },
-        error: (err) => console.log(err),
-      });
-  }
+  // createCliente() {
+  //   if (this.createForm?.invalid) return;
+  //   this.store
+  //     .select(DadosSessaoState)
+  //     .pipe(
+  //       take(1),
+  //       switchMap((e: IDadosSessaoState) => {
+  //         return this.service
+  //           .criar(e.id, this.createForm.value)
+  //           .pipe(take(1));
+  //       })
+  //     )
+  //     .subscribe({
+  //       next: (e) => {
+  //         this.store.dispatch(new SetCliente(e as IDadosClientesState));
+  //         setTimeout(() => {
+  //           this.modalRef.close();
+  //           this.router
+  //             .navigateByUrl('/', { skipLocationChange: true })
+  //             .then(() => this.router.navigate([this.href]));
+  //         }, 200);
+  //       },
+  //       error: (err) => console.log(err),
+  //     });
+  // }
 
   cancel() {
     this.createForm.reset();
     setTimeout(() => {
-      this.modalRef.close();
+      this.modalRef.close([false]);
     }, 200);
+  }
+
+  continuar() {
+    if (this.createForm.valid) {
+      setTimeout(() => {
+        this.modalRef.close([true, this.createForm.value]);
+      }, 200);
+    } else {
+      this.errorMessage = 'Verifique se todos os campos estão preenchidos corretamente!';
+    }
   }
 }

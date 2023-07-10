@@ -1,7 +1,6 @@
 import { DadosClienteState } from './../../../store/dados-clientes/dados-clientes.state';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ProposalsRow } from '@shared/components/table-list/table-list.model';
@@ -19,25 +18,12 @@ import { PropostasService } from './propostas.service';
 export class PropostasComponent implements OnInit {
   proposals!: ProposalsRow[];
   isLoading = false;
-  href = '';
 
   constructor(
     private modalService: ModalService,
     private service: PropostasService,
     private store: Store,
-    private router: Router
-  ) {
-    this.href = this.router.url;
-  }
-
-  openModal(modal: string) {
-    this.modalService.open(ModalComponent, {
-      data: {
-        modalType: modal,
-      },
-      hasBackdropClick: true,
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getPropostas();
@@ -61,8 +47,6 @@ export class PropostasComponent implements OnInit {
         }, 500);
       });
   }
-
-  errorMessage = '';
 
   createProposta() {
     this.modalService
@@ -89,7 +73,13 @@ export class PropostasComponent implements OnInit {
                   },
                 });
               },
-              error: (err) => console.log(err),
+              error: (err) =>
+                this.modalService.openNotification({
+                  data: {
+                    message: `Erro ao tentar criar proposta: ${err.message}`,
+                    color: 'danger',
+                  },
+                }),
             });
         }
       });
@@ -117,10 +107,7 @@ export class PropostasComponent implements OnInit {
             .pipe(take(1))
             .subscribe({
               next: () => {
-                this.router
-                  .navigateByUrl('/', { skipLocationChange: true })
-                  .then(() => this.router.navigate([this.href]));
-
+                this.getPropostas();
                 this.modalService.openNotification({
                   data: {
                     message: `Proposta "${proposta.titulo}" deletada`,
@@ -128,7 +115,13 @@ export class PropostasComponent implements OnInit {
                   },
                 });
               },
-              error: (err) => console.log(err),
+              error: (err) =>
+                this.modalService.openNotification({
+                  data: {
+                    message: `Erro ao tentar deletar: ${err.message}`,
+                    color: 'danger',
+                  },
+                }),
             });
         }
       });
@@ -164,7 +157,13 @@ export class PropostasComponent implements OnInit {
                   },
                 });
               },
-              error: (err) => (this.errorMessage = err.mensagem),
+              error: (err) =>
+                this.modalService.openNotification({
+                  data: {
+                    message: `Erro ao tentar editar proposta: ${err.message}`,
+                    color: 'danger',
+                  },
+                }),
             });
         }
       });

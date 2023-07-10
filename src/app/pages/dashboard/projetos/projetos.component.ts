@@ -22,16 +22,7 @@ export class ProjetosComponent implements OnInit {
     private modalService: ModalService,
     private service: ProjetosService,
     private store: Store
-  ) {}
-
-  openModal(modal: string, hasBackdropClick: boolean) {
-    this.modalService.open(ModalComponent, {
-      data: {
-        modalType: modal,
-      },
-      hasBackdropClick: hasBackdropClick,
-    });
-  }
+  ) { }
 
   ngOnInit(): void {
     this.getProjetos();
@@ -88,6 +79,13 @@ export class ProjetosComponent implements OnInit {
                     },
                   });
                 },
+                error: (err) =>
+                  this.modalService.openNotification({
+                    data: {
+                      message: `Erro ao tentar criar projeto: ${err.message}`,
+                      color: 'danger',
+                    },
+                  }),
               });
           }
         },
@@ -123,10 +121,10 @@ export class ProjetosComponent implements OnInit {
                   },
                 });
               },
-              error: () =>
+              error: (err) =>
                 this.modalService.openNotification({
                   data: {
-                    message: `Erro ao deletar projeto!`,
+                    message: `Erro ao tentar deletar: ${err.message}`,
                     color: 'danger',
                   },
                 }),
@@ -168,10 +166,10 @@ export class ProjetosComponent implements OnInit {
                   },
                 });
               },
-              error: () =>
+              error: (err) =>
                 this.modalService.openNotification({
                   data: {
-                    message: `Erro ao editar projeto!`,
+                    message: `Erro ao tentar editar projeto: ${err.message}`,
                     color: 'danger',
                   },
                 }),

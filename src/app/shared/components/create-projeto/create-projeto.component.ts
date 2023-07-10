@@ -31,6 +31,8 @@ export class CreateProjetoComponent implements OnInit {
     descricao: ['', Validators.required]
   });
 
+  errorMessage = '';
+
   ngOnInit(): void {
     this.clientesFormatado$ = this.store.select(DadosClienteState).pipe(
       switchMap((e: any) => {
@@ -51,8 +53,12 @@ export class CreateProjetoComponent implements OnInit {
   }
 
   continuar() {
-    setTimeout(() => {
-      this.modalRef.close([true, this.createForm.value]);
-    }, 200);
+    if (this.createForm.valid) {
+      setTimeout(() => {
+        this.modalRef.close([true, this.createForm.value]);
+      }, 200);
+    } else {
+      this.errorMessage = 'Verifique se todos os campos estão preenchidos corretamente!';
+    }
   }
 }

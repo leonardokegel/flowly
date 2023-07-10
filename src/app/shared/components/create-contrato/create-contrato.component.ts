@@ -45,13 +45,17 @@ export class CreateContratoComponent implements OnInit {
   cancel() {
     this.createForm.reset();
     setTimeout(() => {
-      this.modalRef.close();
+      this.modalRef.close([false]);
     }, 200);
   }
 
   continuar() {
-    setTimeout(() => {
-      this.modalRef.close([true, this.createForm.value]);
-    }, 200);
+    if (this.createForm.valid) {
+      setTimeout(() => {
+        this.modalRef.close([true, this.createForm.value]);
+      }, 200);
+    } else {
+      this.errorMessage = 'Verifique se todos os campos estão preenchidos corretamente!';
+    }
   }
 }

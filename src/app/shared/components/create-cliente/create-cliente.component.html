@@ -5,6 +5,10 @@
     </div>
 
     <div class="p-4">
+        <div *ngIf="errorMessage !== ''" class="bg-danger-100 text-danger-500 p-2 text-sm font-medium border border-danger-200 rounded-md mb-4">
+            <p>{{ errorMessage }}</p>
+        </div>
+
         <app-input 
         label="Nome da Empresa"
         [type]="'text'"
@@ -29,14 +33,11 @@
         [control]="createForm.get('telefone')"
         ></app-input>
 
-        <div *ngIf="errorMessage !== ''" class="error-style">
-            <p>{{ errorMessage }}</p>
-        </div>
     </div>
 
     <div class="flex gap-3 justify-end border-t border-basic-300 p-4">
         <app-button (mouseup)="cancel()" buttonColor="ghost">Cancelar</app-button>
-        <app-button (mouseup)="createCliente()">Salvar</app-button>
+        <app-button (mouseup)="continuar()">Salvar</app-button>
     </div>
 
 </form>
