@@ -14,7 +14,8 @@ export class ContratosService {
 
   criar(
     contrato: ICriarContratoRequest,
-    idCliente: string
+    idCliente: string,
+    status = 0
   ): Observable<unknown> {
     if (!idCliente) {
       return of([]);
@@ -23,7 +24,7 @@ export class ContratosService {
     return this.http
       .post<ICriarContratoRequest>(`${this.baseUrl}/${idCliente}`, {
         titulo: contrato,
-        status: 0,
+        status: status,
       })
       .pipe(
         catchError((err) => {

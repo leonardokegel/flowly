@@ -17,7 +17,8 @@ export class PropostasService {
 
   criar(
     proposta: ICriarPropostaRequest,
-    idCliente: string
+    idCliente: string,
+    status = 0
   ): Observable<unknown> {
     if (!idCliente) {
       return of([]);
@@ -26,7 +27,7 @@ export class PropostasService {
     return this.http
       .post<ICriarPropostaRequest>(`${this.baseUrl}/${idCliente}`, {
         titulo: proposta,
-        status: 0,
+        status: status,
       })
       .pipe(
         catchError((err) => {

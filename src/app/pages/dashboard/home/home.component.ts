@@ -126,10 +126,11 @@ export class HomeComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result) => {
-        if (result) {
-          const { titulo, cliente } = result[1];
+        if (result[0]) {
+          result[1].status = 1;
+          const { titulo, cliente, status } = result[1];
           this.propostaService
-            .criar(titulo, cliente)
+            .criar(titulo, cliente, status)
             .pipe(take(1))
             .subscribe({
               next: () => {
@@ -157,10 +158,11 @@ export class HomeComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result) => {
-        if (result) {
-          const { titulo, cliente } = result[1];
+        if (result[0]) {
+          result[1].status = 1;
+          const { titulo, cliente, status } = result[1];
           this.contratoService
-            .criar(titulo, cliente)
+            .criar(titulo, cliente, status)
             .pipe(take(1))
             .subscribe({
               next: () => {

@@ -154,7 +154,7 @@ export class ContratosComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((result) => {
-        if (result) {
+        if (result[0]) {
           const { titulo, cliente } = result[1];
           this.service
             .criar(titulo, cliente)
