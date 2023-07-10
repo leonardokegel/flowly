@@ -23,11 +23,8 @@ export class SignInComponent {
   isLoading = false;
 
   loginForm: FormGroup = this.formBuilder.group({
-    email: [
-      'pedro@gmail.com',
-      Validators.compose([Validators.required, Validators.email]),
-    ],
-    senha: ['123456', [Validators.required]],
+    email: ['', Validators.compose([Validators.required, Validators.email])],
+    senha: ['', [Validators.required]],
   });
 
   errorMessage!: string;

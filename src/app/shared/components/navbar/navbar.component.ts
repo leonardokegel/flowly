@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
@@ -22,7 +23,45 @@ export class NavbarComponent {
   @Select(DadosSessaoState)
   userName$: Observable<IDadosSessaoState> | undefined;
 
-  constructor() {
+  initials: string | undefined;
+  circleColor: string | undefined;
+
+  private colors = [
+    '#EB7181', // red
+    '#468547', // green
+    '#FFD558', // yellow
+    '#3670B2', // blue
+  ];
+
+  constructor(private router: Router) {
+    this.userName$?.subscribe((e: any) => {
+      console.log(e.nome);
+      let initials = '';
+
+      for (let i = 0; i < e?.nome?.length; i++) {
+        if (e.nome.charAt(i) === ' ') {
+          continue;
+        }
+
+        if (e?.nome?.charAt(i) === e?.nome?.charAt(i).toUpperCase()) {
+          initials += e.nome.charAt(i);
+
+          if (initials?.length == 2) {
+            break;
+          }
+        }
+      }
+
+      this.circleColor =
+        this.colors[Math.floor(Math.random() * Math.floor(this.colors.length))];
+
+      console.log(initials);
+      console.log(this.initials);
+
+      this.initials = initials;
+      console.log(this.initials);
+    });
+
     this.openSidebar.subscribe((open: boolean) => {
       this.isOpen = open;
     });
@@ -30,5 +69,11 @@ export class NavbarComponent {
 
   onClick() {
     this.isOpen ? this.openSidebar.emit(false) : this.openSidebar.emit(true);
+  }
+
+  logout() {
+    localStorage.removeItem('dadosSessao');
+    localStorage.clear();
+    this.router.navigate(['/sign-in']);
   }
 }

@@ -1,25 +1,49 @@
 <app-page-layout>
-  <div class="flex-grow w-full">
-    <app-card [card]="{ title: 'Projetos Ativos', icon: 'plus', openPopup: 'CREATE_PROJETO' }"
-      (openPopup)="openModal($event)">
-      <app-project-status *ngIf="!isLoading" [projectStatus]="status"></app-project-status>
+  <div class="w-full flex-grow">
+    <app-card
+      [card]="{
+        title: 'Projetos Ativos'
+      }"
+    >
+      <app-project-status
+        *ngIf="!isLoading"
+        [projectStatus]="status"
+      ></app-project-status>
     </app-card>
   </div>
 
-  <div class="flex-grow min-w-max w-1/3">
-    <app-card [card]="{ title: 'Propostas enviadas', icon: 'plus', openPopup: 'CREATE_PROPOSTA' }"
-      (openPopup)="openModal($event)">
+  <div class="w-1/3 min-w-max flex-grow">
+    <app-card
+      [card]="{
+        title: 'Propostas enviadas',
+        icon: 'plus',
+        openPopup: 'CREATE_PROPOSTA'
+      }"
+      (openPopup)="createProposta()"
+    >
       <ng-container *ngIf="!isLoading">
-        <app-document-status documentType="proposta" [documents]="proposals"></app-document-status>
+        <app-document-status
+          documentType="proposta"
+          [documents]="proposals"
+        ></app-document-status>
       </ng-container>
     </app-card>
   </div>
 
-  <div class="flex-grow min-w-max w-1/3">
-    <app-card [card]="{ title: 'Contratos enviadas', icon: 'plus', openPopup: 'CREATE_CONTRATO' }"
-      (openPopup)="openModal($event)">
+  <div class="w-1/3 min-w-max flex-grow">
+    <app-card
+      [card]="{
+        title: 'Contratos enviadas',
+        icon: 'plus',
+        openPopup: 'CREATE_CONTRATO'
+      }"
+      (openPopup)="createContrato()"
+    >
       <ng-container *ngIf="!isLoading">
-        <app-document-status documentType="contrato" [documents]="contracts"></app-document-status>
+        <app-document-status
+          documentType="contrato"
+          [documents]="contracts"
+        ></app-document-status>
       </ng-container>
     </app-card>
   </div>
