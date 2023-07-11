@@ -29,6 +29,7 @@ export class EditClienteComponent {
       this.data.cliente.email,
       Validators.compose([Validators.required]),
     ],
+    telefone: ['', [Validators.pattern('[- +()0-9]{11}')]],
   });
 
   cancel() {
@@ -51,6 +52,7 @@ export interface IDataCliente {
     empresa: string;
     nome: string;
     email: string;
+    telefone?: string;
   };
 
 }
