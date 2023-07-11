@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe((e) => {
-        this.proposals = e.slice(0, 5);
+        this.proposals = e.filter(item => item.status > 0).slice(0, 5);
         this.isLoading = false;
       });
   }
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe((e) => {
-        this.contracts = e.slice(0, 5);
+        this.contracts = e.filter(item => item.status > 0).slice(0, 5);
         this.isLoading = false;
       });
   }
